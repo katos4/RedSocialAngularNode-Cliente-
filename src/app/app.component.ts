@@ -9,9 +9,7 @@ export class AppComponent implements OnInit{
   title = 'Angular social';
 
   ngOnInit() {
-
-    $('h2').css('color', 'orange');
-
+    
  }
 
 
