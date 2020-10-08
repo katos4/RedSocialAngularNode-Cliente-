@@ -13,8 +13,13 @@ export class UserService{
         this.url = GLOBAL.url;
     }
 
-    register(user_to_register){
-        console.log(user_to_register);
+    /**Registrar usuario*/
+    register(user: User): Observable<any>{
+        //params es lo que va en el body de la peticion y asi es como se llama en el backend
+        let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        
+        return this._http.post(this.url+'register', params, {headers: headers});
     }
 
 }

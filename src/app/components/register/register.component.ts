@@ -12,6 +12,7 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
   public title:String;
   public user: User;
+  public status: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,8 +27,21 @@ export class RegisterComponent implements OnInit {
     console.log("componente de registro cargado");
   }
 
-  onSubmit(){
-    this._userService.register(this.user);
+  onSubmit(registerForm){
+    this._userService.register(this.user).subscribe(
+      response =>{
+        if(response.user && response.user._id){
+         // console.log(response.user);
+          this.status = 'success';
+          registerForm.reset();
+        }else{
+          this.status = 'error';
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
   }
 
 }
