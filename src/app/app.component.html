@@ -8,7 +8,9 @@
     <!--BARRA DE NAVEGACION CUANDO EXISTA UN USUARIO IDENTIFICADO-->
     <ul class="navbar-nav" *ngIf="identity">
       <li class="nav-item">
-        <a class="nav-link" href="#">Inicio</a>
+        <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="['active']">
+          Inicio
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Timeline</a>
@@ -31,6 +33,38 @@
         </a>
       </li>
     </ul>
+
+    <!--MENÚ DE USUARIO IDENTIFICADO-->
+    <ul class="nav navbar-nav ml-auto" *ngIf="identity">
+      <li class="avatar">
+        <!--cargar la imagen del usuario-->
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          {{identity.name}} <span class="caret"></span>
+        </a>
+
+        <ul class="dropdown-menu">
+            <li>
+              <a href="#">
+                <span class="glyphicon glyphicon-user"></span>
+              Mi perfil
+              </a>
+            </li>
+            <li>
+              <a href="#">
+              Mis datos
+              </a>
+            </li>
+            <li>
+              <a href="#">
+              Cerrar sesión
+              </a>
+            </li>
+        </ul>
+      </li>
+    </ul>
+    
 
   </div>
 </nav>

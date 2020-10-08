@@ -26,3 +26,14 @@
 .navbar a:hover{
     background: #cc1717 !important;
 }
+
+.dropdown-menu *{
+    cursor: pointer;
+    color:black !important;
+}
+
+
+
+.jumbotron{
+    text-align: center;
+}
