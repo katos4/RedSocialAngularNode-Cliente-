@@ -1,4 +1,4 @@
-/*Generales*/
+/*GENERALES*/
 .h1-strong{
     font-size: 35px;
     font-weight: bold;
@@ -6,4 +6,23 @@
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
+}
+
+.active{
+    background: #cc1717;
+    height: 100%;
+}
+
+/*CABECERA*/
+ 
+.navbar{
+    background-color: #e53c37 !important;
+}
+
+.navbar *{
+    color: white !important;
+}
+
+.navbar a:hover{
+    background: #cc1717 !important;
 }

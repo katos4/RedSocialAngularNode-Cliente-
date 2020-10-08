@@ -1,12 +1,13 @@
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" href="#">NGSocial</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
+    <!--BARRA DE NAVEGACION CUANDO EXISTA UN USUARIO IDENTIFICADO-->
+    <ul class="navbar-nav" *ngIf="identity">
+      <li class="nav-item">
         <a class="nav-link" href="#">Inicio</a>
       </li>
       <li class="nav-item">
@@ -16,6 +17,21 @@
         <a class="nav-link" href="#">Gente</a>
       </li>
     </ul>
+
+    <!--BARRA DE NAVEGACION CUANDO NO EXISTA UN USUARIO IDENTIFICADO-->
+    <ul class="nav navbar-nav ml-auto" *ngIf="!identity">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']">
+          Login
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/registro']" [routerLinkActive]="['active']">
+          Registro
+        </a>
+      </li>
+    </ul>
+
   </div>
 </nav>
  
