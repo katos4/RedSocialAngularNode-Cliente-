@@ -21,14 +21,20 @@
         </p>
 
         <p>
+            <label>Nick</label>
+            <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
+        </p>
+
+        <p>
             <label>Correo electrónico</label>
             <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
         </p>
 
         <p>
-            <label>Apodo</label>
-            <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
+            <label>Subir tu avatar</label>
+            <input type="file" class="form-control-file" />
         </p>
+       
 
         <input type="submit" value="Actualizar" class="btn btn-warning" />
 
