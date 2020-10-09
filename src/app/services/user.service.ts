@@ -10,6 +10,7 @@ export class UserService{
     public url: string;
     public identity;
     public token;
+    public stats;
 
     constructor(public _http: HttpClient){
         this.url = GLOBAL.url;
@@ -25,7 +26,7 @@ export class UserService{
     }
 
     /**Identificar usuario*/
-    login(user: User, gettoken = null): Observable<any>{
+    login(user, gettoken = null): Observable<any>{
         if(gettoken != null){
             user.gettoken = gettoken;
         }
@@ -59,6 +60,31 @@ export class UserService{
             this.token = null;
         }
         return this.token;
+    }
+
+    /**Obtener las estadisticas almacenadas en el local storage */
+    getStats(){
+        let stats = JSON.parse(localStorage.getItem('stats'));
+
+        if(stats !== 'undefined'){
+            this.stats = stats;
+        }else{
+            this.stats = null;
+        }
+        return this.stats;
+    }
+
+    /**Obtener las estadisticas del usuario almacenadas en la base de datos */
+    getCounters(userId = null): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                       .set('Authorization', this.gettoken());
+        
+        if(userId != null){
+            return this._http.get(this.url+'counters/'+userId, {headers:headers});
+        }else{
+            return this._http.get(this.url+'counters', {headers:headers});
+        }
+    
     }
 
 }

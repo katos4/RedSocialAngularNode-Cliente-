@@ -24,13 +24,14 @@ export class LoginComponent implements OnInit {
     private _userService: UserService
   ) { 
     this.title = 'Identificate';
-    this.user = new User("","","","","","","ROLE_USER","","");
+    this.user = new User("","","","","","","ROLE_USER","");
   }
 
   ngOnInit(): void {
     console.log('componente de login cargado');
   }
 
+  /**Metodo submit del boton del formulario de login */
   onSubmit(){
     // console.log(this.user);
   
@@ -60,7 +61,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-
 /** Obtener el token del usuario logueado */
 gettoken(){
   this._userService.login(this.user, 'true').subscribe(
@@ -74,10 +74,8 @@ gettoken(){
         // persistir datos del usuario en el local storage
         localStorage.setItem('token', this.token);
         // conseguir los contadores o estadisticas del usuario
-        
-        this._router.navigate(['/']);
-      }
-      
+        this.getCounters();
+      } 
     },
     error => {
       var errorMessage = <any>error;
@@ -86,7 +84,24 @@ gettoken(){
         this.status = 'error';
       }
     }
+  );
+}
 
+
+/**Obtengo las estadisticas desde el servicio y las almaceno en el local storage
+ * esto se hace asi para no sobrecargar a la api con peticiones y hacerla solo 1 vez
+ */
+getCounters(){
+  this._userService.getCounters().subscribe(
+    response => {
+      //console.log(response);
+      localStorage.setItem('stats', JSON.stringify(response));
+      this._router.navigate(['/']);
+      this.status = 'success';
+    },
+    error => {
+      console.log(<any>error);
+    }
   );
 }
 
