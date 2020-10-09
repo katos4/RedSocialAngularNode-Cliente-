@@ -1,5 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from './services/user.service';
+
 
 declare var $:any;
 @Component({
@@ -14,6 +16,8 @@ export class AppComponent implements OnInit, DoCheck{
 
 
   constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
     private _userService: UserService
   ){
     this.title = 'Angular social';
@@ -26,6 +30,12 @@ export class AppComponent implements OnInit, DoCheck{
 
  ngDoCheck(){
   this.identity =this._userService.getIdentity();
+ }
+
+ logout(){
+   localStorage.clear();
+   this.identity = null;
+   this._router.navigate(['/']);
  }
 
 

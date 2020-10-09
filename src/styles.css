@@ -27,12 +27,18 @@
     background: #cc1717 !important;
 }
 
-.dropdown-menu *{
+.dropdown a{
     cursor: pointer;
+    text-decoration:none !important;
+}
+
+.dropdown-menu *{
     color:black !important;
 }
 
-
+.navbar .dropdown-menu a:hover{
+    background: #eee !important;
+}
 
 .jumbotron{
     text-align: center;

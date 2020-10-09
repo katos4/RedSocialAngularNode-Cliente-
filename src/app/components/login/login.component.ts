@@ -74,6 +74,8 @@ gettoken(){
         // persistir datos del usuario en el local storage
         localStorage.setItem('token', this.token);
         // conseguir los contadores o estadisticas del usuario
+        
+        this._router.navigate(['/']);
       }
       
     },
