@@ -1,0 +1,37 @@
+<div class="col-lg-5">
+    <h1 class="h1-strong">{{title}}</h1>
+
+    <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+       ¡Tus datos se han modificado correctamente!
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+        Se ha producido un error, intentalo de nuevo.
+    </div>
+
+    <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+        <p>
+            <label>Nombre</label>
+            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
+        </p>
+
+        <p>
+            <label>Apellidos</label>
+            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
+        </p>
+
+        <p>
+            <label>Correo electrónico</label>
+            <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
+        </p>
+
+        <p>
+            <label>Apodo</label>
+            <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
+        </p>
+
+        <input type="submit" value="Actualizar" class="btn btn-warning" />
+
+    </form>
+
+</div>

@@ -38,7 +38,7 @@ export class UserService{
         return this._http.post(this.url+'login', params, {headers: headers});
     }
 
-
+    /**Obtener los datos del usuario de la propiedad identity almacenada en el localstorage */
     getIdentity(){
         let identity = JSON.parse(localStorage.getItem('identity'));
 
@@ -51,6 +51,7 @@ export class UserService{
         return this.identity;
     }
 
+    /**Obtener el token almacenado en el localstorage */
     gettoken(){
         let token = localStorage.getItem('token');
 
@@ -84,7 +85,16 @@ export class UserService{
         }else{
             return this._http.get(this.url+'counters', {headers:headers});
         }
-    
     }
 
+    /**Actualizar los datos del usuario */
+    updateUser(user: User): Observable<any>{
+        let params = JSON.stringify(user);
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                       .set('Authorization', this.gettoken());
+    
+        return this._http.put(this.url+'update-user/'+user._id, params, {headers:headers});
+    }
+
+    
 }
