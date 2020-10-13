@@ -65,3 +65,46 @@
 }
 
 /*PAGINA DATOS USUARIO*/
+
+
+/*LISTADO DE GENTE*/
+
+.item-user{
+    display:flex;
+    align-items: center;
+    border: 1px solid grey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+.item-user .image-user{
+    width: 70px;
+    height: 70px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+    margin-left: 5px;
+}
+
+.item-user .image-user img{
+    width: 120px;
+}
+
+.item-user .user-name{
+    margin-top: 10px;
+}
+
+.item-user .user-name .nickname{
+    color:#969393;
+}
+
+.item-user .user-name .name-surname a{
+    color: #444;
+    font-weight: bold;
+}
+
+.avatar-default{
+    width: 100% !important;
+}
+

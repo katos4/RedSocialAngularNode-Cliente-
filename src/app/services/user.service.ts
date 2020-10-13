@@ -96,5 +96,22 @@ export class UserService{
         return this._http.put(this.url+'update-user/'+user._id, params, {headers:headers});
     }
 
+    /**Obtener todos los usuarios */
+    getUsers(page = null): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                       .set('Authorization', this.gettoken());
+
+        return this._http.get(this.url+'users/'+page, {headers:headers});
+    }
+
+    /**Obtener un unico usuario */
+    getUser(id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                       .set('Authorization', this.gettoken());
+
+        return this._http.get(this.url+'user/'+id, {headers:headers});
+    }
+
+
     
 }
