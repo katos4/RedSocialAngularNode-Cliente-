@@ -1,0 +1,7 @@
+.imagenUsuarioSubida img{
+    max-height: 200px !important;
+    max-width: 300px !important;
+    border: 1px solid black;
+}
+
+ 

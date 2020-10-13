@@ -32,9 +32,12 @@
 
         <p>
             <label>Subir tu avatar</label>
-            <input type="file" class="form-control-file" />
+            <input type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
         </p>
        
+        <div class="imagenUsuarioSubida" *ngIf="user.image">
+            <img src="{{ url + 'get-image-user/' + user.image}}" />
+        </div><br><br>
 
         <input type="submit" value="Actualizar" class="btn btn-warning" />
 

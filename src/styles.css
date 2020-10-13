@@ -27,19 +27,41 @@
     background: #cc1717 !important;
 }
 
+.dropdown{
+  margin-top: 5px;
+}
+
 .dropdown a{
     cursor: pointer;
     text-decoration:none !important;
+  
 }
 
 .dropdown-menu *{
     color:black !important;
+   
 }
 
 .navbar .dropdown-menu a:hover{
     background: #eee !important;
 }
 
+.navbar .avatar{
+    width: 50px;
+    height: 40px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 8px;
+}
+
+.navbar .avatar img{
+    height: 40px;
+    width: 50px;
+}
+
+
 .jumbotron{
     text-align: center;
 }
+
+/*PAGINA DATOS USUARIO*/
