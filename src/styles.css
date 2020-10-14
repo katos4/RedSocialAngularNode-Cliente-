@@ -104,7 +104,6 @@
     font-weight: bold;
 }
 
-.avatar-default{
-    width: 100% !important;
+.follow-buttons{
+    margin-left: 50%;
 }
-
