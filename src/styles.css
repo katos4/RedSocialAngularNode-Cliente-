@@ -2,7 +2,7 @@
 .h1-strong{
     font-size: 35px;
     font-weight: bold;
-    margin-left: 13px;
+    /*margin-left: 13px;*/
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
@@ -67,7 +67,7 @@
 /*PAGINA DATOS USUARIO*/
 
 
-/*LISTADO DE GENTE*/
+/*GENTE*/
 
 .item-user{
     display:flex;
@@ -107,3 +107,59 @@
 .follow-buttons{
     margin-left: 50%;
 }
+
+
+/*SIDEBAR*/
+
+#user-card{
+   /* border: 1px solid grey;*/
+}
+
+#user-card .avatar{
+    margin-right: 15px;
+}
+
+#user-card .avatar img{
+    width: 90px;
+    height: 75px;
+}
+
+#user-card .name-surname a{
+    font-weight: bold;
+    color: #000;
+}
+
+#user-card .name-surname .nickname{
+    color: #969393;
+}
+
+#user-card .label-stats,
+#user-card .number-stats{
+    display: block;
+    text-align: center;
+}
+
+#user-card .label-stats{
+    font-weight: 500;
+    color: #555;
+}
+
+#user-card .number-stats{
+    font-weight: 700;
+    color: #333;
+}
+
+#user-card .following-data{
+    display: inline-block;
+    margin-left: 28px;
+    margin-top: 15px;
+}
+
+#user-card .following-data:first-child{
+    padding-left: 15px;
+}
+
+.following-data a{
+    text-decoration: none !important;
+}
+

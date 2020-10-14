@@ -1,0 +1,50 @@
+<h1 class="h1-strong">Mis datos</h1>
+
+
+<div  id="user-card">
+
+    <div class="row">
+        <div class="avatar col-md-4">
+            <img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}"
+            *ngIf="identity.name"/>
+            <img class="rounded-circle" src="assets/user-default.png"
+            *ngIf="!identity.name"/>
+        </div>
+
+        <div class="name-surname col-md-6">
+            <a href="#">
+                {{identity.nick}}
+            </a>
+            <p class="nickname">{{identity.name + ' ' + identity.surname}}</p>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    <div class="stats" *ngIf="stats">
+        <div class="following-data">
+            <a href="#">
+                <span class="label-stats">Publicaciones</span>
+                <span class="number-stats">{{stats.publications}}</span>
+            </a>
+        </div>
+
+        <div class="following-data">
+            <a href="#">
+                <span class="label-stats">Seguidores</span>
+                <span class="number-stats">{{stats.followed}}</span>
+            </a>
+        </div>
+
+        <div class="following-data">
+            <a href="#">
+                <span class="label-stats">Seguidos</span>
+                <span class="number-stats">{{stats.following}}</span>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+<!--formulario de publicaciones-->
