@@ -70,13 +70,22 @@
 /*GENTE*/
 
 .item-user{
-    display:flex;
-    align-items: center;
-    border: 1px solid grey;
+    border: 1px solid rgba(230, 230, 230, 0.8);
+    border-radius: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
+#item-user-row{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-user .image-user,
+.item-user .user-name{
+    display: inline-block;
+}
 
 .item-user .image-user{
     width: 70px;
@@ -85,6 +94,7 @@
     overflow: hidden;
     margin-right: 15px;
     margin-left: 5px;
+    margin-top: 15px;
 }
 
 .item-user .image-user img{
@@ -104,9 +114,9 @@
     font-weight: bold;
 }
 
-.follow-buttons{
+/*.follow-buttons{
     margin-left: 50%;
-}
+}*/
 
 
 /*SIDEBAR*/
@@ -163,3 +173,6 @@
     text-decoration: none !important;
 }
 
+#new-publication{
+    margin-top: 25px;
+}

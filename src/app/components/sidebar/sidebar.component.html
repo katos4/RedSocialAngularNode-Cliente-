@@ -43,8 +43,29 @@
                 <span class="number-stats">{{stats.following}}</span>
             </a>
         </div>
-        
+
     </div>
 </div>
 
 <!--formulario de publicaciones-->
+
+<div id="new-publication">
+
+    
+    <form #newPubForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
+
+        <p>
+            <label>¿Qué estás pensando hoy?</label>
+            <textarea name="text" #text="ngModel" [(ngModel)]="publication.text"
+            class="form-control"></textarea>
+        </p>
+
+        <p>
+            <label>Sube tu foto</label>
+            <input type="file" placeholder="subir imagen" />
+        </p>
+
+        <input type="submit" value="Publicar" class="btn btn-success">
+    </form>
+
+</div>

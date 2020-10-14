@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
-
+import { Publication } from '../../models/publications';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   public stats;
   public url;
   public status;
+  public publication: Publication;
 
 
   constructor(
@@ -24,10 +25,15 @@ export class SidebarComponent implements OnInit {
     this.token = this._userService.gettoken();
     this.stats = this._userService.getStats();
     this.url = GLOBAL.url;
+    this.publication = new Publication('', '', '', '' , this.identity._id);
   }
 
   ngOnInit() {
     console.log("componente sidebar cargado");
+  }
+
+  onSubmit(){
+    console.log(this.publication);
   }
 
 }
