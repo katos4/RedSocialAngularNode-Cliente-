@@ -1,6 +1,63 @@
-<div class="col-md-8">
-    <h1 class="h1-strong">{{title}}</h1>
+<div class="row justify-content-center">
+    
+    <div class="col-md-7">
+       <!-- <div class="row justify-content-center">
+            <button class="floatingButton">Publicaciones nuevas</button>
+        </div> -->
+        <div id="publications">
+           
+            <div *ngFor="let publication of publications" class="item-publication">
+               
+                <div class="card col-md-10">
+
+                    <div class="publication-header-card row">
+                        <div class="image-user col-md-1">
+                            <a href="#">
+                                <img class="rounded-circle" src="{{ url + 'get-image-user/' + publication.user.image}}" *ngIf="publication.user.image"/>
+                                <img class="rounded-circle" src="assets/user-default.png" class="avatar-default" *ngIf="!publication.user.image"/>
+                            </a>
+                        </div>
+                        <div class="publication-user-name col-md-3">
+                            <a href="#" class="card-link">{{publication.user.nick}}</a>
+                        </div>
+                    </div>
+
+                    <div class="publication-image-card">
+                        <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" />
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <a href="#" class="link-publication-nick card-link">{{publication.user.nick}}</a><span>{{publication.text}}</span>
+                        </div>
+                    </div>
+
+                  </div>
+                  
+                    <div class="date">
+                        {{ (publication.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}
+                    </div>
+
+            <!--fin bucle for-->
+            </div>
+            <!--fin div publications-->
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <p>
+                    <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+                        Ver mas publicaciones
+                    </button>
+                </p>
+            </div>
+        </div>
+       
+    </div>
+
+    <div class="col-md-4">
+        <app-sidebar (sended)="refresh($event)"></app-sidebar>
+        <div class="clearfix"></div>
+    </div>
 
 </div>
-<app-sidebar></app-sidebar>
-<div class="clearfix"></div>

@@ -29,6 +29,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('componente de login cargado');
+  
+      var height = $(window).height();
+
+      $('.loginPage').height(height);
+
   }
 
   /**Metodo submit del boton del formulario de login */
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('identity', JSON.stringify(this.identity));
           // conseguir el token
           this.gettoken();
+          this._router.navigate(['/timeline']);
         }
       },
       error => {
@@ -96,7 +102,7 @@ getCounters(){
     response => {
       //console.log(response);
       localStorage.setItem('stats', JSON.stringify(response));
-      this._router.navigate(['/']);
+      //this._router.navigate(['/']);
       this.status = 'success';
     },
     error => {

@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
 import { Publication } from '../../models/publications';
+import { PublicationService } from '../../services/publication.service';
+import { UploadService } from '../../services/upload.service';
+
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
-  providers: [UserService]
+  providers: [UserService, PublicationService, UploadService]
 })
 export class SidebarComponent implements OnInit {
   public identity;
@@ -19,7 +23,11 @@ export class SidebarComponent implements OnInit {
 
 
   constructor(
-    private _userService: UserService
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _userService: UserService,
+    private _publicationService: PublicationService,
+    private _uploadService: UploadService
   ) { 
     this.identity = this._userService.getIdentity();
     this.token = this._userService.gettoken();
@@ -32,8 +40,50 @@ export class SidebarComponent implements OnInit {
     console.log("componente sidebar cargado");
   }
 
-  onSubmit(){
+  onSubmit(form){
     console.log(this.publication);
+    this._publicationService.addPublication(this.token, this.publication).subscribe(
+      response => {
+        if(response.publication){
+          //this.publication = response.publication;
+          this.status = 'success';
+
+          //subir imagen
+          this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
+                             .then((result:any) => {
+                              this.publication.file = result.image;
+                              setTimeout(function(){
+                                var alert = document.getElementById("alertaExito");
+                                alert.style.display = 'none';
+                                },2000);
+                              form.reset();
+                            });
+        }else{
+          this.status = 'error';
+        }
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if(errorMessage != null){
+          this.status = 'error';
+        }
+      }
+    );
   }
+
+  public filesToUpload: Array<File>;
+
+  fileChangeEvent(fileInput: any){
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+  }
+
+//output (esto iria en el componente futuro dedicado solo al formulario de enviar publicaciones)
+@Output() sended = new EventEmitter();
+sendPublication(event){
+  console.log(event);
+  this.sended.emit({send: 'true'});
+}
+
 
 }

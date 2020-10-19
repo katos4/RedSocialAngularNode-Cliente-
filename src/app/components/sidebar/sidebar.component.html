@@ -51,8 +51,14 @@
 
 <div id="new-publication">
 
-    
-    <form #newPubForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-10">
+    <div id="alertaExito" class="alert alert-success" *ngIf="status == 'success'">
+        Publicacion enviada correctamente
+    </div>
+
+    <div id="alertaError" class="alert alert-danger" *ngIf="status == 'error'">
+        Publicacion NO enviada correctamente
+    </div>
+    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm);sendPublication($event);" class="col-md-10">
 
         <p>
             <label>¿Qué estás pensando hoy?</label>
@@ -62,7 +68,7 @@
 
         <p>
             <label>Sube tu foto</label>
-            <input type="file" placeholder="subir imagen" />
+            <input type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />
         </p>
 
         <input type="submit" value="Publicar" class="btn btn-success">

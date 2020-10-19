@@ -1,22 +1,22 @@
 
 <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#">NGSocial</a>
+  <a class="navbar-brand" [routerLink]="['/timeline']">Facegram</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <!--BARRA DE NAVEGACION CUANDO EXISTA UN USUARIO IDENTIFICADO-->
     <ul class="navbar-nav" *ngIf="identity">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="['active']">
+     <!-- <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']">
           Inicio
         </a>
+      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/timeline']">Timeline</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/timeline']" [routerLinkActive]="['active']">Timeline</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/gente']" [routerLinkActive]="['active']">
+        <a class="nav-link" [routerLink]="['/gente']">
           Gente
         </a>
       </li>
@@ -81,6 +81,6 @@
   </div>
 </nav>
  
-<div class="container-fluid">
+<div id="divPrincipal" class="container-fluid">
   <router-outlet></router-outlet>
 </div>

@@ -1,4 +1,9 @@
 /*GENERALES*/
+#divPrincipal{
+    background-color: #f0f2f5;
+}
+
+
 .h1-strong{
     font-size: 35px;
     font-weight: bold;
@@ -16,7 +21,7 @@
 /*CABECERA*/
  
 .navbar{
-    background-color: #e53c37 !important;
+    background-color: #1877f2 !important;
 }
 
 .navbar *{
@@ -24,7 +29,7 @@
 }
 
 .navbar a:hover{
-    background: #cc1717 !important;
+    background: #0d65d9 !important;
 }
 
 .dropdown{
@@ -63,6 +68,48 @@
 .jumbotron{
     text-align: center;
 }
+
+/*LOGIN*/
+.formulario-login{
+    background: #fff;
+    margin-top: 25%;
+    margin-right: 80px;
+    padding: 20px;
+    /*border: 1px solid grey;*/
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 5px rgba(230, 230, 230, 0.5);
+}
+.textoPaginaLogin{
+    margin-top: 25%;
+    margin-left: 20%;
+    margin-right: 30px;
+    width: 500px;
+}
+.textoPaginaLogin p{
+    font-size: 30px;
+}
+
+.textoPaginaLogin p img{
+    height: 60px;
+}
+
+.spacer{
+    margin-top: 25px;
+}
+
+.loginPage{
+    background: #f0f2f5;
+    width: 100%;
+}
+
+.botonCuentaNueva{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 25px;
+}
+
 
 /*PAGINA DATOS USUARIO*/
 
@@ -114,16 +161,17 @@
     font-weight: bold;
 }
 
-/*.follow-buttons{
-    margin-left: 50%;
-}*/
-
+.floatingButton{
+    background-color: white;
+    border: 1px solid rgba(230, 230, 230, 0.8);
+    border-radius: 30px;
+    margin-top: 15px;
+    display:scroll;
+    position:fixed;
+    z-index: 1;
+}
 
 /*SIDEBAR*/
-
-#user-card{
-   /* border: 1px solid grey;*/
-}
 
 #user-card .avatar{
     margin-right: 15px;
@@ -176,3 +224,55 @@
 #new-publication{
     margin-top: 25px;
 }
+
+
+/*TIMELINE*/
+
+#publications{
+    margin-top: 70px;
+    min-height: 500px;
+    min-width: 600px;
+}
+
+#publications .date{
+    color: grey;
+    font-size: small;
+}
+
+.item-publication{
+    margin-bottom: 60px;
+    width: 100%;
+}
+
+.item-publication .publication-header-card{
+    padding: 15px;
+    padding-left: 5px !important;
+}
+
+.item-publication .publication-image-card{
+    width: 100%;
+}
+
+.item-publication .image-user img{
+    width: 40px;
+    height: 35px;
+}
+
+.item-publication .publication-user-name a{
+    font-weight: 600;
+    color: #000;
+}
+
+.item-publication .link-publication-nick{
+    padding-right: 10px;
+}
+
+.item-publication .card-body{
+    padding-left: 0px !important;
+}
+
+.item-publication .card{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
