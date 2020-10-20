@@ -21,7 +21,8 @@ export class ProfileComponent implements OnInit {
   public token;
   public url;
   public stats;
-  public follow;
+  public followed;
+  public following;
 
 
   constructor(
@@ -30,10 +31,12 @@ export class ProfileComponent implements OnInit {
     private _userService: UserService,
     private _followService: FollowService
   ) { 
-    this.title = 'Perfil';
+    this.title = 'Mi perfil';
     this. identity = this._userService.getIdentity();
     this.token = _userService.gettoken();
     this.url = GLOBAL.url;
+    this.followed = false;
+    this.following = false;
   }
 
   ngOnInit() {
@@ -56,6 +59,19 @@ export class ProfileComponent implements OnInit {
         if(response.user){
           console.log(response.user);
           this.user = response.user;
+
+          if(response.following[0]._id){
+            this.following = true;
+          }else{
+            this.following = false;
+          }
+
+          if(response.followed[0]._id){
+            this.followed = true;
+          }else{
+            this.followed = false;
+          }
+
         }else{
           this.status='error';
         }

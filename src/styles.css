@@ -161,15 +161,6 @@
     font-weight: bold;
 }
 
-.floatingButton{
-    background-color: white;
-    border: 1px solid rgba(230, 230, 230, 0.8);
-    border-radius: 30px;
-    margin-top: 15px;
-    display:scroll;
-    position:fixed;
-    z-index: 1;
-}
 
 /*SIDEBAR*/
 
@@ -276,3 +267,44 @@
     padding-right: 0px !important;
 }
 
+.floatingButton{
+    background-color: white;
+    border: 1px solid rgba(230, 230, 230, 0.8);
+    border-radius: 30px;
+    margin-top: 15px;
+    display:scroll;
+    position:fixed;
+    z-index: 1;
+}
+
+/*PERFIL USUARIO*/
+
+.user-image{
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.user-image .profile-image{
+      /* cambia estos dos valores para definir el tamaño de tu círculo */
+      height: 200px;
+      width: 200px;
+      /* los siguientes valores son independientes del tamaño del círculo */
+      background-repeat: no-repeat;
+      background-position: 50%;
+      border-radius: 50%;
+      background-size: 100% auto;
+}
+
+#edit-profile-button{
+    margin-left: 20px;
+    margin-right: 10px;
+    background-color: #f0f2f5;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.user-name *{
+    margin-bottom: 15px;
+}

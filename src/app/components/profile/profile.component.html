@@ -1,9 +1,39 @@
-<div class="row">
-    <div class="col-md-7">
-        <h1 class="h1-strong">{{title}}</h1>
-       
+<div class="row align-items-center justify-content-center">
+
+    <div class="col-md-3">
+        <div class="user-image" *ngIf="user">
+            
+            <img class="profile-image rounded-circle" src="{{ url + 'get-image-user/' + user.image}}"
+                *ngIf="user.name"/>
+            <img class=" profile-image rounded-circle" src="assets/user-default.png"
+                *ngIf="!user.image"/> 
+        </div>
     </div>
-    <div class="col-md-5">
-        <app-sidebar></app-sidebar>
+
+    <div class="col-md-3">
+        <div class="user-name">
+            <div class="nick">
+                {{user.nick}} 
+                <button id="edit-profile-button">Editar perfil</button>
+            </div>
+
+                
+           
+            <div class="name">Seguidores y seguidos</div>
+            <div>
+                <p><b>{{user.name + ' ' + user.surname}}</b></p>
+                <p>Biografia</p>
+                
+            </div>
+        </div>
     </div>
+    
+   
+   
 </div>
+
+<div class="follow">
+    <div *ngIf="followed">Te sigue</div>
+</div>
+
+
