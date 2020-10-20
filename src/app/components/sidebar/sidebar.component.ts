@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
     console.log("componente sidebar cargado");
   }
 
-  onSubmit(form){
+  onSubmit(form, $event){
     console.log(this.publication);
     this._publicationService.addPublication(this.token, this.publication).subscribe(
       response => {
@@ -49,15 +49,26 @@ export class SidebarComponent implements OnInit {
           this.status = 'success';
 
           //subir imagen
+          if(this.filesToUpload && this.filesToUpload.length){
           this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
                              .then((result:any) => {
+                               this.status = 'success';
                               this.publication.file = result.image;
                               setTimeout(function(){
                                 var alert = document.getElementById("alertaExito");
                                 alert.style.display = 'none';
                                 },2000);
                               form.reset();
+                              this.sended.emit({send: 'true'});
                             });
+            }else{
+              this.status = 'success';
+              form.reset();
+              this._router.navigate(['/timeline']);
+              this.sended.emit({send: 'true'});
+            }
+        
+
         }else{
           this.status = 'error';
         }

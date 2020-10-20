@@ -43,6 +43,8 @@ public name: string;
     console.log("componente timeline cargado");
     this.getPublications(this.page);
 
+    var height = $(window).height();
+    $('.loginPage').height(height);
   }
   
 
@@ -66,7 +68,7 @@ public name: string;
             this.publications = arrayA.concat(arrayB);
 
             /**scroll animado con jquery cuando se pulsa el boton de ver mas publicaciones */
-            $("html, body").animate({scrollTop: $('body').prop("scrollHeight")}, 500);
+            $("html, body").animate({scrollTop: $('html').prop("scrollHeight")}, 500);
           }
 
          /* if(page > this.pages){
@@ -92,14 +94,28 @@ public name: string;
     /** Cuando la longitud del array de publicaciones sea igual al total de publicaciones, significará 
      * que no hay mas publicaciones que mostrar
     */
-    if(this.publications.length == this.total){
+
+    this.page += 1;
+    if(this.page == this.pages){
       this.noMore = true;
-    }else{
-      this.page += 1;
     }
 
     this.getPublications(this.page, true);
   }
+
+  /*
+    viewMore(){
+     Cuando la longitud del array de publicaciones sea igual al total de publicaciones, significará 
+      que no hay mas publicaciones que mostrar
+   if(this.publications.length == this.total){
+    this.noMore = true;
+  }else{
+    this.page += 1;
+  }
+  this.getPublications(this.page, true);
+  } */
+
+
 
   refresh(event){
     this.getPublications(1);

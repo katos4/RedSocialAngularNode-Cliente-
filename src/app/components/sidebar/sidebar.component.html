@@ -12,7 +12,7 @@
         </div>
 
         <div class="name-surname col-md-6">
-            <a href="#">
+            <a [routerLink]="['/perfil',identity._id]">
                 {{identity.nick}}
             </a>
             <p class="nickname">{{identity.name + ' ' + identity.surname}}</p>
@@ -58,7 +58,7 @@
     <div id="alertaError" class="alert alert-danger" *ngIf="status == 'error'">
         Publicacion NO enviada correctamente
     </div>
-    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm);sendPublication($event);" class="col-md-10">
+    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm, $event)" class="col-md-10">
 
         <p>
             <label>¿Qué estás pensando hoy?</label>

@@ -29,6 +29,9 @@ export class AppComponent implements OnInit, DoCheck{
   ngOnInit() {
     this.identity =this._userService.getIdentity();
     console.log(this.identity);
+    
+    var height = $(window).height();
+    $('.loginPage').height(height);
  }
 
  ngDoCheck(){

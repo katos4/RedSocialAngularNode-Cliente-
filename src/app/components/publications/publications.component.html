@@ -1,0 +1,36 @@
+<div id="profile-publications" class="row"> 
+    <div *ngFor="let publication of publications" class="item-profile-publication col-md-4 d-md-flex mt-4 mb-3">
+       
+                <!-- <div class="publication-header-card row">
+                    <div class="profile-image-user col-md-1">
+                        <a href="#">
+                            <img class="prof-img rounded-circle" src="{{ url + 'get-image-user/' + publication.user.image}}" *ngIf="publication.user.image"/>
+                            <img class="prof-img rounded-circle" src="assets/user-default.png" class="avatar-default" *ngIf="!publication.user.image"/>
+                        </a>
+                    </div>
+                    <div class="publication-user-name col-md-3">
+                        <a href="#" class="card-link">{{publication.user.nick}}</a>
+                    </div>
+                </div> -->
+
+                <div class="publication-profile-image-card">
+                    <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" />
+                </div>
+                
+            <!-- <div class="card-body">
+                    <div class="col-md-12">
+                        <a href="#" class="link-publication-nick card-link">{{publication.user.nick}}</a><span>{{publication.text}}</span>
+                    </div>
+                </div> -->
+
+    <!--fin bucle for-->
+    </div>
+</div>
+
+<div class="row align-items-center justify-content-center">
+    <div class="col-md-2" *ngIf="publications && publications.length">
+        <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+            Ver mas
+        </button>
+    </div>
+</div>

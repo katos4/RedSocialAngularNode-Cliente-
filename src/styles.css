@@ -1,4 +1,8 @@
 /*GENERALES*/
+body{
+    background: #f5f6f8;
+}
+
 #divPrincipal{
     background-color: #f0f2f5;
 }
@@ -280,20 +284,21 @@
 /*PERFIL USUARIO*/
 
 .user-image{
-    display: inline-block;
-    margin-left: 5%;
-    margin-top: 3%;
+    margin-left: 2%;
+    margin-top: 7%;
 }
 
 .user-image .profile-image{
-      /* cambia estos dos valores para definir el tamaño de tu círculo */
+      /* tamaño del circulo */
       height: 200px;
       width: 200px;
       /* los siguientes valores son independientes del tamaño del círculo */
       background-repeat: no-repeat;
       background-position: 50%;
       border-radius: 50%;
+      border: 5px solid #e65c00;
       background-size: 100% auto;
+      padding: 3px;
 }
 
 #edit-profile-button{
@@ -305,6 +310,67 @@
     font-weight: 600;
 }
 
-.user-name *{
-    margin-bottom: 15px;
+
+#profile-user-info .row{
+    padding-bottom: 20px;
 }
+
+#profile-user-info .row:first-child{
+    margin-top: 30px;
+    margin-bottom: 5px;
+    padding-bottom: 0px !important;
+}
+
+#profile-user-info .follow-you{
+    background-color: #969393;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    padding: 2px;
+}
+
+.follows-user-profile .stats a{
+    padding-right: 55px;
+    color: black;
+}
+
+.follows-user-profile .stats .number-stats{
+    font-weight: bold;
+}
+
+
+/*PUBLICACIONES PERFIL USUARIO*/
+.item-profile-publication{
+    width: 100%;
+    align-items: center;
+}
+
+.item-profile-publication .publication-profile-image-card{
+    width: 100%;
+    height: 100%;
+}
+
+
+.profile-image-user .prof-img{
+ /* tamaño del circulo */
+ height: 50px;
+ width: 50px;
+ /* los siguientes valores son independientes del tamaño del círculo */
+ background-repeat: no-repeat;
+ background-position: 50%;
+ border-radius: 50%;
+ border: 5px solid #e65c00;
+ background-size: 100% auto;
+ padding: 3px;
+}
+
+.publication-profile-image-card img{
+    width: 100%;
+}
+
+#profile-publications{
+    margin-top: 10%;
+    /*padding-bottom: 10%;*/
+}
+
+

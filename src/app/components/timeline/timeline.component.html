@@ -18,7 +18,7 @@
                             </a>
                         </div>
                         <div class="publication-user-name col-md-3">
-                            <a href="#" class="card-link">{{publication.user.nick}}</a>
+                            <a [routerLink]="['/perfil',publication.user._id]" class="card-link">{{publication.user.nick}}</a>
                         </div>
                     </div>
 
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-5">
+            <div class="col-md-5" *ngIf="publications && publications.length">
                 <p>
                     <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
                         Ver mas publicaciones

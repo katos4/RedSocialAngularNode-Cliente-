@@ -42,6 +42,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     console.log("componente perfil cargado");
     this.loadPage();
+
+    var height = $(window).height();
+    $('.loginPage').height(height);
   }
 
   loadPage(){
@@ -60,13 +63,13 @@ export class ProfileComponent implements OnInit {
           console.log(response.user);
           this.user = response.user;
 
-          if(response.following[0]._id){
+          if(response.following[0] && response.following[0]._id){
             this.following = true;
           }else{
             this.following = false;
           }
 
-          if(response.followed[0]._id){
+          if(response.followed[0] && response.followed[0]._id){
             this.followed = true;
           }else{
             this.followed = false;
@@ -95,4 +98,40 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  followUser(followed){
+    var follow = new Follow('', this.identity._id, followed);
+
+    this._followService.addFollow(this.token, follow).subscribe(
+      response => {
+        this.following = true;
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+  }
+
+  unfollowUser(followed){
+    this._followService.deleteFollow(this.token, followed).subscribe(
+      response => {
+        this.following = false;
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+  }
+
+  public followUserOver;
+  mouseEnter(user_id){
+    this.followUserOver = user_id;
+  }
+
+  mouseLeave(){
+    this.followUserOver = 0;
+  }
+
+
+
+//---
 }
