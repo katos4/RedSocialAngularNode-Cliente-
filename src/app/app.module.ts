@@ -17,6 +17,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PublicationsComponent } from './components/publications/publications.component';
 import { FollowingComponent } from './components/following/following.component';
+import { FollowedComponent } from './components/followed/followed.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FollowingComponent } from './components/following/following.component';
     TimelineComponent,
     ProfileComponent,
     PublicationsComponent,
-    FollowingComponent
+    FollowingComponent,
+    FollowedComponent
   ],
   imports: [
     BrowserModule,

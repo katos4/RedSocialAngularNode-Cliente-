@@ -14,7 +14,7 @@
                 </div> -->
 
                 <div class="publication-profile-image-card">
-                    <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" />
+                    <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" (click)="openModal(publication._id)"/>
                 </div>
                 
             <!-- <div class="card-body">

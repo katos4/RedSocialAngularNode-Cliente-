@@ -49,7 +49,7 @@ export class SidebarComponent implements OnInit {
           this.status = 'success';
 
           //subir imagen
-          if(this.filesToUpload && this.filesToUpload.length){
+   
           this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
                              .then((result:any) => {
                                this.status = 'success';
@@ -61,13 +61,7 @@ export class SidebarComponent implements OnInit {
                               form.reset();
                               this.sended.emit({send: 'true'});
                             });
-            }else{
-              this.status = 'success';
-              form.reset();
-              this._router.navigate(['/timeline']);
-              this.sended.emit({send: 'true'});
-            }
-        
+                            
 
         }else{
           this.status = 'error';

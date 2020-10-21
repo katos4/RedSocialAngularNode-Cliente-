@@ -10,11 +10,11 @@ import { GLOBAL } from '../../services/global';
 
 @Component({
   selector: 'app-following',
-  templateUrl: './following.component.html',
-  styleUrls: ['./following.component.css'],
+  templateUrl: './followed.component.html',
+  styleUrls: ['./followed.component.css'],
   providers: [UserService, FollowService]
 })
-export class FollowingComponent implements OnInit {
+export class FollowedComponent implements OnInit {
   public title: string;
   public url: string;
   public identity;
@@ -28,7 +28,7 @@ export class FollowingComponent implements OnInit {
   public status: string;
   public follows;
   public followUserOver;
-  public following;
+  public followed;
   public userPageId;
 
   constructor(
@@ -37,7 +37,7 @@ export class FollowingComponent implements OnInit {
     private _userService: UserService,
     private _followService: FollowService
   ) {
-    this.title = "Seguidos";
+    this.title = "Seguidores";
     this.url = GLOBAL.url;
     this.identity = this._userService.getIdentity();
     this.token = this._userService.gettoken();
@@ -77,7 +77,7 @@ export class FollowingComponent implements OnInit {
   }
 
 getFollows(user_id, page){
-  this._followService.getFollowing(this.token, user_id, page).subscribe(
+  this._followService.getFollowed(this.token, user_id, page).subscribe(
     response => {
       if(!response.follows){
         this.status = 'error';
@@ -85,7 +85,7 @@ getFollows(user_id, page){
         console.log(response);
         
         this.total = response.total;
-        this.following  = response.follows;
+        this.followed  = response.follows;
         this.pages = response.pages;
         this.follows = response.users_following;
 
