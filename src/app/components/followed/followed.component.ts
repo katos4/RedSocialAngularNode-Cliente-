@@ -45,7 +45,7 @@ export class FollowedComponent implements OnInit {
 
   ngOnInit(){
 
-    console.log("componente following se ha cargado");
+    //console.log("componente following se ha cargado");
     this.actualPage();
   }
 

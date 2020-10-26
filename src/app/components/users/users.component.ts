@@ -42,8 +42,10 @@ export class UsersComponent implements OnInit {
    }
 
   ngOnInit(){
-
-    console.log("componente Gente se ha cargado");
+    var height = $(window).height();
+    $('.loginPage').height(height);
+    $('.navbar').removeAttr('hidden');
+    //console.log("componente Gente se ha cargado");
     this.actualPage();
   }
 
@@ -77,13 +79,13 @@ getUsers(page){
       if(!response.users){
         this.status = 'error';
       }else{
-        console.log(response);
+        //console.log(response);
         this.total = response.total;
         this.users  = response.users;
         this.pages = response.pages;
         this.follows = response.users_following;
 
-        console.log(this.follows);
+        //console.log(this.follows);
         if(page > this.pages){
           this._router.navigate(['/gente', 1]);
         }

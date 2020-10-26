@@ -1,10 +1,7 @@
-<h1 class="h1-strong">Mis datos</h1>
-
-
 <div  id="user-card">
 
     <div class="row">
-        <div class="avatar col-md-4">
+        <div class="avatar col-md-3">
             <img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}"
             *ngIf="identity.name"/>
             <img class="rounded-circle" src="assets/user-default.png"
@@ -49,29 +46,42 @@
 
 <!--formulario de publicaciones-->
 
-<div id="new-publication">
+<!-- <div id="new-publication-container"> 
+    <div class="row">
+        <div id="alertaExito" class="alert alert-success" *ngIf="status == 'success'">
+            Publicacion enviada correctamente
+        </div>
 
-    <div id="alertaExito" class="alert alert-success" *ngIf="status == 'success'">
-        Publicacion enviada correctamente
+        <div id="alertaError" class="alert alert-danger" *ngIf="status == 'error'">
+            Publicacion NO enviada correctamente
+        </div>
     </div>
+    
+   
+    <div id="new-publication" clas="row justify-content-center">
+        
+        <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm, $event)" class="col-md-12">
 
-    <div id="alertaError" class="alert alert-danger" *ngIf="status == 'error'">
-        Publicacion NO enviada correctamente
-    </div>
-    <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm, $event)" class="col-md-10">
+            <div class="row justify-content-center">
+                <textarea name="text" #text="ngModel" [(ngModel)]="publication.text"
+                class="form-control" placeholder="¿Qué estás pensando hoy?"></textarea>
+            </div>
+                
+            <div class="row mt-2">
+                <div class="image-upload">
+                    <label id="image-input" for="file-input">
+                        <img src="../../../assets/imagenes/galeria.png" />
+                    </label>
+                    <label id="text-input" for="file-input">Subir foto</label>
+                    <input id="file-input" type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />
+                </div>
+            </div>
+            
+            <div class="row mt-3">
+                <input type="submit" value="Publicar" class="btn btn-primary btn-block">
+            </div>
+            
+        </form>
+    </div>-->
 
-        <p>
-            <label>¿Qué estás pensando hoy?</label>
-            <textarea name="text" #text="ngModel" [(ngModel)]="publication.text"
-            class="form-control"></textarea>
-        </p>
-
-        <p>
-            <label>Sube tu foto</label>
-            <input type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />
-        </p>
-
-        <input type="submit" value="Publicar" class="btn btn-success">
-    </form>
-
-</div>
+<!-- </div> -->

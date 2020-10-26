@@ -34,8 +34,11 @@ export class UserEditComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log(this.user);
-    console.log("User edit se ha cargado");
+    //console.log(this.user);
+    //console.log("User edit se ha cargado");
+    var height = $(window).height();
+    $('.loginPage').height(height);
+    $('.navbar').removeAttr('hidden');
   }
 
   onSubmit(){
@@ -54,7 +57,7 @@ export class UserEditComponent implements OnInit {
 
           this._uploadService.makeFileRequest(this.url + 'upload-image-user/' + this.user._id, [], this.filesToUpload, this.token, 'image')
                 .then((result: any) => {
-                  console.log(result);
+                  //console.log(result);
                   this.user.image = result.user.image;
                   localStorage.setItem('identity', JSON.stringify(this.user));
                 });

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params} from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -8,12 +10,22 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   public title: string;
 
-  constructor() { 
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+  ) { 
     this.title = "Bienvenido a NGSocial";
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     console.log("Home Component cargado");
+    setTimeout(() => {
+      this._router.navigate(['/timeline']);
+    }, 1000);
+    
+    var height = $(window).height();
+    $('.loginPage').height(height);
+
   }
 
 }

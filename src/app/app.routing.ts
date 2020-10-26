@@ -11,10 +11,12 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
+import { ChatComponent } from './components/chat/chat.component';
+
 
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
-    {path: 'home', component: TimelineComponent},
+    {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'registro', component: RegisterComponent},
     {path: 'mis-datos', component: UserEditComponent},
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
     {path: 'perfil/:id', component: ProfileComponent},
     {path: 'siguiendo/:id/:page', component: FollowingComponent},
     {path: 'seguidores/:id/:page', component: FollowedComponent},
+    {path: 'chat', component: ChatComponent},
     {path: '**', component: HomeComponent}
 ];
 

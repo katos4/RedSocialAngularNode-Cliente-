@@ -6,6 +6,7 @@ import { routing, appRoutingProviders } from './app.routing';
 import { MomentModule } from 'angular2-moment';
 
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -18,6 +19,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PublicationsComponent } from './components/publications/publications.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './services/chat.service';
+import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 
 
 @NgModule({
@@ -33,7 +37,9 @@ import { FollowedComponent } from './components/followed/followed.component';
     ProfileComponent,
     PublicationsComponent,
     FollowingComponent,
-    FollowedComponent
+    FollowedComponent,
+    ChatComponent,
+    UploadPublicationComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,8 @@ import { FollowedComponent } from './components/followed/followed.component';
     MomentModule
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

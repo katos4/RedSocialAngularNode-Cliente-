@@ -23,6 +23,7 @@ export class PublicationsComponent implements OnInit {
   public pages;
   public itemsPerPage;
   public publications: Publication[];
+  public modalData: any[] = [];
   @Input() user: string;
 
 
@@ -94,10 +95,21 @@ export class PublicationsComponent implements OnInit {
   }
 
 
-  openModal(id){
-    console.log("El id de la imagen clickada es " + id);
-    
+  openModal(id, file, userImg, userNick, text, userId){
+    this.modalData = [];
+    this.modalData.push({
+      "userId": userId,
+      "imgId":id, 
+      "file":file, 
+      "userImage":userImg,
+      "nick": userNick,
+      "text": text});
+    console.log(this.modalData);
+
   }
+
+
+
 
 //-----  
 }

@@ -40,11 +40,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("componente perfil cargado");
+    //console.log("componente perfil cargado");
     this.loadPage();
 
     var height = $(window).height();
     $('.loginPage').height(height);
+    $('.navbar').removeAttr('hidden');
   }
 
   loadPage(){
@@ -58,9 +59,9 @@ export class ProfileComponent implements OnInit {
   getUser(id){
     this._userService.getUser(id).subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
         if(response.user){
-          console.log(response.user);
+          //console.log(response.user);
           this.user = response.user;
 
           if(response.following[0] && response.following[0]._id){

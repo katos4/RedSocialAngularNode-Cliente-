@@ -32,6 +32,7 @@ export class AppComponent implements OnInit, DoCheck{
     
     var height = $(window).height();
     $('.loginPage').height(height);
+
  }
 
  ngDoCheck(){
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit, DoCheck{
  }
 
  logout(){
+  $('.navbar').attr('hidden', true);
    localStorage.clear();
    this.identity = null;
    this._router.navigate(['/']);

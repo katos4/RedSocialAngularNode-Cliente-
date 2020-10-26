@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-
+import { ChatService } from '../../services/chat.service';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +17,16 @@ export class LoginComponent implements OnInit {
   public status: string;
   public identity;
   public token;
+  public socket_id;
 
+  socket;
+  server = 'http://localhost:5000';
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    private _chatService: ChatService
   ) { 
     this.title = 'Identificate';
     this.user = new User("","","","","","","ROLE_USER","");
@@ -31,7 +36,6 @@ export class LoginComponent implements OnInit {
     console.log('componente de login cargado');
   
       var height = $(window).height();
-
       $('.loginPage').height(height);
 
   }
@@ -42,16 +46,22 @@ export class LoginComponent implements OnInit {
   
     this._userService.login(this.user).subscribe(
       response => {
+    
         this.identity = response.user;
+        
         if(!this.identity || !this.identity._id){
           this.status = 'error';
         }else{
           this.status = 'success';
+          //mostrar barra de navegacion
+          $('.navbar').removeAttr('hidden');
+
           // persistir datos del usuario en el local storage
           localStorage.setItem('identity', JSON.stringify(this.identity));
+
           // conseguir el token
           this.gettoken();
-          this._router.navigate(['/timeline']);
+          this._router.navigate(['/home']);
         }
       },
       error => {
@@ -76,7 +86,7 @@ gettoken(){
         this.status = 'error';
       }else{
         this.status = 'success';
-        console.log(this.token);
+        //console.log(this.token);
         // persistir datos del usuario en el local storage
         localStorage.setItem('token', this.token);
         // conseguir los contadores o estadisticas del usuario

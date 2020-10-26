@@ -1,46 +1,52 @@
-<div class="col-lg-5">
+<div class="row justify-content-center pt-3">
     <h1 class="h1-strong">{{title}}</h1>
+</div>
 
-    <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
-       ¡Tus datos se han modificado correctamente!
+<div class="row justify-content-center">
+
+    <div class="col-lg-5">
+    
+        <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+        ¡Tus datos se han modificado correctamente!
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+            Se ha producido un error, intentalo de nuevo.
+        </div>
+
+        <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+            <p>
+                <label>Nombre</label>
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
+            </p>
+
+            <p>
+                <label>Apellidos</label>
+                <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
+            </p>
+
+            <p>
+                <label>Nick</label>
+                <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
+            </p>
+
+            <p>
+                <label>Correo electrónico</label>
+                <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
+            </p>
+
+            <p>
+                <label>Subir tu avatar</label>
+                <input type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
+            </p>
+        
+            <div class="imagenUsuarioSubida" *ngIf="user.image">
+                <img src="{{ url + 'get-image-user/' + user.image}}" />
+            </div><br><br>
+
+            <input type="submit" value="Actualizar" class="btn btn-warning" />
+
+        </form>
     </div>
-
-    <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
-        Se ha producido un error, intentalo de nuevo.
-    </div>
-
-    <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
-        <p>
-            <label>Nombre</label>
-            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
-        </p>
-
-        <p>
-            <label>Apellidos</label>
-            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
-        </p>
-
-        <p>
-            <label>Nick</label>
-            <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
-        </p>
-
-        <p>
-            <label>Correo electrónico</label>
-            <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
-        </p>
-
-        <p>
-            <label>Subir tu avatar</label>
-            <input type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
-        </p>
-       
-        <div class="imagenUsuarioSubida" *ngIf="user.image">
-            <img src="{{ url + 'get-image-user/' + user.image}}" />
-        </div><br><br>
-
-        <input type="submit" value="Actualizar" class="btn btn-warning" />
-
-    </form>
 
 </div>

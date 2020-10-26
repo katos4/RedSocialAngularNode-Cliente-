@@ -8,19 +8,18 @@ import { UploadService } from '../../services/upload.service';
 
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
+  selector: 'app-upload-publication',
+  templateUrl: './upload-publication.component.html',
+  styleUrls: ['./upload-publication.component.css'],
   providers: [UserService, PublicationService, UploadService]
 })
-export class SidebarComponent implements OnInit {
+export class UploadPublicationComponent implements OnInit {
   public identity;
   public token;
   public stats;
   public url;
   public status;
   public publication: Publication;
-
 
   constructor(
     private _route: ActivatedRoute,
@@ -36,46 +35,46 @@ export class SidebarComponent implements OnInit {
     this.publication = new Publication('', '', '', '' , this.identity._id);
   }
 
-  ngOnInit() {
-    //console.log("componente sidebar cargado");
+  ngOnInit(){
   }
 
   onSubmit(form, $event){
-    //console.log(this.publication);
-    this._publicationService.addPublication(this.token, this.publication).subscribe(
-      response => {
-        if(response.publication){
-          //this.publication = response.publication;
-          this.status = 'success';
+  //console.log(this.publication);
+  this._publicationService.addPublication(this.token, this.publication).subscribe(
+    response => {
+      if(response.publication){
+        //this.publication = response.publication;
+        this.status = 'success';
 
-          //subir imagen
-          this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
-                             .then((result:any) => {
-                               this.status = 'success';
-                              this.publication.file = result.image;
-                              setTimeout(function(){
-                                var alert = document.getElementById("alertaExito");
-                                alert.style.display = 'none';
-                                },2000);
-                              form.reset();
-                              this.sended.emit({send: 'true'});
-                            });
-                            
+        //subir imagen
+        this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
+                           .then((result:any) => {
+                             this.status = 'success';
+                            this.publication.file = result.image;
+                            setTimeout(function(){
+                              var alert = document.getElementById("alertaExito");
+                              alert.style.display = 'none';
+                              },2000);
+                            form.reset();
+                            this.sended.emit({send: 'true'});
+                            $('#closeModalButton').click();
+                          });
+                          
 
-        }else{
-          this.status = 'error';
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        console.log(errorMessage);
-        if(errorMessage != null){
-          this.status = 'error';
-        }
+      }else{
+        this.status = 'error';
       }
-    );
-    
+    },
+    error => {
+      var errorMessage = <any>error;
+      console.log(errorMessage);
+      if(errorMessage != null){
+        this.status = 'error';
+      }
+    }
+  );
   }
+
 
   public filesToUpload: Array<File>;
 
@@ -89,6 +88,5 @@ sendPublication(event){
   console.log(event);
   this.sended.emit({send: 'true'});
 }
-
 
 }

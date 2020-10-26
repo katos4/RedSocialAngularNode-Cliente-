@@ -20,12 +20,12 @@
                 {{user.nick}} 
             </div>
 
-            <div class="edit-profile-button-box">
-                <button id="edit-profile-button">Editar perfil</button>
+            <div class="edit-profile-button-box" *ngIf="user._id == identity._id">
+                <button [routerLink]="['/mis-datos']" id="edit-profile-button">Editar perfil</button>
             </div>
 
             <div class="follow">
-                <div> <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">Seguir</button> </div>
+                <div> <button class="btn btn-success" *ngIf="!following && !identity._id" (click)="followUser(user._id)">Seguir</button> </div>
                 <div> 
                     <button class="btn btn-default" *ngIf="following" 
                         (click)="unfollowUser(user._id)" 
