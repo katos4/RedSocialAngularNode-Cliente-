@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { MomentModule } from 'angular2-moment';
 
 
-
+/** Componentes */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -20,9 +20,18 @@ import { PublicationsComponent } from './components/publications/publications.co
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatService } from './services/chat.service';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
+import { SearchComponent } from './components/search/search.component';
 
+
+/** Servicios */
+import { ChatService } from './services/chat.service';
+
+/** Angular Material */
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -39,14 +48,20 @@ import { UploadPublicationComponent } from './components/upload-publication/uplo
     FollowingComponent,
     FollowedComponent,
     ChatComponent,
-    UploadPublicationComponent
+    UploadPublicationComponent,
+    SearchComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
     routing,
     HttpClientModule,
-    MomentModule
+    MomentModule,
+    NoopAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [
     appRoutingProviders,

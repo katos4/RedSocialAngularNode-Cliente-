@@ -49,6 +49,13 @@ export class UsersComponent implements OnInit {
     this.actualPage();
   }
 
+  handleSearch(value: string){
+    //console.log(value);
+    this.filtro_valor = value;
+  }
+
+  filtro_valor = '';
+
   actualPage(){
     this._route.params.subscribe(params => {
       let page = +params['page'];

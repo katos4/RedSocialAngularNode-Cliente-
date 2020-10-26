@@ -4,10 +4,11 @@
 
 <div class="row justify-content-center mt-3">
     <div class="col-md-8">
+        <app-search (search)="handleSearch($event)"></app-search>
         <div class="people">
 
             <!--LISTADO-->
-            <div *ngFor="let user of users" class="item-user">
+            <div *ngFor="let user of users | search:filtro_valor" class="item-user">
                 <div id="item-user-row" class="row">
 
                     <div class="col-md-9">
