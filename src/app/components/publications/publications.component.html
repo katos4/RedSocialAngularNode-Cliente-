@@ -1,8 +1,8 @@
 <div id="profile-publications" class="row"> 
-    <div *ngFor="let publication of publications" class="item-profile-publication col-md-4 d-md-flex mt-4 mb-3">
+    <div *ngFor="let publication of publications" class="item-profile-publication col-md-4 col-6 d-md-flex mt-4 mb-3">
        
         <div class="publication-profile-image-card">
-            <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" data-toggle="modal" data-target="#exampleModal" (click)="openModal(publication._id, publication.file, publication.user.image, publication.user.nick, publication.text, publication.user._id)"/>
+            <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" (click)="openModal(publication._id, publication.file, publication.user.image, publication.user.nick, publication.text, publication.user._id)"/>
         </div>
         
     <!--fin bucle for-->
@@ -19,6 +19,97 @@
     </div>
 </div>
 
+
+<!-- MODAL PERSONALIZADO -->
+
+<div id="modalPersonalizado" class="modalContainer">
+    <div class="modal-content">
+        <div *ngFor="let item of modalData">
+
+            <div class="row" id="mainModalRow">
+                <!--imagen principal de la publicacion-->
+                <div class="col-md-9">
+                    <div class="modal-img">
+                        <img class="img-fluid" src="{{ url + 'get-image-pub/' + item.file}}" />
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="row justify-content-end pr-2 pb-3">
+                        <span class="close" (click)="closeModal()">×</span>
+                    </div>
+                    
+                    <div class="row" id="modalUserInfoRow">
+                        <div class="image-user col-md-1">
+                            <a href="#">
+                                <img class="rounded-circle" src="{{ url + 'get-image-user/' + item.userImage}}" />
+                            </a>
+                        </div>
+                        <div class="publication-user-name col-md-5">
+                            <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}</a></b>
+                        </div>
+                        <div class="col-md-1" *ngIf="item.userId == identity._id">
+                           <!-- <button type="button" id="deleteButton" class="btn btn-danger" 
+                            data-toggle="modal" data-target="#deleteModal"> -->
+                            <div id="deleteButton" *ngIf="item.userId == identity._id">
+                                <img src="../../../assets/iconos/borrar.png" (click)="openDeleteModal()" >
+                            </div>   
+                        </div>
+                    </div>
+                    <div class="row pt-3" id="modalCommentRow">
+                        <p>
+                            <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}:</a></b>
+                            &nbsp;
+                            <span>{{item.text}}</span>
+                        </p>
+                        <p>Seccion comentarios</p>
+
+
+
+                        <!-- Modal confirmacion borrado -->
+                        <div id="deleteModalConfirmation" class="modalDeleteContainer">
+                            <div class="modal-content">
+                                <div class="row justify-content-end pr-2 pb-3">
+                                    <span class="close" (click)="closeDeleteModal()">×</span>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">
+                                        <h2>Confirmación de borrado</h2>
+                                        <p>Estás a punto de borrar una de tus publicaciones, si la borras no podrás recuperarla.</p> 
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-secondary md-block" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-primary md-block" data-dismiss="modal" (click)="deletePublication(item.imgId)">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin modal confirmacion borrado --> 
+                    </div>
+                    <div class="row" id="modalToolsRow">
+                        <img class="like" *ngIf="likesArray.indexOf(item.imgId) >= 0" (click)="unlikePublication(item.imgId)" src="../../../assets/iconos/like.svg">
+                        <img class="unlike" *ngIf="likesArray.indexOf(item.imgId) < 0" (click)="giveLike(item.imgId)" src="../../../assets/iconos/unlike.svg">
+                    </div>
+
+                </div>
+
+
+                 
+
+            </div>
+          
+        </div> 
+    </div>
+</div>
+
+
+
+
+<!-- MODAL DE BOOTSTRAP-->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">

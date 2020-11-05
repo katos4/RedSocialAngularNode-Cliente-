@@ -30,7 +30,7 @@ body{
     margin: 0;
     background-color: #f0f2f5 !important;
     background-size: 100%;
-    padding-top: 5%;
+    padding-top: 8%;
 }
 
 #divPrincipal{
@@ -156,21 +156,6 @@ body{
     justify-content: center;
     margin: 10px;
     margin-top: 25px;
-}
-
-@media screen and (max-width:600px){
-    .textoPaginaLogin p{
-        margin-top: 0%;
-    }
-    
-   .textoPaginaLogin p:nth-child(2n){
-       display:none;
-   }
-
-   .formulario-login{
-       margin-top: 5%;
-       margin-left: 15%;
-   }
 }
 
 
@@ -540,7 +525,7 @@ body{
     word-break: break-all !important;
 } 
 
-.modal-body .image-user img{
+/*.modal-body .image-user img{
     width: 40px;
     height: 35px;
 }
@@ -562,7 +547,7 @@ body{
 
 #text-comments-row{
 padding-top: 10px;
-}
+}*/
 
 
 /*PAGINA SEGUIDOS*/
@@ -732,11 +717,139 @@ padding-top: 10px;
     padding-right: 5px;
 }
 
+
+/* MODAL PUBLICACIONES */
+
+.modalContainer {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modalContainer .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid lightgray;
+  /*  border-top: 10px solid #58abb7;*/
+    width: 60%;
+    height: 65%;
+}
+
+.modalContainer .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 58px;
+    font-weight: bold;
+    line-height: 5px;
+}
+
+.modalContainer .close:hover,
+.modalContainer .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modalPersonalizado .image-user img{
+    width: 40px;
+    height: 35px;
+}
+
+#modalPersonalizado .publication-user-name{
+    margin-left: 15px;
+}
+#modalPersonalizado .publication-user-name a{
+    color: black;
+}
+
+#deleteButton{
+    width: 30px;
+    height: 25px;
+    border-radius: 60px;
+    cursor: pointer;
+    padding-left:7px;
+    margin-left: 15px;
+}
+
+#deleteButton img{
+    width: 20px;
+    height: 20px;
+}
+
+#modalUserInfoRow{
+    padding-bottom: 10px;
+    padding-right: 5px;
+}
+
+#modalCommentRow{
+    height: 65%;
+}
+
+#modalCommentRow a{
+    color: black;
+}
+
+
+.modalDeleteContainer {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+}
+
+.modalDeleteContainer .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid black;
+  /*  border-top: 10px solid #58abb7;*/
+    width: 40%;
+    height: 40%;
+}
+
 /* MEDIAS QUERY */
+
+/*Login*/
+@media screen and (max-width:600px){
+   
+    .textoPaginaLogin p{
+        margin-top: 0%;
+    }
+    
+   .textoPaginaLogin p:nth-child(2n){
+       display:none;
+   }
+
+   .formulario-login{
+       margin-top: 5%;
+       margin-left: 15%;
+   }
+}
 
 
 /*Timeline*/
 
-
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+   
+    #user-card{
+      display:none;
+    }
+ 
+    
+}
 
 

@@ -11,7 +11,7 @@
             <div *ngFor="let user of users | search:filtro_valor" class="item-user">
                 <div id="item-user-row" class="row">
 
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-7">
                         <div class="image-user">
                             <a [routerLink]="['/perfil',user._id]">
                                 <img src="{{ url + 'get-image-user/' + user.image}}" *ngIf="user.image"/>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-4">
                         <!--SEGUIR/ DEJAR DE SEGUIR-->
                         <div class="follow-buttons" *ngIf="user._id != identity._id">
                             <button class="btn btn-success" *ngIf="follows.indexOf(user._id) < 0" (click)="followUser(user._id)">
