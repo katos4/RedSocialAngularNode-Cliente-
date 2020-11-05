@@ -24,7 +24,7 @@ constructor(private _http: HttpClient){
         let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
 
     
-        return this._http.delete(this.url + 'follow/' + id, {headers:headers})
+        return this._http.delete(this.url + 'follow/' + id, {headers:headers});
     }
 
     /**Seguidos */
@@ -49,4 +49,9 @@ constructor(private _http: HttpClient){
         return this._http.get(url, {headers:headers});
     }
 
+    getMyFollows(token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
+        return this._http.get(this.url+'get-my-follows/true', {headers:headers});
+    }
+      
 }

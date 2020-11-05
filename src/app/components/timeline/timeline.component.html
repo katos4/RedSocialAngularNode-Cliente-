@@ -35,17 +35,33 @@
                         <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" />
                     </div>
                     
+                  
+
                     <div class="card-body">
+                   
+
                         <div class="col-md-12">
+                            <div>
+                                <img class="like" *ngIf="likesArray.indexOf(publication._id) >= 0" (click)="unlikePublication(publication._id)" src="../../../assets/iconos/like.svg">
+                            </div>
+    
+                            <div>
+                                <img class="unlike" *ngIf="likesArray.indexOf(publication._id) < 0" (click)="giveLike(publication._id)" src="../../../assets/iconos/unlike.svg">
+                            </div>
+
                             <a [routerLink]="['/perfil',publication.user._id]" class="link-publication-nick card-link">{{publication.user.nick}}</a><span>{{publication.text}}</span>
+                            
+                            <div class="date">
+                                {{ (publication.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}
+                            </div>
+                       
                         </div>
                     </div>
 
                  <!-- </div> -->
-                  
-                    <div class="date">
-                        {{ (publication.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}
-                    </div>
+                 
+
+                    
 
             <!--fin bucle for-->
             </div>

@@ -1,0 +1,19 @@
+<div class="row" id="messageRowList">
+        <div class="col-md-4 message-menu">
+            <ul class="list-group list-group-flush">
+                    
+                <a class="list-group-item" [routerLink]="['enviar']" [routerLinkActive]="['active']">Enviar mensaje</a>  
+                
+                <a class="list-group-item" [routerLinkActive]="['active']" [routerLink]="['recibidos']">Mensajes recibidos</a>
+                    
+                <a class="list-group-item" [routerLinkActive]="['active']" [routerLink]="['enviados']">Mensajes enviados</a>
+                    
+                <a class="list-group-item" href="#">Información</a>
+                    
+            </ul>
+        </div>
+   
+    <div class="col-md-8">
+        <router-outlet></router-outlet>
+    </div>
+</div>

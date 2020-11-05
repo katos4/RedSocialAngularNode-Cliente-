@@ -51,7 +51,12 @@
                 <div class="spacer"></div>
                 <hr>
                 <div class="botonCuentaNueva">
-                    <button class="btn btn-success btn-lg">Crear cuenta nueva</button>
+                    <button class="btn btn-success btn-lg" 
+                    data-toggle="modal" data-target="#registerModal">
+                    Crear cuenta nueva
+                    </button>
+                    <!-- [routerLink]="['/registro']" -->
+
                 </div>
                 
             </div>
@@ -61,3 +66,27 @@
     </div>
 
 </div>
+
+
+<!-- modal register -->
+
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <div class="col-md-12">
+                <h1>Registrarte</h1>
+                <label>Es rápido y fácil</label>
+            </div>
+            </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <app-register></app-register>
+        </div>
+      </div>
+    </div>
+  </div>

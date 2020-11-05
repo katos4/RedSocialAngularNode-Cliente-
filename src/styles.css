@@ -23,12 +23,19 @@
 }
 
 /*GENERALES*/
+
+html, body { height: 100%; }
+
 body{
-    background: #f5f6f8;
+    margin: 0;
+    background-color: #f0f2f5 !important;
+    background-size: 100%;
+    padding-top: 5%;
 }
 
 #divPrincipal{
     background-color: #f0f2f5;
+    background-size: 100%;
 }
 
 
@@ -55,15 +62,12 @@ body{
  
 .navbar{
     background-color: #1877f2 !important;
+    width: 100%;
 }
 
 .navbar *{
     color: white !important;
     text-decoration: none !important;
-}
-
-.navbar a:hover{
-  /*  background: #0d65d9 !important;*/
 }
 
 .dropdown a{
@@ -116,7 +120,7 @@ body{
 /*LOGIN*/
 .formulario-login{
     background: #fff;
-    margin-top: 25%;
+    margin-top: 15%;
     margin-right: 80px;
     padding: 20px;
     /*border: 1px solid grey;*/
@@ -124,7 +128,7 @@ body{
     box-shadow: 1px 1px 10px 5px rgba(230, 230, 230, 0.5);
 }
 .textoPaginaLogin{
-    margin-top: 25%;
+    margin-top: 10%;
     margin-left: 20%;
     margin-right: 30px;
     width: 500px;
@@ -154,17 +158,69 @@ body{
     margin-top: 25px;
 }
 
+@media screen and (max-width:600px){
+    .textoPaginaLogin p{
+        margin-top: 0%;
+    }
+    
+   .textoPaginaLogin p:nth-child(2n){
+       display:none;
+   }
 
-/*PAGINA DATOS USUARIO*/
+   .formulario-login{
+       margin-top: 5%;
+       margin-left: 15%;
+   }
+}
+
+
+/*REGISTRAR NUEVO USUARIO*/
+
+.registerColumn{
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.titleRowRegister{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    line-height:20px;
+}
+
+.titleRowRegister h1 {
+    font-weight: 700;
+}
+
+.formRowRegister{
+    padding-top: 15px;
+}
+
+.botonRegistrarCuenta{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 25px;
+}
+
 
 
 /*GENTE*/
+#people-column{
+    /*background-color: white;*/
+}
 
 .item-user{
-    border: 1px solid rgba(230, 230, 230, 0.8);
+    border: 1px solid rgba(230, 230, 230, 0.9);
     border-radius: 20px;
+    background-color: white;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.item-user:hover{
+    box-shadow: 1px 1px 20px 1px lightgrey;
 }
 
 #item-user-row{
@@ -214,7 +270,7 @@ body{
 /*SIDEBAR*/
 
 #user-card{
-    margin-top: 70px;
+   /* margin-top: 7%;*/
 }
 
 #user-card .avatar{
@@ -301,7 +357,7 @@ body{
 /*TIMELINE*/
 
 #publications{
-    margin-top: 70px;
+  /*margin-top: 70px;*/
     min-height: 500px;
     min-width: 600px;
 }
@@ -358,6 +414,26 @@ body{
     display:scroll;
     position:fixed;
     z-index: 1;
+}
+
+@keyframes zoominoutsinglefeatured {
+    0% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1.2,1.2);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+.like, .unlike{
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 15px;
+    animation: zoominoutsinglefeatured 0.5s;
 }
 
 /*PERFIL USUARIO*/
@@ -471,6 +547,7 @@ body{
 
 .modal-body .publication-user-name{
     margin-left: 15px;
+    margin-right: 25px;
 }
 
 .modal-body .publication-user-name a{
@@ -486,6 +563,8 @@ body{
 #text-comments-row{
 padding-top: 10px;
 }
+
+
 /*PAGINA SEGUIDOS*/
 
 #followed-container{
@@ -496,5 +575,168 @@ padding-top: 10px;
     /*margin-right: 10px;*/
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*CHAT*/
+#chat-row{
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding:10px;
+}
+
+.message-box{
+    height: 500px;
+    width: 100%;
+}
+
+.message-box-container{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.message-box-container > input {
+    border-radius: 15px;
+}
+
+#user-list-col{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+#direct{
+    padding: 10px;
+}
+
+#direct span{
+    font-weight: 600;
+}
+
+#user-list{
+    border-top: 1px solid lightgray;
+    margin-top: 15px;
+    padding-top: 5px;
+}
+
+.item-list{
+    border: 1px solid black;
+    margin-top: 3px;
+    margin-bottom: 7px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/*MENSAJES*/
+
+.message-menu ul{
+    border-radius: 10px;
+}
+
+.form-column{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.image-user-messages img{
+    width: 50px;
+    height: 50px;
+}
+
+#messages-row{
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#messages-row .date{
+    color: gray; 
+}
+
+#messages-row #message-text p{
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.user-info-messages a{
+    color: black;
+    font-weight: 600;
+    
+}
+
+.user-info-messages a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+
+/*VER MENSAJES*/
+#back-arrow{
+    width: 2.2em;
+    height: 2em;
+    border-radius: 60px;
+}
+
+#remove-message{
+    padding-top: 2px;
+    width: 2.2em;
+    height: 2em;
+    border-radius: 60px;
+}
+
+#remove-message span{
+    margin-left: 8px;
+}
+
+#remove-message:hover{
+    cursor: pointer;
+    background-color:  #1877f2;
+}
+
+#back-arrow:hover{
+    cursor:pointer;
+    background-color: #1877f2;
+}
+
+.tools-row{
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 10px;
+}
+
+.view-message-container{
+    padding-top: 20px;
+}
+
+.view-message-container .message-user-container .emitter-name{
+    color: black;
+    font-weight: bold;
+    line-height: 1px;
+}
+
+.view-message-container .message-user-container .receiver-name{
+    color: gray;
+    font-size: small;
+    line-height: 1px;
+}
+
+.view-message-container .message-text-container{
+    height: 400px;
+    overflow: auto;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-top: 5px;
+    padding-right: 5px;
+}
+
+/* MEDIAS QUERY */
+
+
+/*Timeline*/
+
+
+
+

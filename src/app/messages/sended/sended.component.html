@@ -1,0 +1,57 @@
+<div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+    El mensaje se ha borrado correctamente!
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+    No hemos podido eliminar el mensaje :(
+</div>
+
+
+<div class="people" *ngIf="messages">
+    <!--LISTADO-->
+    <div *ngFor="let message of messages">
+        <div class="row" id="messages-row" (click)="viewMessage(message._id)">
+
+            <div class="col-md-1">
+                <div class="image-user-messages">
+                    <a>
+                        <img class="rounded-circle" src="{{ url + 'get-image-user/' + message.receiver.image}}" *ngIf="message.receiver.image"/>
+                        <img class="rounded-circle" src="assets/user-default.png" class="avatar-default" *ngIf="!message.receiver.image"/>
+                    </a>
+                </div>   
+            </div>
+
+            <div class="col-md-4">
+                <div class="user-info-messages">
+                    <p>
+                        <span>Para:</span>  
+                        <a>
+                            {{message.receiver.name+ " " +message.receiver.surname}} | <span class="nickname">{{message.receiver.nick}}</span>
+                        </a>
+                    </p>
+                
+                </div>
+            </div>
+
+            <div class="col-md-5" id="message-text">
+                <p>{{message.text}}</p>
+            </div>
+            <div class="col-md-2">
+                <span class="date">
+                    Enviado {{ (message.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}
+                </span>
+            </div>
+
+        <!--fin de row-->
+        </div>
+    <!--fin de bucle for-->
+    </div>
+    <!--PAGINACION-->
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" *ngIf="page > 1"><a class="page-link" [routerLink]="['/mensajes/enviados', prevPage]">Anterior</a></li>
+            <li class="page-item" *ngIf="pages != page"><a class="page-link" [routerLink]="['/mensajes/enviados', nextPage]">Siguiente</a></li>
+        </ul>
+    </nav>
+</div>

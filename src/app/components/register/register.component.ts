@@ -28,12 +28,16 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(registerForm){
+    console.log("formulario registro enviado");
+    
     this._userService.register(this.user).subscribe(
       response =>{
         if(response.user && response.user._id){
          // console.log(response.user);
           this.status = 'success';
           registerForm.reset();
+          ($('#registerModal')as any).modal('toggle');
+          this._router.navigate(['/login']);
         }else{
           this.status = 'error';
         }
@@ -42,6 +46,7 @@ export class RegisterComponent implements OnInit {
         console.log(<any>error);
       }
     );
+
   }
 
 }

@@ -44,7 +44,9 @@ export class FollowingComponent implements OnInit {
    }
 
   ngOnInit(){
-
+    var height = $(window).height();
+    $('.loginPage').height(height);
+    $('.navbar').removeAttr('hidden');
     //console.log("componente following se ha cargado");
     this.actualPage();
   }

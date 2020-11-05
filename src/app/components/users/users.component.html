@@ -2,8 +2,8 @@
     <h1 class="h1-strong">{{title}}</h1>
 </div>
 
-<div class="row justify-content-center mt-3">
-    <div class="col-md-8">
+<div class="row justify-content-center mt-1">
+    <div class="col-md-8" id="people-column">
         <app-search (search)="handleSearch($event)"></app-search>
         <div class="people">
 
@@ -13,7 +13,7 @@
 
                     <div class="col-md-9">
                         <div class="image-user">
-                            <a href="#">
+                            <a [routerLink]="['/perfil',user._id]">
                                 <img src="{{ url + 'get-image-user/' + user.image}}" *ngIf="user.image"/>
                                 <img src="assets/user-default.png" class="avatar-default" *ngIf="!user.image"/>
                             </a>

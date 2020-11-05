@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   public status: string;
   public identity;
   public token;
-  public socket_id;
+ 
 
   socket;
   server = 'http://localhost:5000';
@@ -55,12 +55,22 @@ export class LoginComponent implements OnInit {
           this.status = 'success';
           //mostrar barra de navegacion
           $('.navbar').removeAttr('hidden');
-
           // persistir datos del usuario en el local storage
           localStorage.setItem('identity', JSON.stringify(this.identity));
-
           // conseguir el token
           this.gettoken();
+          //conseguir el socket del servidor
+          const localUser = localStorage.getItem('identity');
+          this.socket = io.connect(this.server);
+          //OBTENER EL ID DEL SOCKET CONECTADO EN EL SERVIDOR
+          this.socket.on('connect', () => {
+          //console.log(this.socket.id, this.socket.io.engine.id, this.socket.json.id);
+          localStorage.setItem('socket-id', this.socket.id);
+          this.identity = JSON.parse(localUser);
+          this.identity['socketId'] = this.socket.id;
+          localStorage.setItem('identity', JSON.stringify(this.identity)); 
+          });  
+
           this._router.navigate(['/home']);
         }
       },

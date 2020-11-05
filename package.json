@@ -28,6 +28,7 @@
     "jquery": "^3.5.1",
     "rxjs": "~6.5.5",
     "rxjs-compat": "^6.6.3",
+    "select2": "^4.0.13",
     "socket.io-client": "^2.3.1",
     "tslib": "^2.0.2",
     "zone.js": "~0.10.3"
@@ -36,6 +37,7 @@
     "@angular-devkit/build-angular": "~0.1000.5",
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "~10.0.6",
+    "@types/bootstrap": "^5.0.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.5.3",

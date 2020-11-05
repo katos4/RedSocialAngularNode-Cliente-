@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-md-10 form-column">
+
+        <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+            Mensaje enviado correctamente! puedes verlo <a [routerLink]="['/mensajes/enviados']">aqui</a>
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+            No has podido enviar el mensaje, quizás los datos sean erroneos, intentalo de nuevo.
+        </div>
+
+        <form #formAdd="ngForm" id="addMessageForm" (ngSubmit)="onSubmit(formAdd)">
+            <p>
+             <!--   <select *ngIf="follows" name="receiver" #receiver="ngModel" [(ngModel)]="message.receiver" class="form-control mi-selector" required>
+                    <option *ngFor="let follow of follows" value="{{follow.user._id}}">
+                        {{follow.user.name + ' ' + follow.user.surname + ' (' + follow.user.nick + ')'}}
+                    </option>
+                </select> -->
+                <input type="text"
+                aria-label="Number"
+                placeholder="Para:"
+                matInput
+                [matAutocomplete]="auto"
+                [formControl]="myControl"
+                ngDefaultControl
+                id="autoCompleteSelect" class="form-control">
+                 <mat-autocomplete name="receiver" #auto="matAutocomplete" [displayWith]="displayFn" class="form-control">
+                     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                         {{option.name}}
+                     </mat-option>
+                 </mat-autocomplete>
+
+            </p>
+        
+ 
+            <p>
+               <!-- <textarea name="text" #text="ngModel" [(ngModel)]="message.text" class="form-control" required></textarea> -->
+               <textarea name="text" id="text" class="form-control" placeholder="Mensaje:" required></textarea>
+              <!-- <span *ngIf="!text.valid && text.touched">El mensaje es obligatorio</span> -->
+            </p>
+        
+            <input type="submit" value="¡Enviar mensaje!" class="btn btn-success">
+        </form>
+
+    </div>
+</div>
+
+

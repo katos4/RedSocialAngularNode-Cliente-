@@ -3,26 +3,32 @@ import { Observable } from 'rxjs/Observable';
 import { GLOBAL } from './global';
 import * as io from 'socket.io-client';
 import { environment } from '../../environments/environment';
+import { UserService } from './user.service';
+
 
 export class ChatService {
 
     socket;
     server = 'http://localhost:5000';
     public identity;
-    constructor(){
-       this.socket = io.connect(this.server);
-
-       //OBTENER EL ID DEL SOCKET CONECTADO EN EL SERVIDOR
-       this.socket.on('connect', () => {
-        //console.log(this.socket.id, this.socket.io.engine.id, this.socket.json.id);
-        localStorage.setItem('socket-id', this.socket.id);
-        const localUser = localStorage.getItem('identity');
-        this.identity = JSON.parse(localUser);
-        this.identity['socketId'] = this.socket.id;
-        localStorage.setItem('identity', JSON.stringify(this.identity));
-        });
-        
-        
+    constructor(
+      
+    ){
+     
+     /* const localUser = localStorage.getItem('identity');
+      
+      if(localUser){
+         this.socket = io.connect(this.server);
+         //OBTENER EL ID DEL SOCKET CONECTADO EN EL SERVIDOR
+         this.socket.on('connect', () => {
+         //console.log(this.socket.id, this.socket.io.engine.id, this.socket.json.id);
+         localStorage.setItem('socket-id', this.socket.id);
+         this.identity = JSON.parse(localUser);
+         this.identity['socketId'] = this.socket.id;
+         localStorage.setItem('identity', JSON.stringify(this.identity)); 
+         });  
+      }*/
+      this.socket = io.connect(this.server);
      }
 
      listen(eventName: String){

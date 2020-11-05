@@ -32,7 +32,6 @@ export class AppComponent implements OnInit, DoCheck{
     
     var height = $(window).height();
     $('.loginPage').height(height);
-
  }
 
  ngDoCheck(){

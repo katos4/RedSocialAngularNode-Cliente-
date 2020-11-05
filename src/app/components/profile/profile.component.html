@@ -52,7 +52,7 @@
             <div class="follows-user-profile">
                 <div class="stats" *ngIf="stats">
                    
-                        <a href="#">
+                        <a [routerLink]="['/perfil',user._id]">
                             <span class="number-stats">{{stats.publications}}</span>&nbsp;
                             <span class="label-stats">Publicaciones</span>
                         </a>

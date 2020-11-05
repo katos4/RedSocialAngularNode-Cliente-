@@ -4,13 +4,14 @@ import { Publication } from '../../models/publications';
 import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { LikeService } from '../../services/like.service';
 
 
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
   styleUrls: ['./publications.component.css'],
-  providers: [UserService, PublicationService]
+  providers: [UserService, PublicationService, LikeService]
 })
 export class PublicationsComponent implements OnInit {
   public title: string;
@@ -45,6 +46,7 @@ export class PublicationsComponent implements OnInit {
 
     var height = $(window).height();
     $('.loginPage').height(height);
+    $('.navbar').removeAttr('hidden');
   }
 
 
@@ -108,7 +110,18 @@ export class PublicationsComponent implements OnInit {
 
   }
 
-
+  deletePublication(id){
+    console.log("id de la publicacion " + id);
+    this._publicationService.deletePublication(this.token, id).subscribe(
+      response => {
+        this.getPublications(this.user, 1);
+      
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+  }
 
 
 //-----  

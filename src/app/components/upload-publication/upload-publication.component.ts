@@ -33,6 +33,8 @@ export class UploadPublicationComponent implements OnInit {
     this.stats = this._userService.getStats();
     this.url = GLOBAL.url;
     this.publication = new Publication('', '', '', '' , this.identity._id);
+    
+   
   }
 
   ngOnInit(){

@@ -5,6 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { MomentModule } from 'angular2-moment';
 
+//custom module
+import { MessagesModule } from './messages/messages.module';
+
 
 /** Componentes */
 import { AppComponent } from './app.component';
@@ -26,12 +29,26 @@ import { SearchComponent } from './components/search/search.component';
 
 /** Servicios */
 import { ChatService } from './services/chat.service';
+import { MessageService } from './services/message.service';
+import { UserService } from './services/user.service';
 
 /** Angular Material */
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchPipe } from './pipes/search.pipe';
+/*import { MainComponent } from './messages/main/main.component';
+import { AddComponent } from './messages/add/add.component';
+import { ReceivedComponent } from './messages/received/received.component';
+import { SendedComponent } from './messages/sended/sended.component';
+*/
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+/**Componentes web de angular material */
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SearchPipe } from './pipes/search.pipe';
+import { UserGuard } from './services/user.guard';
+
+
+
 
 @NgModule({
   declarations: [
@@ -61,11 +78,16 @@ import { SearchPipe } from './pipes/search.pipe';
     NoopAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MessagesModule,
+    BrowserAnimationsModule
   ],
   providers: [
     appRoutingProviders,
-    ChatService
+    ChatService,
+    MessageService,
+    UserService,
+    UserGuard
   ],
   bootstrap: [AppComponent]
 })

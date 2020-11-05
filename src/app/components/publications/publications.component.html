@@ -4,7 +4,7 @@
         <div class="publication-profile-image-card">
             <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" data-toggle="modal" data-target="#exampleModal" (click)="openModal(publication._id, publication.file, publication.user.image, publication.user.nick, publication.text, publication.user._id)"/>
         </div>
-                
+        
     <!--fin bucle for-->
     </div>
 
@@ -45,6 +45,36 @@
                                 <div class="publication-user-name col-md-3">
                                     <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}</a></b>
                                 </div>
+                                 <!--boton borrar publicacion-->  
+                                <div class="col-md-1" *ngIf="item.userId == identity._id">
+                                    <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- Modal confirmacion borrado -->
+                                  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro que quieres borrar la publicación?</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Si la borras no podrás recuperarla.
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deletePublication(item.imgId)">Aceptar</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                <!-- Fin modal confirmacion borrado --> 
                             </div>
 
                             <div id="text-comments-row" class="row">
@@ -52,8 +82,10 @@
                                     <p><span><b>{{item.nick}}</b></span>&nbsp;{{item.text}} </p>
                                 </div>
                             </div>
-                        </div>  
-
+                           
+                        </div>
+                       
+                       
                     </div>
                 </div>
 
