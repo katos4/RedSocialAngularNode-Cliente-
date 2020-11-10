@@ -73,7 +73,7 @@ public countLikes;
         //console.log(response);
        this.countLikes = response.likes;
 
-       console.log('likes de la publicacion ' + id + ' ==> ' + this.countLikes);
+       //console.log('likes de la publicacion ' + id + ' ==> ' + this.countLikes);
         
        this.publications.forEach(publication => {
         if (publication._id === id){
@@ -95,7 +95,7 @@ public countLikes;
     this._publicationService.getPublications(this.token, page).subscribe(
       response => {
         var pubId;
-        console.log(response);
+        //console.log(response);
         if (response.publications){
           this.total = response.total_items;
           this.pages = response.pages;
