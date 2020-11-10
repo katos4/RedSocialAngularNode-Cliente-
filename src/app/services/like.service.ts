@@ -34,4 +34,10 @@ public url: string;
         return this._http.get(this.url + 'get-my-likes', {headers:headers});
     }
 
+    getCountLikes(token, idPub): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
+
+        return this._http.get(this.url + 'count-likes/' + idPub, {headers:headers});
+    }
+
 }

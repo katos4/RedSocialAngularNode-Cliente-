@@ -50,7 +50,7 @@ export class UsersComponent implements OnInit {
   }
 
   handleSearch(value: string){
-    //console.log(value);
+    console.log(value);
     this.filtro_valor = value;
   }
 

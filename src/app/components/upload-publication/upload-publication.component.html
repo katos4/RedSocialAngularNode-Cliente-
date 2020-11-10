@@ -13,23 +13,30 @@
     
     <form #newPubForm="ngForm" (ngSubmit)="onSubmit(newPubForm, $event)" class="col-md-12">
 
+        
         <div class="row justify-content-center">
             <textarea name="text" #text="ngModel" [(ngModel)]="publication.text"
             class="form-control" placeholder="¿Qué estás pensando hoy?"></textarea>
         </div>
             
-        <div class="row mt-2">
-            <div class="image-upload">
+        <div class="row justify-content-start mt-2 ">
+            
+            <div class="image-upload col-md-1 align-self-start">
                 <label id="image-input" for="file-input">
-                    <img src="../../../assets/imagenes/galeria.png" />
+                    <img src="../../../assets/imagenes/upload-image.png" />
                 </label>
-                <label id="text-input" for="file-input">Subir foto</label>
+                <!--<label id="text-input" for="file-input">Subir foto</label>-->
                 <input id="file-input" type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />
             </div>
+            
+                <!--div para previsualizar la imagen a subir -->
+            <div id="previewUploadImgDiv" class="col-md-4"></div>
+           
         </div>
         
         <div class="row mt-3">
-            <input type="submit" value="Publicar" class="btn btn-primary btn-block">
+             <!--<input type="submit" value="Publicar" class="btn btn-primary btn-block">-->
+             <input type="submit" value="Publicar" class="btn-upload-publication btn-block">
         </div>
         
     </form>

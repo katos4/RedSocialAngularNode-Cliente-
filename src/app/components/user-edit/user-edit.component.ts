@@ -81,6 +81,21 @@ public filesToUpload: Array<File>;
 fileChangeEvent(fileInput: any){
   this.filesToUpload = <Array<File>>fileInput.target.files;
   console.log(this.filesToUpload);
+ 
+  let div = $('#imagenUsuarioSubida');
+  let preview = $('<div id="previewUploadImgEdit">');
+  let image = $('<img id="imgPreviewEdit">');
+
+  const file = this.filesToUpload;
+  const firstFile = file[0];
+  const objectURL = URL.createObjectURL(firstFile);
+  var nombre = firstFile.name;
+  console.log(nombre);
+
+  image.attr('src', objectURL);
+  preview.html('');
+  preview.append(image);
+  div.append(preview);
 }
 
 }

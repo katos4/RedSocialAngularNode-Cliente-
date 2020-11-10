@@ -34,6 +34,8 @@ public noMore = false;
 public likesArray = [];
 public userPubArray = [];
 public newLike;
+public countLikes;
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -59,28 +61,58 @@ public newLike;
 
    
     this.getLikes();
-    console.log(this.likesArray);
+    //this.getCountLikes();
+    //console.log(this.likesArray);
     //console.log(this.userPubArray);
     
   } 
   
+  getCountLikes(id){
+    this._likeService.getCountLikes(this.token, id).subscribe(
+      response => {
+        //console.log(response);
+       this.countLikes = response.likes;
+
+       console.log('likes de la publicacion ' + id + ' ==> ' + this.countLikes);
+        
+       this.publications.forEach(publication => {
+        if (publication._id === id){
+          publication['likes'] = response.likes;
+        }
+        });
+
+      },
+      error => {
+        if (error.message){
+          console.log('hay un error');
+        }
+       // console.log(error as any);
+      }
+    );
+  }
 
   getPublications(page, adding = false){
     this._publicationService.getPublications(this.token, page).subscribe(
       response => {
-        //console.log(response);
-        if(response.publications){
+        var pubId;
+        console.log(response);
+        if (response.publications){
           this.total = response.total_items;
           this.pages = response.pages;
           this.itemsPerPage = response.items_per_page;
 
-          if(!adding){
+        
+
+          if (!adding){
             this.publications = response.publications;
+            this.publications.forEach(publication => {
+              this.getCountLikes(publication._id);
+             });
           }else{
             var arrayA = this.publications;
             var arrayB = response.publications;
-            console.log("ARRAY A "+arrayA);
-            console.log("ARRAY B "+arrayB);
+            console.log("ARRAY A " + arrayA);
+            console.log("ARRAY B " + arrayB);
 
             this.publications = arrayA.concat(arrayB);
 
@@ -88,18 +120,14 @@ public newLike;
             $("html, body").animate({scrollTop: $('html').prop("scrollHeight")}, 500);
           }
 
-         /* if(page > this.pages){
-            this._router.navigate(['/home']);
-          }*/
-
         }else{
           this.status = 'error';
         }
       },
       error => {
-        var errorMessage = <any>error;
+        var errorMessage = <any> error;
         console.log(errorMessage);
-        if(errorMessage != null){
+        if (errorMessage != null){
           this.status = 'error';
         }
       }
@@ -112,7 +140,7 @@ public newLike;
     */
 
     this.page += 1;
-    if(this.page == this.pages){
+    if (this.page == this.pages){
       this.noMore = true;
     }
 
@@ -128,10 +156,10 @@ public newLike;
   giveLike(idPub){
    // console.log('el id de la publicacion es: ' + idPub);
 
-    var like = new Like('', idPub, this.identity._id,'');
+    var like = new Like('', idPub, this.identity._id, '');
     this._likeService.addLike(this.token, like).subscribe(
       response => {
-        if(response){
+        if (response){
           this.status = 'success';
           this.likesArray.push(idPub);
           //console.log(this.likesArray);
@@ -140,7 +168,7 @@ public newLike;
         }
       },
       error => {
-        console.log(<any>error);
+        console.log(error as any);
       }
     );
   }
@@ -150,12 +178,12 @@ public newLike;
     this._likeService.deleteLike(this.token, idPub).subscribe(
       response => {
         var search = this.likesArray.indexOf(idPub);
-        if(search != -1){
+        if (search != -1){
           this.likesArray.splice(search, 1);
         }
       },
       error => {
-        console.log(<any>error);
+        console.log(error as any);
       }
     );
   }
@@ -171,18 +199,20 @@ public newLike;
         temp.myLikes.forEach(like => {
           this.likesArray.push(like.publication);
 
-          if(!this.userPubArray.includes(like.user)){
+          if (!this.userPubArray.includes(like.user)){
             this.userPubArray.push(like.user);
           }
-         //console.log(like.publication);
+          //console.log(like.publication);
         });
 
       },
       error => {
-        console.log(<any>error);
+        console.log(error as any);
       }
     );
   }
+
+ 
 
 //--
 }

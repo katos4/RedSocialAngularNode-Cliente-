@@ -1,74 +1,30 @@
 
 <nav class="navbar fixed-top navbar-expand-lg" hidden>
   <a class="navbar-brand" [routerLink]="['/timeline']">Facegram</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+   <!-- <span class="navbar-toggler-icon"></span> -->
+    <img class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" src="../assets/iconos/menu.svg">
+  <!--</button>-->
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <!--BARRA DE NAVEGACION CUANDO EXISTA UN USUARIO IDENTIFICADO-->
-    <ul class="navbar-nav" *ngIf="identity">
-     <!-- <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']">
-          Inicio
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/timeline']">Timeline</a>
-      </li>-->
+    <div class="navbar-nav text-center" *ngIf="identity">
+      <a class="nav-item" class="nav-link" [routerLink]="['/gente']">Gente</a>
+      <a class="nav-item" class="nav-link" [routerLink]="['/mensajes']">Mensajes</a>
+    </div>
 
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/gente']">
-          Gente
-        </a>
-      </li>
-     <!-- <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/chat']">
-          Chat
-        </a>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/mensajes']">
-          Mensajes
-        </a>
-      </li>
-     <!-- <li class="nav-item">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalCrear">
-          Crear Publicación
-        </button> 
-      </li> -->
-
-    </ul>
-
-   
-
-    <!--BARRA DE NAVEGACION CUANDO NO EXISTA UN USUARIO IDENTIFICADO-->
-   <!-- <ul class="nav navbar-nav ml-auto" *ngIf="!identity">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']">
-          Login
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/registro']" [routerLinkActive]="['active']">
-          Registro
-        </a>
-      </li>
-    </ul>-->
-
-    <!--MENÚ DE USUARIO IDENTIFICADO-->
-    <ul class="nav navbar-nav ml-auto" *ngIf="identity">
-      <li class="avatar">
-        <!--cargar la imagen del usuario-->
-        <a [routerLink]="['/mis-datos']"><img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" /></a>
-      </li>
-      <li class="label-profile"><label><a [routerLink]="['/perfil', identity._id]">{{identity.name}}</a></label></li>
-      <li class="label-home"><label><a [routerLink]="['/timeline']">Inicio</a></label></li>
+    <div class="navbar-nav ml-auto d-flex flex-row justify-content-center" *ngIf="identity">
+      <!--<label class="label-home"><a class="label-home" [routerLink]="['/timeline']">Inicio</a></label>-->
+      <div class="d-inline">
+        <a class="avatar" [routerLink]="['/mis-datos']"><img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" /></a>
+        <a class="label-profile mr-2" [routerLink]="['/perfil', identity._id]">{{identity.name}}</a>
+      </div>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown">
         <img class="settings-img" src="../assets/iconos/ajustes1.svg" />
         <span class="caret"></span>
         </a>
-
+    
         <ul class="dropdown-menu dropdown-menu-right">
             <li>
               <a [routerLink]="['/perfil',identity._id]">
@@ -97,9 +53,8 @@
             </li>
         </ul>
       </li>
-    </ul>
+    </div>
     
-
   </div>
 </nav>
  
@@ -108,20 +63,47 @@
 </div>
 
 
+<!--  
+<ul class="nav navbar-nav ml-auto" *ngIf="identity">
+  <li class="avatar">
+   
+    <a [routerLink]="['/mis-datos']"><img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" /></a>
+  </li>
+  <li class="label-profile"><label><a [routerLink]="['/perfil', identity._id]">{{identity.name}}</a></label></li>
+  <li class="label-home"><label><a [routerLink]="['/timeline']">Inicio</a></label></li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown">
+    <img class="settings-img" src="../assets/iconos/ajustes1.svg" />
+    <span class="caret"></span>
+    </a>
 
-<!-- Modal -->
-<div class="modal fade" id="modalCrear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Crear publicación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <!-- <app-upload-publication></app-upload-publication> -->
-      </div>
-    </div>
-  </div>
-</div>
+    <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+          <a [routerLink]="['/perfil',identity._id]">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+          Mi perfil
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/mis-datos']">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          Mis datos
+          </a>
+        </li>
+        <li>
+          <a (click)="logout()">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+          Cerrar sesión
+          </a>
+        </li>
+    </ul>
+  </li>
+</ul>-->
+

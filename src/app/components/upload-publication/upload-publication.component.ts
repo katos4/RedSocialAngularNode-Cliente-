@@ -52,16 +52,15 @@ export class UploadPublicationComponent implements OnInit {
         this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
                            .then((result:any) => {
                              this.status = 'success';
-                            this.publication.file = result.image;
-                            setTimeout(function(){
+                             this.publication.file = result.image;
+                             setTimeout(function(){
                               var alert = document.getElementById("alertaExito");
                               alert.style.display = 'none';
-                              },2000);
-                            form.reset();
-                            this.sended.emit({send: 'true'});
-                            $('#closeModalButton').click();
+                              }, 2000);
+                             form.reset();
+                             this.sended.emit({send: 'true'});
+                             $('#closeModalButton').click();
                           });
-                          
 
       }else{
         this.status = 'error';
@@ -82,6 +81,18 @@ export class UploadPublicationComponent implements OnInit {
 
   fileChangeEvent(fileInput: any){
     this.filesToUpload = <Array<File>>fileInput.target.files;
+    let div = $('#previewUploadImgDiv');
+    let preview = $('<div id="previewUploadImg">');
+    let image = $('<img id="imgPreview">');
+
+    const file = this.filesToUpload;
+    const firstFile = file[0];
+    const objectURL = URL.createObjectURL(firstFile);
+
+    image.attr('src', objectURL);
+    preview.html('');
+    preview.append(image);
+    div.append(preview);
   }
 
 //output (esto iria en el componente futuro dedicado solo al formulario de enviar publicaciones)

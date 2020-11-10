@@ -1,17 +1,17 @@
-<div class="row justify-content-center">
-    <div id="user-container" class="col-md-7">
+<div class="row justify-content-center pt-3">
+    <h2 class="h1-strong">{{title}}</h2>
+</div>
 
-        <div class="row justify-content-center">
-            <h2 class="h1-strong">{{title}}</h2>
-        </div>
-        
+<div class="row justify-content-center mt-1">
+    <div id="user-container" class="col-md-8">
+
         <div class="people" *ngIf="followed">
 
             <!--LISTADO-->
             <div *ngFor="let follow of followed" class="item-user">
                 <div id="item-user-row" class="row">
 
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-7">
                         <div class="image-user">
                             <a href="#">
                                 <img src="{{ url + 'get-image-user/' + follow.user.image}}" *ngIf="follow.user.image"/>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-4">
                         <!--SEGUIR/ DEJAR DE SEGUIR-->
                         <div class="follow-buttons" *ngIf="follow.user._id != identity._id">
                             <button class="btn btn-success" *ngIf="follows.indexOf(follow.user._id) < 0" (click)="followUser(follow.user._id)">

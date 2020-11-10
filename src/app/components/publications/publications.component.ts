@@ -30,6 +30,7 @@ export class PublicationsComponent implements OnInit {
   public open2 = false;
   public likesArray = [];
   public userPubArray = [];
+  public noMore = false;
   @Input() user: string;
 
 
@@ -89,15 +90,15 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
-
-  public noMore = false;
   viewMore(){
     /** Cuando la longitud del array de publicaciones sea igual al total de publicaciones, significará 
      * que no hay mas publicaciones que mostrar
     */
+   console.log(this.pages);
    this.page += 1;
 
-   if(this.page == this.pages){
+
+   if(this.page === this.pages){
       this.noMore = true;
     }
 

@@ -33,6 +33,7 @@ body{
     padding-top: 8%;
 }
 
+
 #divPrincipal{
     background-color: #f0f2f5;
     background-size: 100%;
@@ -61,8 +62,10 @@ body{
 /*CABECERA*/
  
 .navbar{
-    background-color: #1877f2 !important;
+   /* background-color: #1877f2 !important;*/
+    background-color: #ff4500 !important;
     width: 100%;
+  
 }
 
 .navbar *{
@@ -105,17 +108,22 @@ body{
 
 .navbar .label-profile{
     padding-right: 10px;
-    border-right: 1px solid blue;
+    /*border-right: 1px solid #cc3600;*/
+    
 }
-.navbar .label-home{
+/*.navbar .label-home{
     padding-left: 10px;
-    margin-right: 50px;
-}
+}*/
 
 .navbar .dropdown img{
     height: 25px;
     width: 25px;
 }
+
+.navbar .navbar-toggler{
+    height: 50px;
+    width: 50px;
+ }
 
 /*LOGIN*/
 .formulario-login{
@@ -312,11 +320,12 @@ body{
     padding: 10px;
 }
 
+/*UPLOAD PUBLICATION*/
+
 .image-upload{
-    background-color:rgba(230, 230, 230, 0.8);
+   /* background-color:rgba(230, 230, 230, 0.8);*/
     border-radius: 20px;
     padding-top:7px;
-    padding-left: 5px;
     padding-right: 5px;
 }
 
@@ -328,17 +337,31 @@ body{
     cursor: pointer;
 }
 .image-upload img{
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
 }
 
-/*.image-upload label{
-    padding-left: 5px;
-    margin-bottom: 10px;
-}*/
+#previewUploadImg{
+   /* border: 1px solid black;*/
+    width: 70px;
+    height: 65px;
+    margin-left: 10px;
+}
 
+#previewUploadImg img{
+    width: 70px;
+    height: 65px;
+}
 
+#new-publication .btn-upload-publication{
+    background-color: #ff4500;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: large;
+    
+}
 /*TIMELINE*/
 
 #publications{
@@ -391,6 +414,18 @@ body{
     padding-right: 0px !important;
 }
 
+.item-publication .like-text{
+    color: grey;
+    margin-left: 10px;
+    font-size: large;
+}
+
+.item-publication .liked-text{
+    color: red;
+    margin-left: 10px;
+    font-size: large;
+}
+
 .floatingButton{
     background-color: white;
     border: 1px solid rgba(230, 230, 230, 0.8);
@@ -400,6 +435,8 @@ body{
     position:fixed;
     z-index: 1;
 }
+
+
 
 @keyframes zoominoutsinglefeatured {
     0% {
@@ -481,6 +518,32 @@ body{
 .follow{
     margin-left: 20px;
 }
+
+/*EDITAR DATOS USUARIO*/
+#edit-user-file-input{
+    display: none;
+}
+
+#image-input-edit img{
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+
+#imagenUsuarioSubida img{
+    width: 120px;
+    height: 100px;
+}
+
+#edit-user-image-container{
+    display: flex;
+    flex-direction: row;
+}
+
+#edit-user-image-container div{
+    margin-left: 35px;
+}
+
 
 /*PUBLICACIONES PERFIL USUARIO*/
 .item-profile-publication{
@@ -822,6 +885,12 @@ padding-top: 10px;
 }
 
 /* MEDIAS QUERY */
+@media screen and (max-width:600px){
+    body{
+        padding-top: 20%;
+    }
+}
+
 
 /*Login*/
 @media screen and (max-width:600px){

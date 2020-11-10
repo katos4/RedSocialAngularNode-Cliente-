@@ -31,7 +31,7 @@
 
 
 
-                    <div class="publication-image-card">
+                    <div class="publication-image-card col-md-12">
                         <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" />
                     </div>
                     
@@ -43,12 +43,12 @@
                         <div class="col-md-12">
                             <div>
                                 <img class="like" *ngIf="likesArray.indexOf(publication._id) >= 0" (click)="unlikePublication(publication._id)" src="../../../assets/iconos/like.svg">
-                            </div>
-    
-                            <div>
                                 <img class="unlike" *ngIf="likesArray.indexOf(publication._id) < 0" (click)="giveLike(publication._id)" src="../../../assets/iconos/unlike.svg">
+                               
+                                <label class="like-text" *ngIf="likesArray.indexOf(publication._id) < 0" >{{publication.likes}}</label>
+                                <label class="liked-text" *ngIf="likesArray.indexOf(publication._id) >= 0" >Tú y {{publication.likes}} personas más</label>
                             </div>
-
+                           
                             <a [routerLink]="['/perfil',publication.user._id]" class="link-publication-nick card-link">{{publication.user.nick}}</a><span>{{publication.text}}</span>
                             
                             <div class="date">

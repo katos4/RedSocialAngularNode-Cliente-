@@ -15,36 +15,60 @@
         </div>
 
         <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
-            <p>
-                <label>Nombre</label>
-                <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
-            </p>
+           
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label>Nombre</label>
+                        <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <label>Apellidos</label>
+                        <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
+                    </p>
+                </div>
+            </div>
+          <div class="row">
+              <div class="col-md-6">
+                <p>
+                    <label>Nick</label>
+                    <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p>
+                    <label>Correo electrónico</label>
+                    <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
+                </p>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-5">
+                <label>Imagen de perfil</label>
+            </div>
+          </div>
+          <div class="row pt-1">
+              <div class="col-md-4 col-sm-5">
+                  <div id="edit-user-image-container" class="container-fluid">
+                      <div>
+                        <label id="image-input-edit" for="edit-user-file-input">
+                            <img src="../../../assets/imagenes/imagenes-de-usuario.png">
+                        </label>
+                        <input id="edit-user-file-input" type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
+                      </div>
+                      <div id="imagenUsuarioSubida"></div> 
+                  </div>
+              </div>
+          </div>
+          <div class="row justify-content-center pt-3">
+              <div class="col-md-7">
+                <input type="submit" value="Actualizar" class="btn btn-warning btn-block" />
+              </div>
+          </div>
 
-            <p>
-                <label>Apellidos</label>
-                <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
-            </p>
-
-            <p>
-                <label>Nick</label>
-                <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
-            </p>
-
-            <p>
-                <label>Correo electrónico</label>
-                <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
-            </p>
-
-            <p>
-                <label>Subir tu avatar</label>
-                <input type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
-            </p>
         
-            <div class="imagenUsuarioSubida" *ngIf="user.image">
-                <img src="{{ url + 'get-image-user/' + user.image}}" />
-            </div><br><br>
-
-            <input type="submit" value="Actualizar" class="btn btn-warning" />
 
         </form>
     </div>
