@@ -19,6 +19,7 @@ export class UserEditComponent implements OnInit {
   public token;
   public status;
   public url: string;
+  public filesToUpload: Array<File>;
 
   constructor(
     private _route: ActivatedRoute,
@@ -52,7 +53,8 @@ export class UserEditComponent implements OnInit {
           this.status = 'success';
           localStorage.setItem('identity', JSON.stringify(response.user));
           this.identity = this.user;
-
+          $('#imgPreviewEdit').remove();
+          
           //Subida de archivos
 
           this._uploadService.makeFileRequest(this.url + 'upload-image-user/' + this.user._id, [], this.filesToUpload, this.token, 'image')
@@ -61,7 +63,8 @@ export class UserEditComponent implements OnInit {
                   this.user.image = result.user.image;
                   localStorage.setItem('identity', JSON.stringify(this.user));
                 });
-
+          this.filesToUpload = [];
+          console.log(this.filesToUpload);
         }
       },
       error => {
@@ -77,21 +80,20 @@ export class UserEditComponent implements OnInit {
     
   }
 
-public filesToUpload: Array<File>;
+
 fileChangeEvent(fileInput: any){
   this.filesToUpload = <Array<File>>fileInput.target.files;
-  console.log(this.filesToUpload);
- 
-  let div = $('#imagenUsuarioSubida');
-  let preview = $('<div id="previewUploadImgEdit">');
-  let image = $('<img id="imgPreviewEdit">');
+  //console.log(this.filesToUpload);
+  let image;
+  let div;
+  let preview;
 
+  div = $('#imagenUsuarioSubida');
+  preview = $('<div id="previewUploadImgEdit">');
+  image = $('<img id="imgPreviewEdit">');
   const file = this.filesToUpload;
   const firstFile = file[0];
   const objectURL = URL.createObjectURL(firstFile);
-  var nombre = firstFile.name;
-  console.log(nombre);
-
   image.attr('src', objectURL);
   preview.html('');
   preview.append(image);

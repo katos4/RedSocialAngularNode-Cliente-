@@ -33,17 +33,14 @@ body{
     padding-top: 8%;
 }
 
-
 #divPrincipal{
     background-color: #f0f2f5;
     background-size: 100%;
 }
 
-
 .h1-strong{
     font-size: 35px;
     font-weight: bold;
-    /*margin-left: 13px;*/
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
@@ -59,13 +56,13 @@ body{
     margin-bottom: 100%;
 }
 
+
 /*CABECERA*/
  
 .navbar{
    /* background-color: #1877f2 !important;*/
     background-color: #ff4500 !important;
     width: 100%;
-  
 }
 
 .navbar *{
@@ -76,25 +73,15 @@ body{
 .dropdown a{
     cursor: pointer;
     text-decoration:none !important;
-  
 }
 
 .dropdown-menu *{
     color:black !important;
-   
 }
 
 .navbar .dropdown-menu a:hover{
     background: #eee !important;
 }
-
-/*.navbar .avatar{
-    width: 50px;
-    height: 40px;
-    border-radius: 100px;
-    overflow: hidden;
-    margin-right: 8px;
-}*/
 
 .navbar .avatar img{
     height: 30px;
@@ -107,13 +94,8 @@ body{
 }
 
 .navbar .label-profile{
-    padding-right: 10px;
-    /*border-right: 1px solid #cc3600;*/
-    
+    padding-right: 10px; 
 }
-/*.navbar .label-home{
-    padding-left: 10px;
-}*/
 
 .navbar .dropdown img{
     height: 25px;
@@ -125,7 +107,9 @@ body{
     width: 50px;
  }
 
+
 /*LOGIN*/
+
 .formulario-login{
     background: #fff;
     margin-top: 15%;
@@ -135,12 +119,14 @@ body{
     border-radius: 10px;
     box-shadow: 1px 1px 10px 5px rgba(230, 230, 230, 0.5);
 }
+
 .textoPaginaLogin{
     margin-top: 10%;
     margin-left: 20%;
     margin-right: 30px;
     width: 500px;
 }
+
 .textoPaginaLogin p{
     font-size: 30px;
 }
@@ -196,7 +182,6 @@ body{
     margin: 10px;
     margin-top: 25px;
 }
-
 
 
 /*GENTE*/
@@ -257,7 +242,6 @@ body{
 .mat-form-field{
     width: 100%;
 }
-
 
 
 /*SIDEBAR*/
@@ -436,7 +420,52 @@ body{
     z-index: 1;
 }
 
+.add-comment-section{
+    border-top: 1px solid lightgray;
+    padding-top: 1%;
+}
 
+.add-comment-section form{
+    display: flex;
+    flex-direction: row;
+}
+
+.add-comment-section form>input{
+    border: none;
+    text-decoration: none;
+}
+
+.comment-section{
+    width: 100%;
+    height: 15%;
+    word-break: break-all;
+}
+
+
+.comment-section-scroll{
+    width: 100%;
+    height: 180px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.comment-section-scroll::-webkit-scrollbar{
+    display: none;
+}
+
+.comment-section .single-comment .comment-user-nick:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.view-all-comments-section label{
+    color: #b3b3b3;
+}
+
+.view-all-comments-section label:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
 
 @keyframes zoominoutsinglefeatured {
     0% {
@@ -582,35 +611,13 @@ body{
     margin-top: 10%;
     /*padding-bottom: 10%;*/
 }
+
 /*MODAL PERFIL*/
 
 #exampleModal .modal-content .modal-body .row p{
     word-break: break-all !important;
 } 
 
-/*.modal-body .image-user img{
-    width: 40px;
-    height: 35px;
-}
-
-.modal-body .publication-user-name{
-    margin-left: 15px;
-    margin-right: 25px;
-}
-
-.modal-body .publication-user-name a{
-    color: black;
-}
-
-#image-nick-row{
-    padding-top: 5px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid black;
-}
-
-#text-comments-row{
-padding-top: 10px;
-}*/
 
 
 /*PAGINA SEGUIDOS*/
@@ -780,6 +787,92 @@ padding-top: 10px;
     padding-right: 5px;
 }
 
+/* MODAL TODOS LOS COMENTARIOS */
+
+.modalContainer .modal-content-comments {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid lightgray;
+  /*  border-top: 10px solid #58abb7;*/
+    width: 40%;
+    height: 105%;
+    overflow: initial !important;
+    margin-bottom: 10px;
+}
+
+.title-comment-modal{
+  padding-bottom: 5%;  
+}
+
+.title-comment-modal .title{
+    font-weight: 700;
+    font-size: 1.5em;
+    padding-left: 20%;
+    
+}
+
+.title-comment-modal .icon-back-comment{
+    padding-left: 5%;
+}
+
+.title-comment-modal .icon-back-comment:hover{
+    cursor: pointer;
+}
+
+.modal-single-comment{
+    /*border: 1px solid black;*/
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-single-comment .image-user-modal-comment, 
+.modal-single-comment .nick-text-modal-comment{
+    padding: 5px;
+}
+
+.modal-single-comment .image-user-modal-comment img{
+    width: 40px;
+    height: 35px;
+}
+
+
+.comment-modal-row .global{
+    max-height: calc(100vh - 200px);
+    /*height: 72%;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-break: break-all;
+}
+
+
+.comment-modal-row .global::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.comment-modal-row .global::-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.comment-modal-row .global::-webkit-scrollbar-button:increment,
+.comment-modal-row .global::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.comment-modal-row .global::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.comment-modal-row .global::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.comment-modal-row .global::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
 
 /* MODAL PUBLICACIONES */
 
@@ -804,7 +897,7 @@ padding-top: 10px;
     border: 1px solid lightgray;
   /*  border-top: 10px solid #58abb7;*/
     width: 60%;
-    height: 65%;
+    height: 115%;
 }
 
 .modalContainer .close {
@@ -861,6 +954,7 @@ padding-top: 10px;
     color: black;
 }
 
+/*MODAL CONFIRMACION ELIMINAR PUBLICACION*/
 
 .modalDeleteContainer {
     display: none; 
@@ -881,20 +975,16 @@ padding-top: 10px;
     border: 1px solid black;
   /*  border-top: 10px solid #58abb7;*/
     width: 40%;
-    height: 40%;
+    height: 38%;
 }
 
 /* MEDIAS QUERY */
+
 @media screen and (max-width:600px){
     body{
         padding-top: 20%;
     }
-}
 
-
-/*Login*/
-@media screen and (max-width:600px){
-   
     .textoPaginaLogin p{
         margin-top: 0%;
     }
@@ -907,6 +997,19 @@ padding-top: 10px;
        margin-top: 5%;
        margin-left: 15%;
    }
+
+   /*ventana modal publicaciones dentro del perfil de usuario*/
+   .modalContainer .modal-content{
+       height: 80%;
+   }
+
+   /*ventana modal confirmacion borrado publicacion*/
+   .modalDeleteContainer .modal-content{
+       margin-top: 15%;
+       width: 80%;
+       height: 45%;
+   }
+
 }
 
 
@@ -917,8 +1020,6 @@ padding-top: 10px;
     #user-card{
       display:none;
     }
- 
-    
 }
 
 

@@ -26,45 +26,61 @@
     <div class="modal-content">
         <div *ngFor="let item of modalData">
 
-            <div class="row" id="mainModalRow">
-                <!--imagen principal de la publicacion-->
-                <div class="col-md-9">
+            <!--Cruz cerrar modal-->
+            <div class="row justify-content-end pr-2 pb-3">
+                <span class="close" (click)="closeModal()">×</span>
+            </div>
+            <!--nombre, foto pequeña usuario y boton borrar publicacion-->
+            <div class="row mb-2">
+                <div class="col-md-12 d-flex flex-row">
+                    <div class="image-user">
+                        <a href="#">
+                            <img class="rounded-circle" src="{{ url + 'get-image-user/' + item.userImage}}" />
+                        </a>
+                    </div>
+                    <div class="publication-user-name">
+                        <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}</a></b>
+                    </div>
+                    <div class="ml-auto" id="deleteButton" *ngIf="item.userId == identity._id">
+                        <img src="../../../assets/iconos/borrar.png" (click)="openDeleteModal()" >
+                    </div>  
+                </div>
+            </div>
+
+            <!--imagen principal de la publicacion-->
+            <div class="row mb-2">
+                <div class="col-md-12">
                     <div class="modal-img">
                         <img class="img-fluid" src="{{ url + 'get-image-pub/' + item.file}}" />
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-3">
-                    <div class="row justify-content-end pr-2 pb-3">
-                        <span class="close" (click)="closeModal()">×</span>
-                    </div>
-                    
-                    <div class="row" id="modalUserInfoRow">
-                        <div class="image-user col-md-1">
-                            <a href="#">
-                                <img class="rounded-circle" src="{{ url + 'get-image-user/' + item.userImage}}" />
-                            </a>
-                        </div>
-                        <div class="publication-user-name col-md-5">
-                            <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}</a></b>
-                        </div>
-                        <div class="col-md-1" *ngIf="item.userId == identity._id">
-                           <!-- <button type="button" id="deleteButton" class="btn btn-danger" 
-                            data-toggle="modal" data-target="#deleteModal"> -->
-                            <div id="deleteButton" *ngIf="item.userId == identity._id">
-                                <img src="../../../assets/iconos/borrar.png" (click)="openDeleteModal()" >
-                            </div>   
-                        </div>
-                    </div>
-                    <div class="row pt-3" id="modalCommentRow">
-                        <p>
-                            <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}:</a></b>
-                            &nbsp;
-                            <span>{{item.text}}</span>
-                        </p>
-                        <p>Seccion comentarios</p>
+            <!--fila likes-->
+            <div class="row">
+                <div class="col-md-12">
+                    <img class="like" *ngIf="likesArray.indexOf(item.imgId) >= 0" (click)="unlikePublication(item.imgId)" src="../../../assets/iconos/like.svg">
+                    <img class="unlike" *ngIf="likesArray.indexOf(item.imgId) < 0" (click)="giveLike(item.imgId)" src="../../../assets/iconos/unlike.svg">
+                </div>
+            </div>
+            
+            <!--fila nombre de usuario y texto de la publicacion-->
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <b><a [routerLink]="['/perfil',item.userId]"  class="card-link">{{item.nick}}:</a></b>
+                        &nbsp;
+                        <span>{{item.text}}</span>
+                    </p>
+                </div>
+            </div>
 
-
+            <!--fila comentarios-->
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Seccion comentarios</p>
+                </div>
+            </div>
 
                         <!-- Modal confirmacion borrado -->
                         <div id="deleteModalConfirmation" class="modalDeleteContainer">
@@ -74,34 +90,22 @@
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-md-8">
-                                        <h2>Confirmación de borrado</h2>
+                                        <h5><b>Confirmación de borrado</b></h5>
                                         <p>Estás a punto de borrar una de tus publicaciones, si la borras no podrás recuperarla.</p> 
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-6">
                                         <button type="button" class="btn btn-secondary md-block" data-dismiss="modal">Cancelar</button>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-6">
                                         <button type="button" class="btn btn-primary md-block" data-dismiss="modal" (click)="deletePublication(item.imgId)">Aceptar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Fin modal confirmacion borrado --> 
-                    </div>
-                    <div class="row" id="modalToolsRow">
-                        <img class="like" *ngIf="likesArray.indexOf(item.imgId) >= 0" (click)="unlikePublication(item.imgId)" src="../../../assets/iconos/like.svg">
-                        <img class="unlike" *ngIf="likesArray.indexOf(item.imgId) < 0" (click)="giveLike(item.imgId)" src="../../../assets/iconos/unlike.svg">
-                    </div>
-
-                </div>
-
-
-                 
-
-            </div>
-          
+                   
         </div> 
     </div>
 </div>

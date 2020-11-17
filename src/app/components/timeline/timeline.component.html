@@ -41,6 +41,7 @@
                    
 
                         <div class="col-md-12">
+                            <!--dar like-->
                             <div>
                                 <img class="like" *ngIf="likesArray.indexOf(publication._id) >= 0" (click)="unlikePublication(publication._id)" src="../../../assets/iconos/like.svg">
                                 <img class="unlike" *ngIf="likesArray.indexOf(publication._id) < 0" (click)="giveLike(publication._id)" src="../../../assets/iconos/unlike.svg">
@@ -51,8 +52,47 @@
                            
                             <a [routerLink]="['/perfil',publication.user._id]" class="link-publication-nick card-link">{{publication.user.nick}}</a><span>{{publication.text}}</span>
                             
-                            <div class="date">
+                            
+                            <!--seccion comentarios-->
+                            <div class="pt-2 pb-2">
+                                <div class="row view-all-comments-section">
+                                    <label class="col-12 view-all-comments-show"
+                                    *ngIf="publication.comments && publication.comments.length > 0"
+                                    (click)="viewAllComments(publication._id)">
+                                        Ver todos los comentarios
+                                    </label>    
+                                </div>
+
+                                    <div class="row comment-section" id="section-comment">
+                                        <div class="col-12" *ngIf="publication.comments && publication.comments.length > 0; else noComment">
+                                            <div class="single-comment" *ngFor="let comment of publication.comments">
+                                                <label class="comment-user-nick pr-2" [routerLink]="['/perfil',comment.user._id]"><b>{{comment.user.nick}}</b></label>
+                                                <label>{{comment.text}}</label>
+                                            </div>
+                                        </div>
+                                        <ng-template #noComment>
+                                            <div class="col-12">Sé el primero en comentar  </div>
+                                        </ng-template>
+                                    </div>
+                                
+                            </div>
+                          
+                            <!--tiempo publicacion-->
+                            <div class="date pb-2">
                                 {{ (publication.created_at | amFromUnix) | amLocale:'es' | amTimeAgo}}
+                            </div>
+                            
+                            <!--añadir comentario-->
+                            <div class="add-comment-section">
+                                <form>
+                                    <input type="text" class="form-control" 
+                                    id="comment-text-input" 
+                                    [(ngModel)]="comment.text"
+                                    name="texto"
+                                    placeholder="Añade un comentario..."
+                                   >
+                                    <input type="submit" class="btn btn-link" value="Publicar" (click)="sendComment(publication._id)">
+                                </form>
                             </div>
                        
                         </div>
@@ -60,7 +100,48 @@
 
                  <!-- </div> -->
                  
+                 <!--Modal todos los comentarios-->
+                 <div id="modalPersonalizadoComentarios" class="modalContainer">
+                    <div class="modal-content-comments">
 
+                        <!--Titulo-->
+                        <div class="row">
+                            <div class="title-comment-modal d-flex">
+                                <div class="icon-back-comment" (click)="closeModal()">
+                                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                    </svg>
+                                </div>
+                                <div class="title">
+                                    <label>Comentarios</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Seccion con todos los comentarios-->
+                        <div class="row">
+                            <div class="col-md-12 comment-modal-row">
+                                <div class="global">
+                                    <div class="modal-single-comment d-flex" *ngFor="let item of comments"> 
+                                        <div class="image-user-modal-comment">
+                                            <a href="#">
+                                                <img class="rounded-circle" src="{{ url + 'get-image-user/' + item.user.image}}" *ngIf="item.user.image"/>
+                                                <img class="rounded-circle" src="assets/user-default.png" class="avatar-default" *ngIf="!item.user.image"/>
+                                            </a>
+                                        </div>
+        
+                                        <div class="nick-text-modal-comment">
+                                            <label class="pr-1"><b>{{item.user.nick}}</b></label>
+                                            <label>{{item.text}}</label>
+                                        </div>
+                                       <!--fin for modal-->
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                     
 
             <!--fin bucle for-->
@@ -71,7 +152,7 @@
         <div class="row justify-content-center">
             <div class="col-md-5" *ngIf="publications && publications.length">
                 <p>
-                    <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+                    <button id="view-more-pubs-button" class="btn btn-success" (click)="viewMore()" *ngIf="!noMore" hidden>
                         Ver mas publicaciones
                     </button>
                 </p>

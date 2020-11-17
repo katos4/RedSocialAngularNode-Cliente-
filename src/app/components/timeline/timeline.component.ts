@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { GLOBAL } from '../../services/global';
+import * as $ from 'jquery';
+
+//modelos
 import { Publication } from '../../models/publications';
 import { Like } from '../../models/like';
-import { GLOBAL } from '../../services/global';
+import { Comment } from '../../models/comment';
+
+//servicios
 import { UserService } from '../../services/user.service';
 import { LikeService } from '../../services/like.service';
 import { PublicationService } from '../../services/publication.service';
-
-
-import * as $ from 'jquery';
-
+import { CommentService } from '../../services/comment.service';
 
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.css'],
-  providers: [UserService, PublicationService, LikeService]
+  providers: [UserService, PublicationService, LikeService, CommentService]
 })
 export class TimelineComponent implements OnInit {
 public identity;
@@ -35,13 +39,17 @@ public likesArray = [];
 public userPubArray = [];
 public newLike;
 public countLikes;
+public comment: Comment;
+public comments: Comment[];
+public open;
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
     private _publicationService: PublicationService,
-    private _likeService: LikeService
+    private _likeService: LikeService,
+    private _commentService: CommentService
   ) { 
     this.title = "Timeline";
     this.identity = this._userService.getIdentity();
@@ -49,24 +57,23 @@ public countLikes;
     this.url = GLOBAL.url;
     this.page = 1;
     this.newLike = false;
+    this.comment = new Comment('', '', this.identity._id, '' , '');
+    this.open = false;
+  
   }
 
   ngOnInit() {
-    //console.log("componente timeline cargado");
-    this.getPublications(this.page);
-
-    var height = $(window).height();
+    const height = $(window).height();
     $('.loginPage').height(height);
     $('.navbar').removeAttr('hidden');
 
-   
+    this.getPublications(this.page);
     this.getLikes();
-    //this.getCountLikes();
-    //console.log(this.likesArray);
-    //console.log(this.userPubArray);
-    
-  } 
-  
+    this.autoScroll();
+  }
+
+ 
+
   getCountLikes(id){
     this._likeService.getCountLikes(this.token, id).subscribe(
       response => {
@@ -92,32 +99,32 @@ public countLikes;
   }
 
   getPublications(page, adding = false){
+    var temporal;
     this._publicationService.getPublications(this.token, page).subscribe(
       response => {
-        var pubId;
-        //console.log(response);
         if (response.publications){
-          this.total = response.total_items;
-          this.pages = response.pages;
-          this.itemsPerPage = response.items_per_page;
+           console.log(response.publications);
+           this.total = response.total_items;
+           this.pages = response.pages;
+           this.itemsPerPage = response.items_per_page;
 
-        
-
-          if (!adding){
+           if (!adding){
             this.publications = response.publications;
             this.publications.forEach(publication => {
               this.getCountLikes(publication._id);
-             });
+              this.getComments(publication._id);
+
+            });
           }else{
             var arrayA = this.publications;
             var arrayB = response.publications;
-            console.log("ARRAY A " + arrayA);
-            console.log("ARRAY B " + arrayB);
+            // console.log("ARRAY A " + arrayA);
+            // console.log("ARRAY B " + arrayB);
 
             this.publications = arrayA.concat(arrayB);
 
-            /**scroll animado con jquery cuando se pulsa el boton de ver mas publicaciones */
-            $("html, body").animate({scrollTop: $('html').prop("scrollHeight")}, 500);
+            /** scroll animado con jquery cuando se pulsa el boton de ver mas publicaciones */
+            // $("html, body").animate({scrollTop: $('html').prop("scrollHeight")}, 500);
           }
 
         }else{
@@ -212,7 +219,97 @@ public countLikes;
     );
   }
 
- 
+  sendComment(publicationId){
+    var idPub = publicationId;
+    //let tex = $('#comment-text-input').val();
+    //let text = String(tex);
+    // this.comment.text = text,
+    this.comment.publication = idPub;
+    console.log(this.comment);
 
+    this._commentService.addComment(this.token, this.comment).subscribe(
+      response => {
+        console.log(response.comment.text);
+        if(response.comment.text){
+          this.getComments(idPub);
+         // $('#comment-text-input').val('');
+          this.comment.text = '';
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+  }
+
+
+  getComments(idPub){
+    // var idPub = '5fa6d064992c5b6de458ff02';
+    this._commentService.getComments(this.token, idPub).subscribe(
+      response => {
+        // console.log(response.comments);
+        this.publications.forEach(publication => {
+          if(publication._id == idPub){
+            if(response.comments.length >= 3){
+              publication['comments'] = response.comments.slice(0, 2);
+            }else{
+              publication['comments'] = response.comments;
+            }
+          }
+        });
+      },
+      error => {
+        console.log(error as any);
+      }
+    );
+  }
+
+  getAllComments(idPub){
+    this._commentService.getComments(this.token, idPub).subscribe(
+      response => {
+        // console.log(response.comments);
+        this.publications.forEach(publication => {
+          if(publication._id === idPub){
+            this.comments = response.comments;
+            console.log(this.comments);
+           // publication['comments'] = response.comments;
+          }
+        });
+      },
+      error => {
+        console.log(error as any);
+      }
+    );
+  }
+
+  viewAllComments(idPub){
+    console.log('ver todos los comentarios publicacion ' + idPub);
+    this.open = true;
+    ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'block');​​​​​​
+    ($('body') as any).css('position', 'static');
+    ($('body') as any).css('height', '100%');
+    ($('body') as any).css('overflow', 'hidden');
+
+    this.getAllComments(idPub);
+  }
+
+  closeModal(){
+    if(this.open){
+      ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'none');​​​​​​
+      ($('body') as any).css('position', 'inherit');
+      ($('body') as any).css('height', 'auto');
+      ($('body') as any).css('overflow', 'visible');
+      this.open = false;
+    } 
+  }
+
+  autoScroll(){
+    $(window).scroll(function() {
+      if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+       //Al llegar al pie de la pagina se ejecuta
+       $('#view-more-pubs-button').trigger('click');
+   }
+   });
+  }
 //--
 }
