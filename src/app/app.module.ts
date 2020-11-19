@@ -25,7 +25,7 @@ import { FollowedComponent } from './components/followed/followed.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 import { SearchComponent } from './components/search/search.component';
-import { UserInfoComponent } from './components/user-info/user-info.component';
+import { InfoCovidComponent } from './components/info-covid/info-covid.component';
 
 
 /** Servicios */
@@ -54,6 +54,7 @@ import { UserGuard } from './services/user.guard';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,7 @@ import { UserGuard } from './services/user.guard';
     UploadPublicationComponent,
     SearchComponent,
     SearchPipe,
-    UserInfoComponent
+    InfoCovidComponent
   ],
   imports: [
     BrowserModule,
