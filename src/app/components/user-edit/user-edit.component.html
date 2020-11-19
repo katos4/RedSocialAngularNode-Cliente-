@@ -1,76 +1,137 @@
-<div class="row justify-content-center pt-3">
+<div class="row justify-content-center">
     <h1 class="h1-strong">{{title}}</h1>
 </div>
 
-<div class="row justify-content-center">
 
-    <div class="col-lg-5">
-    
-        <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
+    <div class="alert alert-success" role="alert" *ngIf="status == 'success'">
         ¡Tus datos se han modificado correctamente!
-        </div>
+    </div>
 
-        <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
+    <div class="alert alert-danger" role="alert" *ngIf="status == 'error'">
             Se ha producido un error, intentalo de nuevo.
-        </div>
+    </div>
 
-        <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
-           
+        <form #userEditForm="ngForm" (ngSubmit)="onSubmit()" class="row justify-content-center">
+            <!-- COLUMNA 1 -->
+           <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            <label>Nombre</label>
+                            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>
+                            <label>Apellidos</label>
+                            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
+                        </p>
+                    </div>
+                </div>
             <div class="row">
                 <div class="col-md-6">
                     <p>
-                        <label>Nombre</label>
-                        <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
+                        <label>Nick</label>
+                        <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
                     </p>
                 </div>
                 <div class="col-md-6">
                     <p>
-                        <label>Apellidos</label>
-                        <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
+                        <label>Correo electrónico</label>
+                        <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
                     </p>
                 </div>
             </div>
-          <div class="row">
-              <div class="col-md-6">
-                <p>
-                    <label>Nick</label>
-                    <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
-                </p>
-              </div>
-              <div class="col-md-6">
-                <p>
-                    <label>Correo electrónico</label>
-                    <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
-                </p>
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <label>Imagen de perfil</label>
+                </div>
             </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-md-5">
-                <label>Imagen de perfil</label>
+            <div class="row pt-1">
+                <div class="col-md-4 col-sm-5">
+                    <div id="edit-user-image-container" class="container-fluid">
+                        <div>
+                            <label id="image-input-edit" for="edit-user-file-input">
+                                <img src="../../../assets/imagenes/imagenes-de-usuario.png">
+                            </label>
+                            <input id="edit-user-file-input" type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
+                        </div>
+                        <div id="imagenUsuarioSubida"></div> 
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="row pt-1">
-              <div class="col-md-4 col-sm-5">
-                  <div id="edit-user-image-container" class="container-fluid">
-                      <div>
-                        <label id="image-input-edit" for="edit-user-file-input">
-                            <img src="../../../assets/imagenes/imagenes-de-usuario.png">
-                        </label>
-                        <input id="edit-user-file-input" type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
-                      </div>
-                      <div id="imagenUsuarioSubida"></div> 
-                  </div>
-              </div>
-          </div>
-          <div class="row justify-content-center pt-3">
-              <div class="col-md-7">
-                <input type="submit" value="Actualizar" class="btn btn-warning btn-block" />
-              </div>
-          </div>
-
+          
+        </div>
         
+        <!-- COLUMNA 2 -->
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label>Trabaja en</label>
+                        <input type="text" name="work" #work="ngModel" [(ngModel)]="user.work" class="form-control"/>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <label>Estudió en</label>
+                        <input type="text" name="study" #study="ngModel" [(ngModel)]="user.study" class="form-control" />
+                    </p>
+                </div>
+            </div>
 
-        </form>
-    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label>Ciudad</label>
+                        <input type="text" name="city" #city="ngModel" [(ngModel)]="user.city" 
+                        class="form-control" placeholder="añade un lugar"/>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <label>Fecha de nacimiento</label>
+                        <input type="date" name="birth" #birth="ngModel" [(ngModel)]="user.birth" class="form-control" />
+                    </p>
+                </div>
+            </div>
 
-</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label>Género</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="gender"
+                        [(ngModel)]="user.gender">
+                            <option *ngFor="let c of genders" [ngValue]="c">{{c}}</option>
+                          </select>
+                        <!--<input type="text" name="gender" #gender="ngModel" [(ngModel)]="user.gender" class="form-control"/> -->
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p>Situación sentimental</p>
+                    <div class="form-check">
+                       <!-- <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">-->
+                        <input class="form-check-input" type="checkbox" id="checkbox-user-edit" value="" 
+                        name="relationship" [(ngModel)]="user.relationship" />
+                        <label class="form-check-label" for="defaultCheck1">En una relación</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Biografía</label>
+                    <textarea class="md-textarea form-control" name="biography" [(ngModel)]="user.biography"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <input type="submit" value="Actualizar" class="btn btn-warning btn-block" />
+            </div>
+        </div>
+    </form>
+    
+

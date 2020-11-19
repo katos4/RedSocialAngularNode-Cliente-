@@ -19,7 +19,12 @@ export class UploadPublicationComponent implements OnInit {
   public stats;
   public url;
   public status;
+  public statusUpload;
+  public statusUpload2;
   public publication: Publication;
+  public filesToUpload: Array<File>;
+  public uploadTrue;
+  public uploadTrue2;
 
   constructor(
     private _route: ActivatedRoute,
@@ -33,54 +38,84 @@ export class UploadPublicationComponent implements OnInit {
     this.stats = this._userService.getStats();
     this.url = GLOBAL.url;
     this.publication = new Publication('', '', '', '' , this.identity._id);
+    this.uploadTrue = false;
+    this.uploadTrue2 = false;
     
    
   }
 
   ngOnInit(){
+  
   }
 
   onSubmit(form, $event){
-  //console.log(this.publication);
-  this._publicationService.addPublication(this.token, this.publication).subscribe(
-    response => {
-      if(response.publication){
-        //this.publication = response.publication;
-        this.status = 'success';
-
-        //subir imagen
-        this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
-                           .then((result:any) => {
-                             this.status = 'success';
-                             this.publication.file = result.image;
-                             setTimeout(function(){
-                              var alert = document.getElementById("alertaExito");
-                              alert.style.display = 'none';
-                              }, 2000);
-                             form.reset();
-                             this.sended.emit({send: 'true'});
-                             $('#closeModalButton').click();
-                          });
-
-      }else{
-        this.status = 'error';
-      }
-    },
-    error => {
-      var errorMessage = <any>error;
-      console.log(errorMessage);
-      if(errorMessage != null){
-        this.status = 'error';
-      }
+    var textarea = $('#textarea-publication').val();
+  
+    if(textarea === ''){
+      this.uploadTrue2 = false;
+      this.statusUpload = 'error';
+      console.log('el textarea está vacio');
+    }else{
+      this.uploadTrue2 = true;
+      this.statusUpload = 'success';
     }
-  );
+
+    if(!this.uploadTrue){
+      console.log('el archivo esta vacio');
+      this.statusUpload2 = 'error';
+    }
+
+    if(this.uploadTrue && this.uploadTrue2){
+      console.log('los 2 son true');
+     this.uploadFilesAndPublication(form);
+    }
+   
   }
 
+  uploadFilesAndPublication(form){
+    this._publicationService.addPublication(this.token, this.publication).subscribe(
+      response => {
+        if(response.publication){
+          //this.publication = response.publication;
+          this.status = 'success';
+  
+          //subir imagen
+          this._uploadService.makeFileRequest(this.url+'upload-image-pub/'+response.publication._id, [], this.filesToUpload, this.token, 'image')
+                             .then((result:any) => {
+                               this.status = 'success';
+                               this.publication.file = result.image;
+                               setTimeout(function(){
+                                var alert = document.getElementById("alertaExito");
+                                alert.style.display = 'none';
+                                }, 2000);
+                               form.reset();
+                               this.sended.emit({send: 'true'});
+                               $('#closeModalButton').click();
+                            });
+  
+        }else{
+          this.status = 'error';
+        }
+      },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if(errorMessage != null){
+          this.status = 'error';
+        }
+      }
+    );
+  }
 
-  public filesToUpload: Array<File>;
+  
 
   fileChangeEvent(fileInput: any){
-    this.filesToUpload = <Array<File>>fileInput.target.files;
+    this.filesToUpload = <Array<File>> fileInput.target.files;
+    if(this.filesToUpload.length > 0){
+      this.uploadTrue = true;
+      this.statusUpload2 = 'success';
+    }
+
     let div = $('#previewUploadImgDiv');
     let preview = $('<div id="previewUploadImg">');
     let image = $('<img id="imgPreview">');

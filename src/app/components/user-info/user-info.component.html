@@ -1,1 +1,30 @@
-<p>user-info works!</p>
+
+<h3>Detalles</h3>
+
+<div class="user-info-biography">
+    <label>{{identity.biography}}</label>
+</div>
+
+<div class="user-info-details">
+    
+    <p>
+        <img class="info-user-icon" src="../../../assets/iconos/ciudad.svg">
+        Vive en {{identity.city}}
+    </p>
+    <p>
+        <img class="info-user-icon" src="../../../assets/iconos/pastel.svg">
+        Fecha de nacimiento: {{identity.birth}}
+    </p>
+    <p>
+        <img class="info-user-icon" src="../../../assets/iconos/birrete.svg">
+        Estudió en {{identity.study}}
+    </p>
+
+    <p *ngIf="identity.relationship == true">
+        <img class="info-user-icon" src="../../../assets/iconos/corazon.svg">
+        En una relación
+    </p>
+</div>
+   
+
+

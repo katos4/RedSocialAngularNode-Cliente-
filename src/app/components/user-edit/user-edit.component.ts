@@ -20,7 +20,7 @@ export class UserEditComponent implements OnInit {
   public status;
   public url: string;
   public filesToUpload: Array<File>;
-
+  public genders; 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -32,6 +32,11 @@ export class UserEditComponent implements OnInit {
     this.identity = this.user;
     this.token = this._userService.gettoken();
     this.url = GLOBAL.url;
+    this.genders = ["Hombre", "Mujer", "Otro"];
+    /*  {name: "Hombre"},
+      {name: "Mujer"},
+      {name: "Otro"},
+    ];*/
   }
 
   ngOnInit(){
@@ -40,10 +45,18 @@ export class UserEditComponent implements OnInit {
     var height = $(window).height();
     $('.loginPage').height(height);
     $('.navbar').removeAttr('hidden');
+    console.log(this.user);
+
+    if($('#checkbox-user-edit').prop('checked')){
+      console.log('relacion seleccionado');
+    }
+    
   }
 
   onSubmit(){
-    //console.log(this.user);
+
+    console.log(this.user);
+
 
     this._userService.updateUser(this.user).subscribe(
       response =>{

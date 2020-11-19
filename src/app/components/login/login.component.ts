@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private _chatService: ChatService
   ) { 
     this.title = 'Identificate';
-    this.user = new User("","","","","","","ROLE_USER","");
+    this.user = new User("","","","","","","ROLE_USER","","","","","","",false,"");
   }
 
   ngOnInit(): void {

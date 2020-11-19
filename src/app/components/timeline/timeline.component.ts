@@ -35,6 +35,7 @@ public itemsPerPage;
 public publications: Publication[];
 public name: string;
 public noMore = false;
+public noMoreComments = false;
 public likesArray = [];
 public userPubArray = [];
 public newLike;
@@ -42,6 +43,11 @@ public countLikes;
 public comment: Comment;
 public comments: Comment[];
 public open;
+
+public pageComments;
+public totalComments;
+public itemsPerPageComments;
+public pagesComments;
 
   constructor(
     private _route: ActivatedRoute,
@@ -56,6 +62,7 @@ public open;
     this.token = this._userService.gettoken();
     this.url = GLOBAL.url;
     this.page = 1;
+    this.pageComments = 1;
     this.newLike = false;
     this.comment = new Comment('', '', this.identity._id, '' , '');
     this.open = false;
@@ -94,6 +101,38 @@ public open;
           console.log('hay un error');
         }
        // console.log(error as any);
+      }
+    );
+  }
+
+  public idPublication;
+  getAllComments(idPub, page, adding = false){
+    this.idPublication = idPub;
+    this._commentService.getComments(this.token, idPub, page).subscribe(
+      response => {
+        this.totalComments = response.total_items;
+        this.pagesComments = response.pages;
+        this.itemsPerPageComments = response.items_per_page;
+        console.log(response);
+
+        this.publications.forEach(publication => {
+          if (publication._id === idPub){
+            if(!adding){
+              this.comments = response.comments;
+            }else{
+              var arrayA = this.comments;
+              var arrayB = response.comments;
+
+              this.comments = arrayA.concat(arrayB);
+            }
+            // this.comments = response.comments;
+            // console.log(this.comments);
+            // publication['comments'] = response.comments;
+          }
+        });
+      },
+      error => {
+        console.log(error as any);
       }
     );
   }
@@ -139,6 +178,15 @@ public open;
         }
       }
     );
+  }
+
+  viewMoreComments(){
+    this.pageComments += 1;
+    if(this.pageComments === this.pagesComments){
+      this.noMoreComments = true;
+    }
+    console.log(this.pageComments);
+    this.getAllComments(this.idPublication, this.pageComments, true);
   }
 
   viewMore(){
@@ -230,14 +278,14 @@ public open;
     this._commentService.addComment(this.token, this.comment).subscribe(
       response => {
         console.log(response.comment.text);
-        if(response.comment.text){
+        if (response.comment.text){
           this.getComments(idPub);
          // $('#comment-text-input').val('');
           this.comment.text = '';
         }
       },
       error => {
-        console.log(<any>error);
+        console.log(<any> error);
       }
     );
   }
@@ -249,8 +297,8 @@ public open;
       response => {
         // console.log(response.comments);
         this.publications.forEach(publication => {
-          if(publication._id == idPub){
-            if(response.comments.length >= 3){
+          if (publication._id == idPub){
+            if (response.comments.length >= 3){
               publication['comments'] = response.comments.slice(0, 2);
             }else{
               publication['comments'] = response.comments;
@@ -264,38 +312,22 @@ public open;
     );
   }
 
-  getAllComments(idPub){
-    this._commentService.getComments(this.token, idPub).subscribe(
-      response => {
-        // console.log(response.comments);
-        this.publications.forEach(publication => {
-          if(publication._id === idPub){
-            this.comments = response.comments;
-            console.log(this.comments);
-           // publication['comments'] = response.comments;
-          }
-        });
-      },
-      error => {
-        console.log(error as any);
-      }
-    );
-  }
+  
 
   viewAllComments(idPub){
-    console.log('ver todos los comentarios publicacion ' + idPub);
+    // console.log('ver todos los comentarios publicacion ' + idPub);
     this.open = true;
-    ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'block');​​​​​​
+    ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'block');​​​​​​
     ($('body') as any).css('position', 'static');
     ($('body') as any).css('height', '100%');
     ($('body') as any).css('overflow', 'hidden');
 
-    this.getAllComments(idPub);
+    this.getAllComments(idPub, this.pageComments);
   }
 
   closeModal(){
-    if(this.open){
-      ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'none');​​​​​​
+    if (this.open){
+      ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'none');​​​​​​
       ($('body') as any).css('position', 'inherit');
       ($('body') as any).css('height', 'auto');
       ($('body') as any).css('overflow', 'visible');
@@ -305,7 +337,7 @@ public open;
 
   autoScroll(){
     $(window).scroll(function() {
-      if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+      if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
        //Al llegar al pie de la pagina se ejecuta
        $('#view-more-pubs-button').trigger('click');
    }

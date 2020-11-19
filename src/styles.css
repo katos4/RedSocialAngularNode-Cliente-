@@ -304,6 +304,23 @@ body{
     padding: 10px;
 }
 
+/* DETALLES DEL USUARIO */
+
+.user-info-biography{
+    border-bottom: 1px solid black;
+    padding-top: 5%;
+    padding-bottom: 10%;
+}
+
+.user-info-details{
+    padding-top: 10%;
+}
+
+.info-user-icon{
+    width: 1.5em;
+    height: 1.5em;
+}
+
 /*UPLOAD PUBLICATION*/
 
 .image-upload{
@@ -801,6 +818,10 @@ body{
     margin-bottom: 10px;
 }
 
+#view-more-comments-button:hover{
+    cursor: pointer;
+}
+
 .title-comment-modal{
   padding-bottom: 5%;  
 }
@@ -1008,6 +1029,15 @@ body{
        margin-top: 15%;
        width: 80%;
        height: 45%;
+   }
+
+   /*ventana modal todos los comentarios*/
+   .modalContainer .modal-content-comments{
+        width: 95%;
+        height: 100%;
+   }
+   .comment-modal-row .global{
+    max-height: calc(110vh - 0px);
    }
 
 }

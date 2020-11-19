@@ -7,7 +7,14 @@ export class User{
         public email: string,
         public password: string,
         public role: string,
-        public image: string
+        public image: string,
+        public work: string,
+        public study: string,
+        public city: string,
+        public birth: string,
+        public gender: string,
+        public relationship: boolean,
+        public biography: String
     ){}
 
 }

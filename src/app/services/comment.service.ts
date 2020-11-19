@@ -22,9 +22,9 @@ public url: string;
         return this._http.post(this.url + 'comment', params, {headers:headers});
     }
 
-    getComments(token, idPub): Observable<any>{
+    getComments(token, idPub, page = 1): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
 
-        return this._http.get(this.url + 'get-comments/' + idPub, {headers:headers});
+        return this._http.get(this.url + 'get-comments/' + idPub + '/' + page, {headers:headers});
     }
 }

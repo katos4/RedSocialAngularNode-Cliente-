@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-center">
     <div id="alertaExito" class="alert alert-success" *ngIf="status == 'success'">
         Publicacion enviada correctamente
     </div>
@@ -6,6 +6,14 @@
     <div id="alertaError" class="alert alert-danger" *ngIf="status == 'error'">
         Publicacion NO enviada correctamente
     </div>
+
+    <div id="alertaError" class="alert alert-danger" *ngIf="statusUpload == 'error'">
+       Escribe algo!
+    </div>
+
+    <div id="alertaError" class="alert alert-danger" *ngIf="statusUpload2 == 'error'">
+        Es necesario subir algún archivo!
+     </div>
 </div>
 
 
@@ -15,7 +23,7 @@
 
         
         <div class="row justify-content-center">
-            <textarea name="text" #text="ngModel" [(ngModel)]="publication.text"
+            <textarea id="textarea-publication" name="text" #text="ngModel" [(ngModel)]="publication.text"
             class="form-control" placeholder="¿Qué estás pensando hoy?"></textarea>
         </div>
             
@@ -26,7 +34,7 @@
                     <img src="../../../assets/imagenes/upload-image.png" />
                 </label>
                 <!--<label id="text-input" for="file-input">Subir foto</label>-->
-                <input id="file-input" type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)" />
+                <input id="file-input" type="file" placeholder="subir imagen" (change)="fileChangeEvent($event)"/>
             </div>
             
                 <!--div para previsualizar la imagen a subir -->
