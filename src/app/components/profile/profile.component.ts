@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   public stats;
   public followed;
   public following;
+  public open;
 
 
   constructor(
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
     this.url = GLOBAL.url;
     this.followed = false;
     this.following = false;
+    this.open = false;
   }
 
   ngOnInit() {
@@ -63,7 +65,7 @@ export class ProfileComponent implements OnInit {
         if(response.user){
           //console.log(response.user);
           this.user = response.user;
-
+          //console.log(this.user);
           if(response.following[0] && response.following[0]._id){
             this.following = true;
           }else{
@@ -90,7 +92,7 @@ export class ProfileComponent implements OnInit {
   getCounters(id){
     this._userService.getCounters(id).subscribe(
       response => {
-        console.log(response);
+        //console.log(response);
         this.stats = response;
       },
       error => {
@@ -132,7 +134,24 @@ export class ProfileComponent implements OnInit {
     this.followUserOver = 0;
   }
 
+  openModal(){
+    console.log('modal abierto');
+    this.open = true;
+    ($('#modalPersonalizadoMoreInfo') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'block');​​​​​​
+    ($('body') as any).css('position', 'static');
+    ($('body') as any).css('height', '100%');
+    ($('body') as any).css('overflow', 'hidden');
+  }
 
+  closeModal(){
+    if (this.open){
+      ($('#modalPersonalizadoMoreInfo') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'none');​​​​​​
+      ($('body') as any).css('position', 'inherit');
+      ($('body') as any).css('height', 'auto');
+      ($('body') as any).css('overflow', 'visible');
+      this.open = false;
+    }
+  }
 
 //---
 }

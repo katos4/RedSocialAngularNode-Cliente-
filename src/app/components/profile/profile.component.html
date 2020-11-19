@@ -17,7 +17,7 @@
         
         <div class="row align-items-center">
             <div class="nick">
-                {{user.nick}} 
+                <b>{{user.nick}}</b>
             </div>
 
             <div class="edit-profile-button-box" *ngIf="user._id == identity._id">
@@ -46,6 +46,12 @@
                     </button> 
                 </div>
             </div>
+
+            <div class="more-info" (click)="openModal()">
+                <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-three-dots" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                </svg>
+            </div>
         </div>
 
         <div class="row">
@@ -73,8 +79,8 @@
            
         <div class="row">
             <div class="biography">
-                <b>{{user.name + ' ' + user.surname}}</b>
-                <p>Biografia</p>
+                <b>Biografía</b>
+                <p>{{user.biography}}</p>
             </div>
         </div>
 
@@ -92,3 +98,52 @@
 
 
 
+<div id="modalPersonalizadoMoreInfo" class="modalContainer">
+    <div class="modal-content-more-info">
+
+        <!--Titulo-->
+        <div class="row">
+                <div class="col-md-2 icon-back-info" (click)="closeModal()">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                </div>
+
+                <div class="col-md-8 title-more-info">
+                    <label>Detalles del usuario</label>
+                </div>
+        </div>
+
+        <!--Seccion con todos los detales del usuario-->
+        <div class="row">
+
+           <div class="col-md-7 user-info-details">
+                <div *ngIf="user.city != ''">
+                    <img class="info-user-icon" src="../../../assets/iconos/ciudad.svg">
+                    Vive en {{user.city}}
+                </div>
+                 
+                <div *ngIf="user.birth != ''">
+                    <img class="info-user-icon" src="../../../assets/iconos/pastel.svg">
+                    {{user.birth}}
+                </div>
+                  
+               <div *ngIf="user.study != ''">
+                <img class="info-user-icon" src="../../../assets/iconos/birrete.svg">
+                Estudió en {{user.study}}
+               </div>
+                    
+              <div *ngIf="user.relationship != ''">
+                <img class="info-user-icon" src="../../../assets/iconos/corazon.svg">
+                {{user.relationship}}
+              </div>
+                
+              <div *ngIf="user.gender != ''">
+                <img class="info-user-icon" src="../../../assets/iconos/genero.svg">
+                {{user.gender}}
+              </div>
+            </div>
+        </div>
+
+    </div>
+</div>

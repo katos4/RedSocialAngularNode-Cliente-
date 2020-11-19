@@ -565,6 +565,14 @@ body{
     margin-left: 20px;
 }
 
+.more-info{
+    padding-left: 10px;
+}
+
+.more-info:hover{
+    cursor: pointer;
+}
+
 /*EDITAR DATOS USUARIO*/
 #edit-user-file-input{
     display: none;
@@ -999,6 +1007,37 @@ body{
     height: 38%;
 }
 
+/*MODAL MAS INFORMACION USUARIO*/
+
+.modalContainer .modal-content-more-info {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid lightgray;
+  /*  border-top: 10px solid #58abb7;*/
+    width: 35%;
+    height: 60%;
+    overflow: initial !important;
+    margin-bottom: 10px;
+}
+
+.title-more-info{
+    font-size: 1.5em;
+}
+
+.user-info-details{
+    display: flex;
+    flex-direction: column; 
+}
+
+.user-info-details div{
+    font-size: 1.1em;
+    padding-bottom: 10%;
+  }
+
+  .icon-back-info:hover{
+      cursor: pointer;
+  }
 /* MEDIAS QUERY */
 
 @media screen and (max-width:600px){
@@ -1040,6 +1079,11 @@ body{
     max-height: calc(110vh - 0px);
    }
 
+   /*ventana informacion user*/
+   .modalContainer .modal-content-more-info{
+    width: 95%;
+    height: 90%;
+   }
 }
 
 

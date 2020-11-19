@@ -46,6 +46,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 /**Componentes web de angular material */
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import { UserGuard } from './services/user.guard';
 
 
@@ -79,6 +83,10 @@ import { UserGuard } from './services/user.guard';
     NoopAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MessagesModule,
     BrowserAnimationsModule

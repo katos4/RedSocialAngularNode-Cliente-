@@ -13,8 +13,8 @@ export class User{
         public city: string,
         public birth: string,
         public gender: string,
-        public relationship: boolean,
-        public biography: String
+        public relationship: string,
+        public biography: string
     ){}
 
 }

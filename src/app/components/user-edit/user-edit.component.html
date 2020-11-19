@@ -16,50 +16,52 @@
            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>
-                            <label>Nombre</label>
-                            <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control"/>
-                        </p>
+                        <label>Nombre</label>
+                        <mat-form-field class="example-full-width">
+                            <input matInput name="name" [(ngModel)]="user.name" value="{{user.name}}">
+                        </mat-form-field>
                     </div>
                     <div class="col-md-6">
-                        <p>
-                            <label>Apellidos</label>
-                            <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" class="form-control" />
-                        </p>
+                        <label>Apellidos</label>
+                        <mat-form-field class="example-full-width">
+                            <input matInput name="surname" [(ngModel)]="user.surname" value="{{user.surname}}">
+                        </mat-form-field>
                     </div>
                 </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        <label>Nick</label>
-                        <input type="text" name="nick" #nick="ngModel" [(ngModel)]="user.nick" class="form-control" />
-                    </p>
+                <div class="row">
+                    <div class="col-md-6">
+                    
+                            <label>Nick</label>
+                            <mat-form-field class="example-full-width">
+                                <input matInput name="nick" [(ngModel)]="user.nick" value="{{user.nick}}">
+                            </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                       
+                            <label>Correo electrónico</label>
+                            <mat-form-field class="example-full-width">
+                                <input matInput name="email" [(ngModel)]="user.email" value="{{user.email}}">
+                            </mat-form-field>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <p>
-                        <label>Correo electrónico</label>
-                        <input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" class="form-control" />
-                    </p>
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
+                        <label>Imagen de perfil</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-5">
-                    <label>Imagen de perfil</label>
-                </div>
-            </div>
-            <div class="row pt-1">
-                <div class="col-md-4 col-sm-5">
-                    <div id="edit-user-image-container" class="container-fluid">
-                        <div>
-                            <label id="image-input-edit" for="edit-user-file-input">
-                                <img src="../../../assets/imagenes/imagenes-de-usuario.png">
-                            </label>
-                            <input id="edit-user-file-input" type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
+                <div class="row pt-1">
+                    <div class="col-md-4 col-sm-5">
+                        <div id="edit-user-image-container" class="container-fluid">
+                            <div>
+                                <label id="image-input-edit" for="edit-user-file-input">
+                                    <img src="../../../assets/imagenes/imagenes-de-usuario.png">
+                                </label>
+                                <input id="edit-user-file-input" type="file" class="form-control-file" (change)="fileChangeEvent($event)" />
+                            </div>
+                            <div id="imagenUsuarioSubida"></div> 
                         </div>
-                        <div id="imagenUsuarioSubida"></div> 
                     </div>
                 </div>
-            </div>
           
         </div>
         
@@ -67,67 +69,72 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
-                    <p>
-                        <label>Trabaja en</label>
-                        <input type="text" name="work" #work="ngModel" [(ngModel)]="user.work" class="form-control"/>
-                    </p>
+                    <label>Trabaja en</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="work" [(ngModel)]="user.work" value="{{user.work}}">
+                    </mat-form-field>
                 </div>
                 <div class="col-md-6">
-                    <p>
-                        <label>Estudió en</label>
-                        <input type="text" name="study" #study="ngModel" [(ngModel)]="user.study" class="form-control" />
-                    </p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        <label>Ciudad</label>
-                        <input type="text" name="city" #city="ngModel" [(ngModel)]="user.city" 
-                        class="form-control" placeholder="añade un lugar"/>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        <label>Fecha de nacimiento</label>
-                        <input type="date" name="birth" #birth="ngModel" [(ngModel)]="user.birth" class="form-control" />
-                    </p>
+                    <label>Estudió en</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="study" [(ngModel)]="user.study" value="{{user.study}}">
+                    </mat-form-field>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
-                    <p>
-                        <label>Género</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="gender"
-                        [(ngModel)]="user.gender">
-                            <option *ngFor="let c of genders" [ngValue]="c">{{c}}</option>
-                          </select>
-                        <!--<input type="text" name="gender" #gender="ngModel" [(ngModel)]="user.gender" class="form-control"/> -->
-                    </p>
+                    <label>Ciudad</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="city" [(ngModel)]="user.city" value="{{user.city}}">
+                    </mat-form-field>
                 </div>
                 <div class="col-md-6">
-                    <p>Situación sentimental</p>
-                    <div class="form-check">
-                       <!-- <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">-->
-                        <input class="form-check-input" type="checkbox" id="checkbox-user-edit" value="" 
-                        name="relationship" [(ngModel)]="user.relationship" />
-                        <label class="form-check-label" for="defaultCheck1">En una relación</label>
-                    </div>
+                    <label>Fecha de nacimiento</label>
+                    <!--<input type="date" name="birth" #birth="ngModel" [(ngModel)]="user.birth" class="form-control" /><br>-->
+                    <mat-form-field appearance="fill">
+                        <mat-label></mat-label>
+                        <input matInput [matDatepicker]="picker3" name="birth" [(ngModel)]="user.birth" [value]="user.birth">
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Género</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select [(value)]="user.gender">
+                            <mat-option value="">No mostrar</mat-option>
+                            <mat-option value="{{c}}" *ngFor="let c of genders">{{c}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> 
+                </div>
+                <div class="col-md-6">
+                    <label>Situación sentimental</label>
+                    <mat-form-field appearance="fill">
+                        <mat-select [(value)]="user.relationship">
+                            <mat-option value="">No mostrar</mat-option>
+                            <mat-option value="{{marital}}" *ngFor="let marital of maritals">{{marital}}</mat-option>
+                        </mat-select>
+                    </mat-form-field> 
+                    
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <label>Biografía</label>
-                    <textarea class="md-textarea form-control" name="biography" [(ngModel)]="user.biography"></textarea>
+                    <mat-form-field class="example-full-width">
+                        <textarea matInput name="biography" [(ngModel)]="user.biography" value="{{user.biography}}"></textarea>
+                    </mat-form-field>
                 </div>
             </div>
         </div>
 
 
-        <div class="row pt-3">
+        <div class="row pt-3 pb-3">
             <div class="col-md-12">
                 <input type="submit" value="Actualizar" class="btn btn-warning btn-block" />
             </div>

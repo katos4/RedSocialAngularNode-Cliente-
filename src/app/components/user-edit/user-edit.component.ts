@@ -20,7 +20,9 @@ export class UserEditComponent implements OnInit {
   public status;
   public url: string;
   public filesToUpload: Array<File>;
-  public genders; 
+  public genders;
+  public maritals;
+  public checked;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -32,35 +34,35 @@ export class UserEditComponent implements OnInit {
     this.identity = this.user;
     this.token = this._userService.gettoken();
     this.url = GLOBAL.url;
-    this.genders = ["Hombre", "Mujer", "Otro"];
-    /*  {name: "Hombre"},
-      {name: "Mujer"},
-      {name: "Otro"},
-    ];*/
+    this.genders = ['Hombre', 'Mujer', 'Otro'];
+    this.maritals = ['Soltero/a', 'Casado/a', 'Viudo/a', 'Divorciado/a', 'Separado/a', 'Unión libre'];
   }
 
   ngOnInit(){
-    //console.log(this.user);
-    //console.log("User edit se ha cargado");
+    // console.log(this.user);
+    // console.log("User edit se ha cargado");
     var height = $(window).height();
     $('.loginPage').height(height);
     $('.navbar').removeAttr('hidden');
-    console.log(this.user);
+    console.log(this.identity);
 
-    if($('#checkbox-user-edit').prop('checked')){
-      console.log('relacion seleccionado');
+    if (this.identity.relationship === true){
+      this.checked = true;
     }
-    
+   
   }
 
   onSubmit(){
-
-    console.log(this.user);
-
-
+    console.log('submit');
+    if( $('#casilla-relacion').prop('checked') ){
+      console.log('checked es true');
+     /* this.user.relationship = true;
+      this.checked = true;*/
+    }
+    //console.log(this.user);
     this._userService.updateUser(this.user).subscribe(
-      response =>{
-        if(!response.user){
+      response => {
+        if (!response.user){
           this.status = 'error';
         }else{
           this.status = 'success';
@@ -81,21 +83,20 @@ export class UserEditComponent implements OnInit {
         }
       },
       error => {
-        var messageError = <any>error;
+        var messageError = <any> error;
         console.log(messageError);
 
-        if(messageError != null){
+        if (messageError != null){
           this.status = 'error';
         }
       }
     );
 
-    
   }
 
 
 fileChangeEvent(fileInput: any){
-  this.filesToUpload = <Array<File>>fileInput.target.files;
+  this.filesToUpload = <Array<File>> fileInput.target.files;
   //console.log(this.filesToUpload);
   let image;
   let div;
