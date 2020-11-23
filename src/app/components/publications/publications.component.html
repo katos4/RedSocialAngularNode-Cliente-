@@ -1,8 +1,8 @@
 <div id="profile-publications" class="row"> 
     <div *ngFor="let publication of publications" class="item-profile-publication col-md-4 col-6 d-md-flex mt-4 mb-3">
        
-        <div class="publication-profile-image-card">
-            <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" (click)="openModal(publication._id, publication.file, publication.user.image, publication.user.nick, publication.text, publication.user._id)"/>
+        <div class="publication-profile-image-card" *ngIf="publication.user">
+            <img src="{{ url + 'get-image-pub/' + publication.file}}" class="card-img-top" (click)="openModal(publication._id, publication.file, publication.user.image, publication.user.nick, publication.text, publication.user._id, publication.comments)"/>
         </div>
         
     <!--fin bucle for-->
@@ -76,11 +76,103 @@
             </div>
 
             <!--fila comentarios-->
-            <div class="row">
-                <div class="col-md-12">
-                    <p>Seccion comentarios</p>
+             <div class="pt-2 pb-2">
+                <div class="row view-all-comments-section">
+                    <label class="col-12 view-all-comments-show"
+                    *ngIf="item.comments && item.comments.length > 0"
+                    (click)="viewAllComments(item.imgId)">
+                        Ver todos los comentarios
+                    </label>    
                 </div>
-            </div>
+
+                    <div class="row comment-section" id="section-comment">
+                        <div class="col-12" *ngIf="item.comments && item.comments.length > 0; else noComment">
+                            <div class="single-comment" *ngFor="let comment of item.comments">
+                                <label class="comment-user-nick pr-2" [routerLink]="['/perfil',comment.user._id]"><b>{{comment.user.nick}}</b></label>
+                                <label>{{comment.text}}</label>
+                            </div>
+                        </div>
+                        <ng-template #noComment>
+                            <div class="col-12">Sé el primero en comentar  </div>
+                        </ng-template>
+                    </div>
+                </div>
+                 <!--añadir comentario-->
+                 <div class="add-comment-section">
+                    <form>
+                        <input type="text" class="form-control" 
+                        id="comment-text-input" 
+                        [(ngModel)]="comment.text"
+                        name="texto"
+                        placeholder="Añade un comentario..."
+                       >
+                        <input type="submit" class="btn btn-link" value="Publicar" (click)="sendComment(item.imgId)">
+                    </form>
+                </div>
+
+
+
+                 <!--Modal todos los comentarios-->
+                 <div id="modalPersonalizadoComentarios" class="modalContainer">
+                    <div class="modal-content-comments">
+
+                        <!--Titulo-->
+                        <div class="row">
+                            <div class="title-comment-modal d-flex">
+                                <div class="icon-back-comment" (click)="closeModal()">
+                                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                    </svg>
+                                </div>
+                                <div class="title">
+                                    <label>Comentarios</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Seccion con todos los comentarios-->
+                        <div class="row">
+                            <div class="col-md-12 comment-modal-row">
+                                <div class="global">
+                                    <div class="modal-single-comment d-flex" *ngFor="let item of comments"> 
+                                        <div class="image-user-modal-comment">
+                                            <a href="#">
+                                                <img class="rounded-circle" src="{{ url + 'get-image-user/' + item.user.image}}" *ngIf="item.user.image"/>
+                                                <img class="rounded-circle" src="assets/user-default.png" class="avatar-default" *ngIf="!item.user.image"/>
+                                            </a>
+                                        </div>
+        
+                                        <div class="nick-text-modal-comment">
+                                            <label class="pr-1"><b>{{item.user.nick}}</b></label>
+                                            <label>{{item.text}}</label>
+                                        </div>
+                                       <!--fin for modal-->
+                                    </div> 
+                                    <div *ngIf="comments && comments.length">
+                                        <div class="row justify-content-center">
+                                            <div id="view-more-comments-button" (click)="viewMoreComments()" *ngIf="!noMoreComments">
+                                                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                    <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                       <!-- <button id="view-more-pubs-button" class="btn btn-success" (click)="viewMoreComments()" *ngIf="!noMoreComments">
+                                            Mas comentarios
+                                        </button>-->
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
 
                         <!-- Modal confirmacion borrado -->
                         <div id="deleteModalConfirmation" class="modalDeleteContainer">

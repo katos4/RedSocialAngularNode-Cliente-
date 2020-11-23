@@ -16,8 +16,7 @@ public url: string;
 
     addComment(token, comment): Observable<any>{
         let params = JSON.stringify(comment);
-        console.log(params);
-        
+        // console.log(params);
         let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
         return this._http.post(this.url + 'comment', params, {headers:headers});
     }
@@ -26,5 +25,17 @@ public url: string;
         let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
 
         return this._http.get(this.url + 'get-comments/' + idPub + '/' + page, {headers:headers});
+    }
+
+    deleteComment(token, id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
+
+        return this._http.delete(this.url + 'comment/' + id, {headers:headers});
+    }
+
+    deleteAllComments(token, id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
+
+        return this._http.delete(this.url + 'comment-all/' + id, {headers:headers});
     }
 }

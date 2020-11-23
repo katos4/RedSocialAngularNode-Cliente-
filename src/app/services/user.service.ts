@@ -40,7 +40,8 @@ export class UserService{
 
     /**Obtener los datos del usuario de la propiedad identity almacenada en el localstorage */
     getIdentity(){
-        let identity = JSON.parse(localStorage.getItem('identity'));
+       // let identity = JSON.parse(localStorage.getItem('identity'));
+        let identity = JSON.parse(sessionStorage.getItem('identity'));
 
         if(identity != 'undefined'){
             this.identity = identity;
@@ -53,7 +54,8 @@ export class UserService{
 
     /**Obtener el token almacenado en el localstorage */
     gettoken(){
-        let token = localStorage.getItem('token');
+       // let token = localStorage.getItem('token');
+        let token = sessionStorage.getItem('token');
 
         if(token != 'undefined'){
             this.token = token;
@@ -65,7 +67,8 @@ export class UserService{
 
     /**Obtener las estadisticas almacenadas en el local storage */
     getStats(){
-        let stats = JSON.parse(localStorage.getItem('stats'));
+      //  let stats = JSON.parse(localStorage.getItem('stats'));
+        let stats = JSON.parse(sessionStorage.getItem('stats'));
 
         if(stats !== 'undefined'){
             this.stats = stats;

@@ -6,13 +6,15 @@ import { GLOBAL } from '../../services/global';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
 import { LikeService } from '../../services/like.service';
+import { CommentService } from '../../services/comment.service';
+import { Comment } from '../../models/comment';
 
 
 @Component({
   selector: 'app-publications',
   templateUrl: './publications.component.html',
   styleUrls: ['./publications.component.css'],
-  providers: [UserService, PublicationService, LikeService]
+  providers: [UserService, PublicationService, LikeService, CommentService]
 })
 export class PublicationsComponent implements OnInit {
   public title: string;
@@ -31,6 +33,15 @@ export class PublicationsComponent implements OnInit {
   public likesArray = [];
   public userPubArray = [];
   public noMore = false;
+  public comments = [];
+  public comment: Comment;
+  public idPublication;
+
+
+  public pageComments;
+  public totalComments;
+  public itemsPerPageComments;
+  public pagesComments;
   @Input() user: string;
 
 
@@ -39,13 +50,15 @@ export class PublicationsComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _publicationService: PublicationService,
-    private _likeService: LikeService
+    private _likeService: LikeService,
+    private _commentService: CommentService
   ) {
     this.title = 'Publicaciones';
     this.identity = _userService.getIdentity();
     this.token = _userService.gettoken();
     this.url = GLOBAL.url;
     this.page = 1;
+    this.comment = new Comment('', '', this.identity._id, '' , '');
    }
 
   ngOnInit(){
@@ -63,13 +76,17 @@ export class PublicationsComponent implements OnInit {
     this._publicationService.getPublicationsUser(this.token, user, page).subscribe(
       response => {
         if(response.publications){
-          console.log(response.publications);
+         // console.log(response.publications);
           this.total = response.total_items;
           this.pages = response.pages;
           this.itemsPerPage = response.items_per_page;
 
           if(!adding){
             this.publications = response.publications;
+            this.publications.forEach(publication => {
+              this.getComments(publication._id);
+            });
+            console.log(this.publications);
           }else{
             var arrayA = this.publications;
             var arrayB = response.publications;
@@ -106,13 +123,12 @@ export class PublicationsComponent implements OnInit {
   }
 
 
-  openModal(id, file, userImg, userNick, text, userId){
+  openModal(id, file, userImg, userNick, text, userId, comments){
     this.open = true;
     ($('#modalPersonalizado') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'block');​​​​​​
     ($('body') as any).css('position', 'static');
     ($('body') as any).css('height', '100%');
     ($('body') as any).css('overflow', 'hidden');
-
 
     this.modalData = [];
     this.modalData.push({
@@ -121,8 +137,10 @@ export class PublicationsComponent implements OnInit {
       "file":file, 
       "userImage":userImg,
       "nick": userNick,
-      "text": text});
-    console.log(this.modalData);
+      "text": text, 
+      "comments": comments
+    });
+   // console.log(this.modalData);
     return false;
 
   }
@@ -154,6 +172,8 @@ export class PublicationsComponent implements OnInit {
 
   deletePublication(id){
     console.log("id de la publicacion " + id);
+    this.deleteAllComments(id);
+    this.deleteAllLikes(id);
     this._publicationService.deletePublication(this.token, id).subscribe(
       response => {
         this.closeDeleteModal();
@@ -164,6 +184,24 @@ export class PublicationsComponent implements OnInit {
       error => {
         console.log(<any>error);
       }
+    );
+  }
+
+  deleteAllComments(id){
+    this._commentService.deleteAllComments(this.token, id).subscribe(
+      response => {
+       // console.log(response);
+      },
+      error =>{}
+    );
+  }
+
+  deleteAllLikes(id){
+    this._likeService.deleteAllLikes(this.token, id).subscribe(
+      response => {
+       // console.log(response);
+      },
+      error => {}
     );
   }
 
@@ -185,9 +223,9 @@ export class PublicationsComponent implements OnInit {
          console.log(<any>error);
        }
      );
-   }
+  }
 
-   unlikePublication(idPub){
+  unlikePublication(idPub){
  
      this._likeService.deleteLike(this.token, idPub).subscribe(
        response => {
@@ -200,7 +238,7 @@ export class PublicationsComponent implements OnInit {
          console.log(<any>error);
        }
      );
-   }
+  }
 
   getLikes(){
     let temp;
@@ -223,6 +261,87 @@ export class PublicationsComponent implements OnInit {
         console.log(<any>error);
       }
     );
+  }
+
+  getComments(idPub){
+    // var idPub = '5fa6d064992c5b6de458ff02';
+    this._commentService.getComments(this.token, idPub).subscribe(
+      response => {
+        // console.log(response.comments);
+        this.publications.forEach(publication => {
+          if (publication._id == idPub){
+            if (response.comments.length >= 3){
+              publication['comments'] = response.comments.slice(0, 2);
+            }else{
+              publication['comments'] = response.comments;
+            }
+          }
+        });
+      },
+      error => {
+        console.log(error as any);
+      }
+    );
+  }
+
+
+  getAllComments(idPub, page = null, adding = false){
+    this.idPublication = idPub;
+    this._commentService.getComments(this.token, idPub, page).subscribe(
+      response => {
+        this.totalComments = response.total_items;
+        this.pagesComments = response.pages;
+        this.itemsPerPageComments = response.items_per_page;
+        //console.log(response);
+
+        this.publications.forEach(publication => {
+          if (publication._id === idPub){
+            if(!adding){
+              this.comments = response.comments;
+            }else{
+              var arrayA = this.comments;
+              var arrayB = response.comments;
+
+              this.comments = arrayA.concat(arrayB);
+            }
+          }
+        });
+      },
+      error => {
+        console.log(error as any);
+      }
+    );
+  }
+
+  sendComment(publicationId){
+    var idPub = publicationId;
+    this.comment.publication = idPub;
+   // console.log(this.comment);
+
+    this._commentService.addComment(this.token, this.comment).subscribe(
+      response => {
+        // console.log(response.comment.text);
+        if (response.comment.text){
+          this.getComments(idPub);
+         // $('#comment-text-input').val('');
+          this.comment.text = '';
+        }
+      },
+      error => {
+        console.log(<any> error);
+      }
+    );
+  }
+
+  viewAllComments(idPub){
+    // console.log('ver todos los comentarios publicacion ' + idPub);
+    this.open = true;
+    ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'block');​​​​​​
+    ($('body') as any).css('position', 'static');
+    ($('body') as any).css('height', '100%');
+    ($('body') as any).css('overflow', 'hidden');
+
+    this.getAllComments(idPub, this.pageComments);
   }
 
 //-----  

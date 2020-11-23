@@ -28,6 +28,12 @@ public url: string;
         return this._http.delete(this.url + 'like/' + id, {headers:headers});
     }
 
+    deleteAllLikes(token, id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
+
+        return this._http.delete(this.url + 'like-all/' + id, {headers:headers});
+    }
+
     getLikes(token): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type','application/json').set('Authorization', token);
 

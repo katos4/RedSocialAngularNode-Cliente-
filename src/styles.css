@@ -47,7 +47,7 @@ body{
 }
 
 .active{
-    background: #cc1717;
+    background: #ff4500;
     height: 100%;
 }
 
@@ -317,7 +317,33 @@ body{
     width: 50px;
     height: 50px;
 }
-.recommendation-title label{
+
+/*INFO COVID*/
+
+.info-covid-img{
+    border: 10px solid white;
+    border-radius: 20px;
+    background-color: white;
+    width: 100%;
+    height: 500px;
+}
+.info-covid-img img{
+    max-width:95%;
+    max-height:100%; 
+    margin:auto; 
+    display:block;
+}
+
+#info-covid-item{
+    padding-bottom: 3%;
+}
+
+#info-covid-item label{
+    font-size: 1.1em;
+}
+
+#info-covid-item span{
+    color: red;
 }
 
 /* DETALLES DEL USUARIO */
@@ -769,6 +795,15 @@ body{
     color: black;
 }
 
+/*MENÚ MENSAJES*/
+#messageRowList a{
+    color: black;
+}
+
+#messageRowList .list-group-item.active{
+    background-color: #ff4500;
+    border-color: #ff4500;
+}
 
 /*VER MENSAJES*/
 #back-arrow{
@@ -790,12 +825,12 @@ body{
 
 #remove-message:hover{
     cursor: pointer;
-    background-color:  #1877f2;
+    background-color:  #ff4500;
 }
 
 #back-arrow:hover{
     cursor:pointer;
-    background-color: #1877f2;
+    background-color: #ff4500;
 }
 
 .tools-row{
@@ -969,6 +1004,10 @@ body{
     margin-left: 15px;
 }
 #modalPersonalizado .publication-user-name a{
+    color: black;
+}
+
+#modalPersonalizado .modal-content a{
     color: black;
 }
 

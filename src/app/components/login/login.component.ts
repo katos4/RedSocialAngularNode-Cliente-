@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
           $('.navbar').removeAttr('hidden');
           // persistir datos del usuario en el local storage
           localStorage.setItem('identity', JSON.stringify(this.identity));
+          sessionStorage.setItem('identity', JSON.stringify(this.identity));
           // conseguir el token
           this.gettoken();
           //conseguir el socket del servidor
@@ -99,6 +100,7 @@ gettoken(){
         //console.log(this.token);
         // persistir datos del usuario en el local storage
         localStorage.setItem('token', this.token);
+        sessionStorage.setItem('token', this.token);
         // conseguir los contadores o estadisticas del usuario
         this.getCounters();
       } 
@@ -122,6 +124,7 @@ getCounters(){
     response => {
       //console.log(response);
       localStorage.setItem('stats', JSON.stringify(response));
+      sessionStorage.setItem('stats', JSON.stringify(response));
       //this._router.navigate(['/']);
       this.status = 'success';
     },

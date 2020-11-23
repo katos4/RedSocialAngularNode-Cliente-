@@ -41,6 +41,7 @@ export class AppComponent implements OnInit, DoCheck{
  logout(){
   $('.navbar').attr('hidden', true);
    localStorage.clear();
+   sessionStorage.clear();
    this.identity = null;
    this._router.navigate(['/']);
  }

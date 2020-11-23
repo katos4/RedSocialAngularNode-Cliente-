@@ -32,15 +32,12 @@ import { InfoCovidComponent } from './components/info-covid/info-covid.component
 import { ChatService } from './services/chat.service';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
+import { UserGuard } from './services/user.guard';
+
 
 /** Angular Material */
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchPipe } from './pipes/search.pipe';
-/*import { MainComponent } from './messages/main/main.component';
-import { AddComponent } from './messages/add/add.component';
-import { ReceivedComponent } from './messages/received/received.component';
-import { SendedComponent } from './messages/sended/sended.component';
-*/
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 /**Componentes web de angular material */
@@ -50,7 +47,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
-import { UserGuard } from './services/user.guard';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 
 
@@ -88,6 +86,7 @@ import { UserGuard } from './services/user.guard';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatExpansionModule,
     ReactiveFormsModule,
     MessagesModule,
     BrowserAnimationsModule

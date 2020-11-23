@@ -125,9 +125,6 @@ public pagesComments;
 
               this.comments = arrayA.concat(arrayB);
             }
-            // this.comments = response.comments;
-            // console.log(this.comments);
-            // publication['comments'] = response.comments;
           }
         });
       },
@@ -179,6 +176,7 @@ public pagesComments;
       }
     );
   }
+
 
   viewMoreComments(){
     this.pageComments += 1;

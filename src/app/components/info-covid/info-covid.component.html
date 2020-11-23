@@ -1,1 +1,90 @@
-<p>info-covid works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="info-covid-img">
+            <img  src="../../../assets/imagenes/recomendaciones.PNG"/>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row justify-content-center">
+            <mat-form-field appearance="fill">
+                <mat-label>Elige un pais</mat-label>
+                <mat-select (selectionChange)="onChange($event.value)" [(ngModel)]='selectedValue'>
+                  <mat-option *ngFor="let name of countryName;" [value]="name.id">
+                    {{name.name}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+              
+        </div>
+
+        <!--animacion loading-->
+        <div class="row justify-content-center">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+        
+        <!--nombre pais-->
+        <div class="row justify-content-center">
+            <h2>{{nameCountry}}</h2>
+        </div>
+
+        <!--fecha actualizacion datos-->
+        <div class="row justify-content-center">
+            <h5>Actualizado: {{dateToShow}}</h5>
+        </div>
+
+        <!--casos confirmados totales-->
+        <div [ngStyle]="{'color': 'red'}" class="row justify-content-center">
+            <h4>{{todayConfirmed}} casos totales</h4> 
+        </div>
+        
+        <!--datos por comunidades-->
+        <div class="row info-covid-item-row pt-3">
+            <div id="info-covid-item" class="col-md-6" *ngFor="let region of regions">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <b>{{region.name_es}}:</b>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <span id="info-covid-item-span">{{region.today_confirmed}} &nbsp;</span>
+                            <label>casos totales</label>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div>
+                          <p>Nuevos casos: {{region.today_new_confirmed}}</p>
+                          <p>Nuevos fallecidos: {{region.today_new_deaths}} </p>
+                          <p>Nuevos curados: {{region.today_new_recovered}} </p>
+                      </div>
+                      <!--sub regiones-->
+                      <div *ngFor="let sub of region.sub_regions">
+                        <mat-accordion>
+                            <mat-expansion-panel hideToggle>
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <b>{{sub.name_es}}:</b>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <span id="info-covid-item-span">{{sub.today_confirmed}} &nbsp;</span>
+                                    <label>casos totales</label>
+                                </mat-panel-description>
+                              </mat-expansion-panel-header>
+                              <div>
+                                  <p>Nuevos casos: {{sub.today_new_confirmed}}</p>
+                                  <p>Nuevos fallecidos: {{sub.today_new_deaths}} </p>
+                                  <p>Nuevos curados: {{sub.today_new_recovered}} </p>
+                              </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                      </div>
+                      
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+
+           
+        </div>
+       
+    </div>
+</div>
