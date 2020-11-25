@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { GLOBAL } from '../../services/global';
@@ -77,9 +77,8 @@ public pagesComments;
     this.getPublications(this.page);
     this.getLikes();
     this.autoScroll();
-  }
 
- 
+  }
 
   getCountLikes(id){
     this._likeService.getCountLikes(this.token, id).subscribe(

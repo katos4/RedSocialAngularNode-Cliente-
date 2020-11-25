@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { InfoCovidService } from '../../services/infoCovid.service';
-
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-info-covid',
@@ -14,11 +16,17 @@ export class InfoCovidComponent implements OnInit {
   public dateToShow;
   public arrayCovid;
   public todayConfirmed;
+  public todayRecovered;
+  public newCountryConfirmed;
+  public newCountryDead;
+  public newCountryRecovered;
+  public source;
   public regions;
   public nameCountry;
   public arrayCountries;
   public countryName = [];
   public selectedValue;
+  public noExistRegions;
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,17 +34,23 @@ export class InfoCovidComponent implements OnInit {
     private _infoCovidService: InfoCovidService
   ) { }
 
+  myControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+
   ngOnInit() {
     var height = $(window).height();
     $('.loginPage').height(height);
     $('.navbar').removeAttr('hidden');
     this.selectedValue = 'spain';
+    this.noExistRegions = false;
     this.getDate();
     this.getinfo(this.selectedValue);
     this.getAllCountries();
   }
 
-  getDate(){
+
+
+getDate(){
     let d = new Date();
     let month = '' + (d.getMonth() + 1);
     let day = '' + d.getDate();
@@ -51,9 +65,9 @@ export class InfoCovidComponent implements OnInit {
 
     this.date = [year, month, day].join('-');
     this.dateToShow = [day, month, year].join('/');
-  }
+}
 
-  getinfo(country){
+getinfo(country){
 
     this._infoCovidService.getInfo(this.date, country).subscribe(
       response => {
@@ -68,13 +82,14 @@ export class InfoCovidComponent implements OnInit {
         console.log(error as any);
       }
     );
-  }
+}
 
 getCountryDetails(){
   let array = [];
    // tslint:disable-next-line: forin
   for (let key in this.arrayCovid) {
     array = this.arrayCovid[key].countries;
+    // console.log(this.arrayCovid[key]);
   }
 
   // tslint:disable-next-line: forin
@@ -82,7 +97,16 @@ getCountryDetails(){
    // console.log(array[k].id);
     this.nameCountry = array[k].name_es;
     this.todayConfirmed = array[k].today_confirmed;
+
+    array[k].regions.length === 0 ?  this.noExistRegions = true :  this.noExistRegions = false;
     this.regions = array[k].regions;
+    
+    this.todayRecovered = array[k].today_recovered;
+    this.newCountryConfirmed = array[k].today_new_confirmed;
+    this.newCountryDead = array[k].today_new_deaths;
+    this.newCountryRecovered = array[k].today_new_recovered;
+    this.source = array[k].source;
+
   }
 }
 

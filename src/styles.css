@@ -63,6 +63,7 @@ body{
    /* background-color: #1877f2 !important;*/
     background-color: #ff4500 !important;
     width: 100%;
+    /*z-index: 0 !important;*/
 }
 
 .navbar *{
@@ -344,6 +345,11 @@ body{
 
 #info-covid-item span{
     color: red;
+}
+
+#select-country-covid .mat-option{
+    border: 3px solid black;
+    z-index: 0 !important;
 }
 
 /* DETALLES DEL USUARIO */
@@ -1115,7 +1121,8 @@ body{
 
    /*ventana modal publicaciones dentro del perfil de usuario*/
    .modalContainer .modal-content{
-       height: 80%;
+    width: 98%;   
+    height: 118%;
    }
 
    /*ventana modal confirmacion borrado publicacion*/

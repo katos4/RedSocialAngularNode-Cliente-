@@ -1,20 +1,18 @@
 <div class="row">
-    <div class="col-md-6">
-        <div class="info-covid-img">
+    <div class="col-md-4">
+       <!-- <div class="info-covid-img">
             <img  src="../../../assets/imagenes/recomendaciones.PNG"/>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="row justify-content-center">
+        </div> -->
+
+        <div class="row justify-content-center" id="select-country-covid">
             <mat-form-field appearance="fill">
                 <mat-label>Elige un pais</mat-label>
                 <mat-select (selectionChange)="onChange($event.value)" [(ngModel)]='selectedValue'>
-                  <mat-option *ngFor="let name of countryName;" [value]="name.id">
+                  <mat-option class="select-options-country-covid" *ngFor="let name of countryName;" [value]="name.id">
                     {{name.name}}
                   </mat-option>
                 </mat-select>
             </mat-form-field>
-              
         </div>
 
         <!--animacion loading-->
@@ -32,10 +30,30 @@
             <h5>Actualizado: {{dateToShow}}</h5>
         </div>
 
-        <!--casos confirmados totales-->
-        <div [ngStyle]="{'color': 'red'}" class="row justify-content-center">
-            <h4>{{todayConfirmed}} casos totales</h4> 
+        <!--datos totales pais-->
+
+        <div class="row justify-content-center">
+            <h4 [ngStyle]="{'color': 'red'}">{{todayConfirmed}} casos totales</h4>
         </div>
+
+        <div class="row justify-content-center">
+            <h4 [ngStyle]="{'color': 'green'}">{{todayRecovered}} curados totales</h4> 
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-6">
+                <h6>Nuevos confirmados: {{newCountryConfirmed}}</h6>
+                <h6>Nuevos fallecidos: {{newCountryDead}}</h6>
+            </div>
+           <div class="col-md-9 col-6">
+                <h6>Nuevos curados: {{newCountryRecovered}}</h6>
+           </div>
+        </div>
+
+    </div>
+
+    <!--COLUMNA DOS-->
+    <div class="col-md-8">
         
         <!--datos por comunidades-->
         <div class="row info-covid-item-row pt-3">
@@ -82,9 +100,18 @@
                     </mat-expansion-panel>
                 </mat-accordion>
             </div>
-
-           
         </div>
        
+        <div class="row justify-content-center" *ngIf="noExistRegions">
+            <div class="col-md-8">
+                <h1>No hay comunidades disponibles!</h1>
+            </div>
+        </div>
+
+                
+        <div class="row justify-content-center">
+            <p [ngStyle]="{'font-size': '20px'}">Fuente: {{source}}</p>
+        </div>
     </div>
 </div>
+
