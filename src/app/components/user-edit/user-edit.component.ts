@@ -44,7 +44,7 @@ export class UserEditComponent implements OnInit {
     var height = $(window).height();
     $('.loginPage').height(height);
     $('.navbar').removeAttr('hidden');
-    console.log(this.identity);
+   // console.log(this.identity);
 
     if (this.identity.relationship === true){
       this.checked = true;
@@ -76,7 +76,7 @@ export class UserEditComponent implements OnInit {
                 .then((result: any) => {
                   //console.log(result);
                   this.user.image = result.user.image;
-                  localStorage.setItem('identity', JSON.stringify(this.user));
+                  sessionStorage.setItem('identity', JSON.stringify(this.user));
                 });
           this.filesToUpload = [];
           console.log(this.filesToUpload);
@@ -112,6 +112,10 @@ fileChangeEvent(fileInput: any){
   preview.html('');
   preview.append(image);
   div.append(preview);
+}
+
+addEmoji($event){
+  console.log($event);
 }
 
 }

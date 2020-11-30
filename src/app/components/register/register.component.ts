@@ -24,11 +24,11 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log("componente de registro cargado");
+   // console.log("componente de registro cargado");
   }
 
   onSubmit(registerForm){
-    console.log("formulario registro enviado");
+   // console.log("formulario registro enviado");
     
     this._userService.register(this.user).subscribe(
       response =>{

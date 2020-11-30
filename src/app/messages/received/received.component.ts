@@ -46,7 +46,7 @@ export class ReceivedComponent implements OnInit {
    }
 
   ngOnInit(){
-    console.log('componente received cargado');
+   // console.log('componente received cargado');
     $('.navbar').removeAttr('hidden');
     this.actualPage();
   }

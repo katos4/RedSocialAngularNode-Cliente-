@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
    }
 
   ngOnInit(){
-    console.log('componente main cargado');
+   // console.log('componente main cargado');
     $('.navbar').removeAttr('hidden');
   }
 

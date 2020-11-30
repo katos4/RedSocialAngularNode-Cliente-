@@ -14,6 +14,12 @@
                 </div>
             </div> 
             
+            <div class="row justify-content-center mt-4" *ngIf="existPublication == 0">
+                <h2>Todavia no hay publicaciones!</h2>
+            </div>
+            <div class="row justify-content-center" *ngIf="existPublication == 0">
+                <h4>Sigue a algunos <a [routerLink]="['/gente']">amigos</a></h4>
+            </div>
             <div *ngFor="let publication of publications" class="item-publication">
                
               <!--  <div class="card col-md-10"> -->
@@ -22,8 +28,13 @@
                         
                         <div class="image-user col-md-1">
                             <a href="#">
-                                <img class="rounded-circle" src="{{ url + 'get-image-user/' + publication.user.image}}" *ngIf="publication.user.image"/>
-                                <img class="rounded-circle" src="assets/user-default.png" class="avatar-default" *ngIf="!publication.user.image"/>
+                                <div *ngIf="publication.user.image; else noImage">
+                                    <img class="rounded-circle" src="{{ url + 'get-image-user/' + publication.user.image}}" />
+                                </div>
+                                <ng-template #noImage>
+                                    <img class="rounded-circle" src="../../../assets/user-default.png" class="avatar-default" *ngIf="!publication.user.image"/>
+                                </ng-template>
+                                
                             </a>
                         </div>
 
@@ -94,8 +105,8 @@
                                     [(ngModel)]="comment.text"
                                     name="texto"
                                     placeholder="Añade un comentario..."
-                                   >
-                                    <input type="submit" class="btn btn-link" value="Publicar" (click)="sendComment(publication._id)">
+                                    required>
+                                    <input type="submit" id="comment-post-button" class="btn btn-link" value="Publicar" (click)="sendComment(publication._id)">
                                 </form>
                             </div>
                        

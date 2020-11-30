@@ -86,7 +86,7 @@ export class PublicationsComponent implements OnInit {
             this.publications.forEach(publication => {
               this.getComments(publication._id);
             });
-            console.log(this.publications);
+           // console.log(this.publications);
           }else{
             var arrayA = this.publications;
             var arrayB = response.publications;

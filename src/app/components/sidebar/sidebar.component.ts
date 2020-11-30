@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
@@ -13,14 +13,14 @@ import { UploadService } from '../../services/upload.service';
   styleUrls: ['./sidebar.component.css'],
   providers: [UserService, PublicationService, UploadService]
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, DoCheck {
   public identity;
   public token;
   public stats;
   public url;
   public status;
   public publication: Publication;
-
+  public filesToUpload: Array<File>;
 
   constructor(
     private _route: ActivatedRoute,
@@ -39,6 +39,10 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     //console.log("componente sidebar cargado");
   }
+
+  ngDoCheck(){
+    this.stats = this._userService.getStats();
+   }
 
   onSubmit(form, $event){
     //console.log(this.publication);
@@ -77,8 +81,10 @@ export class SidebarComponent implements OnInit {
     
   }
 
-  public filesToUpload: Array<File>;
+  //public filesToUpload: Array<File>;
 
+
+  /**Detectar si ha habido un cambio en el input file del formulario para subir publicaciones */
   fileChangeEvent(fileInput: any){
     this.filesToUpload = <Array<File>>fileInput.target.files;
   }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { ChatService } from '../../services/chat.service';
-import * as io from 'socket.io-client';
+
+
 
 @Component({
   selector: 'app-login',
@@ -19,21 +19,20 @@ export class LoginComponent implements OnInit {
   public token;
  
 
-  socket;
-  server = 'http://localhost:5000';
+  //socket;
+  //server = 'http://localhost:5000';
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService,
-    private _chatService: ChatService
+    private _userService: UserService
   ) { 
     this.title = 'Identificate';
     this.user = new User("","","","","","","ROLE_USER","","","","","","","","");
   }
 
   ngOnInit(): void {
-    console.log('componente de login cargado');
+    //console.log('componente de login cargado');
   
       var height = $(window).height();
       $('.loginPage').height(height);
@@ -62,7 +61,7 @@ export class LoginComponent implements OnInit {
           this.gettoken();
           //conseguir el socket del servidor
           const localUser = localStorage.getItem('identity');
-          this.socket = io.connect(this.server);
+        /*  this.socket = io.connect(this.server);
           //OBTENER EL ID DEL SOCKET CONECTADO EN EL SERVIDOR
           this.socket.on('connect', () => {
           //console.log(this.socket.id, this.socket.io.engine.id, this.socket.json.id);
@@ -70,7 +69,7 @@ export class LoginComponent implements OnInit {
           this.identity = JSON.parse(localUser);
           this.identity['socketId'] = this.socket.id;
           localStorage.setItem('identity', JSON.stringify(this.identity)); 
-          });  
+          });  */
 
           this._router.navigate(['/home']);
         }

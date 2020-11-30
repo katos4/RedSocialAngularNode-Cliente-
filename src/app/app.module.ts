@@ -22,14 +22,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { PublicationsComponent } from './components/publications/publications.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
-import { ChatComponent } from './components/chat/chat.component';
 import { UploadPublicationComponent } from './components/upload-publication/upload-publication.component';
 import { SearchComponent } from './components/search/search.component';
 import { InfoCovidComponent } from './components/info-covid/info-covid.component';
 
-
 /** Servicios */
-import { ChatService } from './services/chat.service';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
@@ -45,13 +42,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
-
-
 
 
 @NgModule({
@@ -68,7 +64,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     PublicationsComponent,
     FollowingComponent,
     FollowedComponent,
-    ChatComponent,
     UploadPublicationComponent,
     SearchComponent,
     SearchPipe,
@@ -91,11 +86,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MessagesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatMomentDateModule
   ],
   providers: [
     appRoutingProviders,
-    ChatService,
     MessageService,
     UserService,
     UserGuard

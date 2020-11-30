@@ -4,9 +4,9 @@
         <div class="row">
             <div class="avatar col-md-3">
                 <img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}"
-                *ngIf="identity.name"/>
-                <img class="rounded-circle" src="assets/user-default.png"
-                *ngIf="!identity.name"/>
+                *ngIf="identity.image"/>
+                <img class="rounded-circle" src="../../../assets/user-default.png"
+                *ngIf="!identity.image"/>
             </div>
     
             <div class="name-surname col-md-6">

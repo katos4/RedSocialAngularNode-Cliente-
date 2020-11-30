@@ -68,6 +68,27 @@
         <!-- COLUMNA 2 -->
         <div class="col-md-6">
             <div class="row">
+                
+                <div class="col-md-6">
+                    <label>Ciudad</label>
+                    <mat-form-field class="example-full-width">
+                        <input matInput name="city" [(ngModel)]="user.city" value="{{user.city}}">
+                    </mat-form-field>
+                </div>
+              
+                <div class="col-md-6">
+                    <label>Fecha de nacimiento</label>
+                    <!--<input type="date" name="birth" #birth="ngModel" [(ngModel)]="user.birth" class="form-control" /><br>-->
+                    <mat-form-field appearance="fill">
+                        <mat-label></mat-label>
+                        <input matInput [matDatepicker]="picker3" name="birth" [(ngModel)]="user.birth" [value]="user.birth">
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-6">
                     <label>Trabaja en</label>
                     <mat-form-field class="example-full-width">
@@ -80,25 +101,7 @@
                         <input matInput name="study" [(ngModel)]="user.study" value="{{user.study}}">
                     </mat-form-field>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Ciudad</label>
-                    <mat-form-field class="example-full-width">
-                        <input matInput name="city" [(ngModel)]="user.city" value="{{user.city}}">
-                    </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                    <label>Fecha de nacimiento</label>
-                    <!--<input type="date" name="birth" #birth="ngModel" [(ngModel)]="user.birth" class="form-control" /><br>-->
-                    <mat-form-field appearance="fill">
-                        <mat-label></mat-label>
-                        <input matInput [matDatepicker]="picker3" name="birth" [(ngModel)]="user.birth" [value]="user.birth">
-                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                        <mat-datepicker #picker3></mat-datepicker>
-                    </mat-form-field>
-                </div>
+               
             </div>
 
             <div class="row">

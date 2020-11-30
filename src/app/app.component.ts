@@ -27,15 +27,17 @@ export class AppComponent implements OnInit, DoCheck{
   }
 
   ngOnInit() {
-    this.identity =this._userService.getIdentity();
-    console.log(this.identity);
+    this.identity = this._userService.getIdentity();
+    //console.log(this.identity);
     
     var height = $(window).height();
     $('.loginPage').height(height);
  }
 
  ngDoCheck(){
-  this.identity =this._userService.getIdentity();
+  this.identity = this._userService.getIdentity();
+  //console.log(this.identity);
+  //console.log(this.identity.image);
  }
 
  logout(){

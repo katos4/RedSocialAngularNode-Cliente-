@@ -1,14 +1,4 @@
 @font-face{
-    font-family: "Roboto";
-    src: url(assets/fuentes/Roboto-Thin.ttf);
-}
-
-@font-face{
-    font-family: "Roboto-light";
-    src: url(assets/fuentes/Roboto-Light.ttf);
-}
-
-@font-face{
     font-family: "Youtube";
     src: url(assets/fuentes/youtube-sans-medium.ttf);
 }
@@ -18,23 +8,49 @@
     src: url(assets/fuentes/youtube-sans-light.ttf);
 }
 
+@font-face{
+    font-family: "Ubuntu-light";
+    src: url(assets/fuentes/Ubuntu-Light.ttf);
+}
+
+@font-face{
+    font-family: "Ubuntu";
+    src: url(assets/fuentes/Ubuntu-Medium.ttf);
+}
+
+@import '~@ctrl/ngx-emoji-mart/picker';
+
 *{
-   font-family: "Youtube-light";
+  /* font-family: "Youtube-light";*/
+   font-family: "Ubuntu-light";
 }
 
 /*GENERALES*/
+
+.pruebaLogo{
+    width: 70px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+}
+
+
 
 html, body { height: 100%; }
 
 body{
     margin: 0;
-    background-color: #f0f2f5 !important;
+    /*background-color: #f0f2f5 !important;*/
+    background-color: #f7f0ee !important;
+  
     background-size: 100%;
     padding-top: 8%;
 }
 
 #divPrincipal{
-    background-color: #f0f2f5;
+    background-color: #f7f0ee;
     background-size: 100%;
 }
 
@@ -47,28 +63,41 @@ body{
 }
 
 .active{
-    background: #ff4500;
+    background: #c91d16;
     height: 100%;
 }
 
-.loading-image{
-    margin-top: 100px;
-    margin-bottom: 100%;
+
+.loading-gif img{
+    width: 80%;
+    height: 95%;
 }
 
 
 /*CABECERA*/
  
+#logoNavBar:hover{
+    cursor: pointer;
+}
+
+#logoNavBar{
+    outline: none;
+}
+
 .navbar{
    /* background-color: #1877f2 !important;*/
-    background-color: #ff4500 !important;
+    /*background-color: #ff4500 !important;*/
+    background-color: #c91d16 !important;
+    
     width: 100%;
     /*z-index: 0 !important;*/
+    
 }
 
 .navbar *{
     color: white !important;
     text-decoration: none !important;
+    font-family: "Ubuntu" !important;
 }
 
 .dropdown a{
@@ -78,6 +107,7 @@ body{
 
 .dropdown-menu *{
     color:black !important;
+    font-family: "Ubuntu-light" !important;
 }
 
 .navbar .dropdown-menu a:hover{
@@ -134,6 +164,7 @@ body{
 
 .textoPaginaLogin p img{
     height: 60px;
+    width: 40%;
 }
 
 .spacer{
@@ -141,7 +172,7 @@ body{
 }
 
 .loginPage{
-    background: #f0f2f5;
+    background: #f7f0ee;
     width: 100%;
 }
 
@@ -404,7 +435,7 @@ body{
 }
 
 #new-publication .btn-upload-publication{
-    background-color: #ff4500;
+    background-color: #c91d16;
     border: none;
     border-radius: 5px;
     color: white;
@@ -500,6 +531,15 @@ body{
     text-decoration: none;
 }
 
+#comment-text-input, #comment-post-button{
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+
 .comment-section{
     width: 100%;
     height: 15%;
@@ -567,7 +607,7 @@ body{
       background-repeat: no-repeat;
       background-position: 50%;
       border-radius: 50%;
-      border: 5px solid #e65c00;
+      border: 5px solid #c91d16;
       background-size: 100% auto;
       padding: 3px;
 }
@@ -692,7 +732,6 @@ body{
 } 
 
 
-
 /*PAGINA SEGUIDOS*/
 
 #followed-container{
@@ -807,8 +846,8 @@ body{
 }
 
 #messageRowList .list-group-item.active{
-    background-color: #ff4500;
-    border-color: #ff4500;
+    background-color: #c91d16;
+    border-color: #c91d16;
 }
 
 /*VER MENSAJES*/
@@ -831,12 +870,12 @@ body{
 
 #remove-message:hover{
     cursor: pointer;
-    background-color:  #ff4500;
+    background-color:  #c91d16;
 }
 
 #back-arrow:hover{
     cursor:pointer;
-    background-color: #ff4500;
+    background-color: #c91d16;
 }
 
 .tools-row{
@@ -970,7 +1009,7 @@ body{
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%; 
+    height: 110%; 
     overflow: auto; 
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
@@ -983,7 +1022,7 @@ body{
     border: 1px solid lightgray;
   /*  border-top: 10px solid #58abb7;*/
     width: 60%;
-    height: 115%;
+    height: 120%;
 }
 
 .modalContainer .close {

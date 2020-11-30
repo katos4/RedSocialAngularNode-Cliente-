@@ -1,6 +1,16 @@
 
 <nav class="navbar fixed-top navbar-expand-lg" hidden>
-  <a class="navbar-brand" [routerLink]="['/timeline']">Facegram</a>
+
+  <!--<a class="navbar-brand" [routerLink]="['/timeline']">Facegram</a>-->
+  
+  <!--LOGO PUÑO-->
+    <svg width="97" height="32" viewBox="0 0 60 33" 
+      fill="none" xmlns="http://www.w3.org/2000/svg" [routerLink]="['/timeline']" id="logoNavBar">
+        <path d="M17.7136 31.6814L16.1378 27.5918L31.3569 28.3812L30.6733 34.9265L17.7136 31.6814Z" fill="#E6E6E6"></path>
+        <path d="M21.3595 0L0.0616455 10.143L3.35453 25.427H7.70011L6.9491 14.4946L7.61666 14.2843L10.2291 25.427H14.7416L14.5747 12.1101L15.2423 11.8998L17.5242 25.427H22.3031L23.4296 9.34061L24.0971 9.13031L25.2782 25.427H31.5976L33.8217 3.05746L21.3595 0Z" fill="#E6E6E6"></path>
+      </svg>
+    
+
   <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
    <!-- <span class="navbar-toggler-icon"></span> -->
     <img class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" src="../assets/iconos/menu.svg">
@@ -9,6 +19,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <!--BARRA DE NAVEGACION CUANDO EXISTA UN USUARIO IDENTIFICADO-->
     <div class="navbar-nav text-center" *ngIf="identity">
+      <a class="nav-item" class="nav-link" [routerLink]="['/timeline']">Inicio</a>
       <a class="nav-item" class="nav-link" [routerLink]="['/gente']">Gente</a>
       <a class="nav-item" class="nav-link" [routerLink]="['/mensajes']">Mensajes</a>
     </div>
@@ -16,7 +27,10 @@
     <div class="navbar-nav ml-auto d-flex flex-row justify-content-center" *ngIf="identity">
       <!--<label class="label-home"><a class="label-home" [routerLink]="['/timeline']">Inicio</a></label>-->
       <div class="d-inline">
-        <a class="avatar" [routerLink]="['/mis-datos']"><img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" /></a>
+        <a class="avatar" [routerLink]="['/mis-datos']">
+          <img class="rounded-circle" src="{{ url + 'get-image-user/' + identity.image}}" *ngIf="identity && identity.image" />
+          <img class="rounded-circle" src="../assets/user-default.png" *ngIf="identity && !identity.image" />
+        </a>
         <a class="label-profile mr-2" [routerLink]="['/perfil', identity._id]">{{identity.name}}</a>
       </div>
       <li class="dropdown">

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     console.log("Home Component cargado");
     setTimeout(() => {
       this._router.navigate(['/timeline']);
-    }, 500);
+    }, 2100);
     
     var height = $(window).height();
     $('.loginPage').height(height);

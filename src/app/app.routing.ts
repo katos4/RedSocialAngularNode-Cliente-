@@ -11,7 +11,6 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowedComponent } from './components/followed/followed.component';
-import { ChatComponent } from './components/chat/chat.component';
 import { InfoCovidComponent } from './components/info-covid/info-covid.component';
 import { UserGuard } from './services/user.guard';
 
@@ -28,7 +27,6 @@ const appRoutes: Routes = [
     {path: 'perfil/:id', component: ProfileComponent, canActivate:[UserGuard]},
     {path: 'siguiendo/:id/:page', component: FollowingComponent, canActivate:[UserGuard]},
     {path: 'seguidores/:id/:page', component: FollowedComponent, canActivate:[UserGuard]},
-    {path: 'chat', component: ChatComponent, canActivate:[UserGuard]},
     {path: 'info-covid', component: InfoCovidComponent, canActivate:[UserGuard]},
     {path: '**', component: HomeComponent}
 ];

@@ -43,6 +43,7 @@ public countLikes;
 public comment: Comment;
 public comments: Comment[];
 public open;
+public existPublication = 0;
 
 public pageComments;
 public totalComments;
@@ -79,6 +80,10 @@ public pagesComments;
     this.autoScroll();
 
   }
+
+  ngDoCheck(){
+   //this.getPublications(this.page);
+   }
 
   getCountLikes(id){
     this._likeService.getCountLikes(this.token, id).subscribe(
@@ -138,13 +143,15 @@ public pagesComments;
     this._publicationService.getPublications(this.token, page).subscribe(
       response => {
         if (response.publications){
-           console.log(response.publications);
+          // console.log(response.publications);
            this.total = response.total_items;
            this.pages = response.pages;
            this.itemsPerPage = response.items_per_page;
 
            if (!adding){
             this.publications = response.publications;
+            this.existPublication = this.publications.length;
+            console.log(this.existPublication);
             this.publications.forEach(publication => {
               this.getCountLikes(publication._id);
               this.getComments(publication._id);
@@ -240,7 +247,7 @@ public pagesComments;
     );
   }
 
-
+/**Obtener los likes */
   getLikes(){
     let temp;
     
@@ -264,19 +271,27 @@ public pagesComments;
     );
   }
 
+  /**Funcion añadir comentario que se llama desde el html */
   sendComment(publicationId){
     var idPub = publicationId;
-    //let tex = $('#comment-text-input').val();
-    //let text = String(tex);
-    // this.comment.text = text,
     this.comment.publication = idPub;
-    console.log(this.comment);
+    $('#comment-text-input').css({border: 'none'});
+    if( $('#comment-text-input').val() !== ''){
+      this.addComment(idPub, this.comment);
+      $('#comment-text-input').css({border: 'none'});
+    }else{
+      $('#comment-text-input').css({border: '2px solid', 'border-color': '#c91d16',});
+      console.log('el input está vacio');
+    }
+  }
 
-    this._commentService.addComment(this.token, this.comment).subscribe(
+  /**Funcion añadir comentario que llama al servicio */
+  addComment(id, comment){
+    this._commentService.addComment(this.token, comment).subscribe(
       response => {
-        console.log(response.comment.text);
+       // console.log(response.comment.text);
         if (response.comment.text){
-          this.getComments(idPub);
+          this.getComments(id);
          // $('#comment-text-input').val('');
           this.comment.text = '';
         }
@@ -287,7 +302,7 @@ public pagesComments;
     );
   }
 
-
+  /**Obtener los comentarios y quedarse con los dos ultimos para mostrarlos */
   getComments(idPub){
     // var idPub = '5fa6d064992c5b6de458ff02';
     this._commentService.getComments(this.token, idPub).subscribe(
@@ -310,7 +325,7 @@ public pagesComments;
   }
 
   
-
+/**Ver todos los comentarios */
   viewAllComments(idPub){
     // console.log('ver todos los comentarios publicacion ' + idPub);
     this.open = true;
@@ -322,6 +337,7 @@ public pagesComments;
     this.getAllComments(idPub, this.pageComments);
   }
 
+/**Cerrar modal comentarios */
   closeModal(){
     if (this.open){
       ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'none');​​​​​​
@@ -332,6 +348,7 @@ public pagesComments;
     } 
   }
 
+  /**Hacer scroll infinito */
   autoScroll(){
     $(window).scroll(function() {
       if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
