@@ -48,6 +48,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatIconModule} from '@angular/material/icon';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 
 @NgModule({
@@ -84,10 +86,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSelectModule,
     MatExpansionModule,
     MatAutocompleteModule,
+    MatIconModule,
     ReactiveFormsModule,
     MessagesModule,
     BrowserAnimationsModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatPasswordStrengthModule.forRoot()
   ],
   providers: [
     appRoutingProviders,

@@ -18,12 +18,12 @@
     src: url(assets/fuentes/Ubuntu-Medium.ttf);
 }
 
-@import '~@ctrl/ngx-emoji-mart/picker';
 
 *{
   /* font-family: "Youtube-light";*/
    font-family: "Ubuntu-light";
 }
+
 
 /*GENERALES*/
 
@@ -213,6 +213,14 @@ body{
     justify-content: center;
     margin: 10px;
     margin-top: 25px;
+}
+
+.hide-pass{
+    display: none;
+}
+
+.show-pass{
+    display: block;
 }
 
 
@@ -1196,5 +1204,4 @@ body{
       display:none;
     }
 }
-
 

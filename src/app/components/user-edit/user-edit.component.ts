@@ -23,6 +23,9 @@ export class UserEditComponent implements OnInit {
   public genders;
   public maritals;
   public checked;
+  
+
+
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -36,6 +39,7 @@ export class UserEditComponent implements OnInit {
     this.url = GLOBAL.url;
     this.genders = ['Hombre', 'Mujer', 'Otro'];
     this.maritals = ['Soltero/a', 'Casado/a', 'Viudo/a', 'Divorciado/a', 'Separado/a', 'Unión libre'];
+
   }
 
   ngOnInit(){
@@ -49,7 +53,8 @@ export class UserEditComponent implements OnInit {
     if (this.identity.relationship === true){
       this.checked = true;
     }
-   
+    // tslint:disable-next-line: no-unused-expression
+
   }
 
   onSubmit(){

@@ -31,7 +31,7 @@ export class SendedComponent implements OnInit {
   public nextPage;
   public prevPage;
   public back;
-
+  public msg = 0;
 
   constructor(
     private _route: ActivatedRoute,
@@ -83,6 +83,7 @@ export class SendedComponent implements OnInit {
          
         }else{
           this.messages = response.messages;
+          this.msg = this.messages.length;
           this.total = response.total;
           this.pages = response.pages;
 

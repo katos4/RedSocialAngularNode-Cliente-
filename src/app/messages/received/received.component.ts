@@ -31,6 +31,7 @@ export class ReceivedComponent implements OnInit {
   public nextPage;
   public prevPage;
   public back;
+  public msg = 0;
 
   constructor(
     private _route: ActivatedRoute,
@@ -81,13 +82,12 @@ export class ReceivedComponent implements OnInit {
       response => {
         if(!response.messages){
           
-         
         }else{
-          //console.log(response.messages);
           this.messages = response.messages;
+          this.msg = this.messages.length;
+          console.log(this.msg);
           this.total = response.total;
           this.pages = response.pages;
-
         }
       },
       error => {

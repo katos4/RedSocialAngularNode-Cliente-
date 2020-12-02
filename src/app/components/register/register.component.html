@@ -17,18 +17,24 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p>
-                            <input type="text" name="name" #name="ngModel" 
-                            [(ngModel)]="user.name" class="form-control"
-                            placeholder="Nombre" required />
-                            <span *ngIf="!name.valid && name.touched">El nombre es obligatorio</span>
+                            <mat-form-field class="example-full-width">
+                                <input matInput id="user-name" name="name" #name="ngModel" 
+                                [(ngModel)]="user.name"
+                                pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" 
+                                placeholder="Nombre" required>
+                            </mat-form-field>
+                            <span *ngIf="!name.valid && name.touched">El formato de nombre no es correcto o está vacío</span>
                         </p>
                     </div>
                     <div class="col-md-6">
                         <p>
-                            <input type="text" name="surname" #surname="ngModel" 
-                            [(ngModel)]="user.surname" class="form-control" 
-                            placeholder="Apellidos" required />
-                            <span *ngIf="!surname.valid && surname.touched">Los apellidos son obligatorios</span>
+                            <mat-form-field class="example-full-width">
+                                <input matInput id="user-surname" name="surname" #surname="ngModel" 
+                                [(ngModel)]="user.surname"
+                                pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,64}" 
+                                placeholder="Apellidos" required>
+                            </mat-form-field>
+                            <span *ngIf="!surname.valid && surname.touched">El formato de apellidos no es correcto o están vacios</span>
                         </p>
                     </div>
                 </div>
@@ -36,32 +42,55 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p>
-                            <input type="text" name="nick" #nick="ngModel" 
-                            [(ngModel)]="user.nick" class="form-control"
-                            placeholder="Apodo" required />
-                            <span *ngIf="!nick.valid && nick.touched">El apodo es obligatorios</span>
+                            <mat-form-field class="example-full-width">
+                                <input matInput id="user-nick" name="nick" #nick="ngModel" 
+                                [(ngModel)]="user.nick"
+                                pattern="^([a-z]+[0-9]{0,2}){3,10}$" 
+                                placeholder="Apodo/Nickname" required>
+                            </mat-form-field>
+                            <span *ngIf="!nick.valid && nick.touched">El apodo tiene un formato incorrecto o tiene menos de 3 caracteres</span>
                         </p>
                     </div>
                     <div class="col-md-6">
                         <p>
-                            <input type="email" name="email" #email="ngModel" 
-                            [(ngModel)]="user.email" class="form-control" 
-                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                            placeholder="Correo electrónico" required />
+                            <mat-form-field class="example-full-width">
+                                <input matInput name="email" #email="ngModel" 
+                                [(ngModel)]="user.email"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+                                placeholder="Correo electrónico" required>
+                            </mat-form-field>
                             <span *ngIf="!email.valid && email.touched">El email es obligatorio</span>
                         </p>
                     </div>
                 </div>
                
                 <div class="row">
+
                     <div class="col-md-12">
-                        <p>
-                            <input type="password" name="password" #password="ngModel"
-                            [(ngModel)]="user.password" class="form-control"
-                            placeholder="Contraseña"  required />
-                            <span *ngIf="!password.valid && password.touched">La contraseña es obligatoria</span>
-                        </p>
+                     <!--password input filed-->
+                        <mat-form-field appearance="outline" style="width: 100%">
+                            <mat-label>Contraseña</mat-label>
+                            <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                        
+                            <input matInput #password
+                                name="password"
+                                id="user-password"
+                                pattern="[A-Za-z0-9!?-]{8,30}"
+                                [type]="toggle.type"
+                                required>
+                            <mat-hint align="end" aria-live="polite">
+                            {{password.value.length}} / {{passwordComponent.max}}
+                            </mat-hint>
+                        </mat-form-field>
+                        <!--@angular-material-extensions/password-strength's main component-->
+                        <mat-password-strength #passwordComponent
+                                                (onStrengthChanged)="onStrengthChanged($event)"
+                                                [password]="password.value">
+                        </mat-password-strength>
+                        <span *ngIf="!password.valid && password.touched">La contraseña es obligatoria y debe tener entre 8 y 30 caracteres</span>
+                        <label id="pass-error" class="hide-pass">La contraseña debe contener al menos 8 caracteres</label>
                     </div>
+                 
                 </div>
             
                 <div class="botonRegistrarCuenta">

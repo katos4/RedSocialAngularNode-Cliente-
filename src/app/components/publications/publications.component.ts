@@ -36,7 +36,7 @@ export class PublicationsComponent implements OnInit {
   public comments = [];
   public comment: Comment;
   public idPublication;
-
+  public existPublication = 0;
 
   public pageComments;
   public totalComments;
@@ -69,6 +69,8 @@ export class PublicationsComponent implements OnInit {
     $('.navbar').removeAttr('hidden');
 
     this.getLikes();
+    console.log(this.user);
+    console.log(this.identity);
   }
 
 
@@ -83,10 +85,12 @@ export class PublicationsComponent implements OnInit {
 
           if(!adding){
             this.publications = response.publications;
+            this.existPublication = this.publications.length;
             this.publications.forEach(publication => {
               this.getComments(publication._id);
             });
-           // console.log(this.publications);
+          /*  console.log(this.publications);
+            console.log(this.identity);*/
           }else{
             var arrayA = this.publications;
             var arrayB = response.publications;

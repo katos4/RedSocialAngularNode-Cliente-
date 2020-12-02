@@ -24,18 +24,25 @@ export class RegisterComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   // console.log("componente de registro cargado");
+ 
   }
 
   onSubmit(registerForm){
-   // console.log("formulario registro enviado");
-    
-    this._userService.register(this.user).subscribe(
+    let pass = $('#user-password').val();
+    if(this.isValid(pass)){
+      this.user.password = pass.toString();
+      console.log(this.user);
+      this.registerUser(this.user, registerForm);
+    }
+  }
+
+  registerUser(user, form){
+   this._userService.register(user).subscribe(
       response =>{
         if(response.user && response.user._id){
          // console.log(response.user);
           this.status = 'success';
-          registerForm.reset();
+          form.reset();
           ($('#registerModal')as any).modal('toggle');
           this._router.navigate(['/login']);
         }else{
@@ -46,7 +53,22 @@ export class RegisterComponent implements OnInit {
         console.log(<any>error);
       }
     );
+  }
 
+  /** validar campos de formulario de registro */
+  isValid(pass){
+    if(pass.length < 8){
+      $('#pass-error').removeClass('hide-pass');
+      return false;
+    }else{
+      $('#pass-error').addClass('hide-pass');
+    }
+
+    return true;
+  }
+
+  onStrengthChanged($event){
+   // console.log($event);
   }
 
 }

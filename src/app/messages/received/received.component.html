@@ -1,6 +1,10 @@
 <div class="people" *ngIf="messages">
 
     <!--LISTADO DE MENSAJES RECIBIDOS-->
+    <div class="row justify-content-center mt-4" *ngIf="msg <= 0">
+        <h4>No hay mensajes recibidos que mostrar</h4>
+    </div>
+
     <div *ngFor="let message of messages">
         <div class="row" id="messages-row" (click)="viewMessage(message._id)">
 
@@ -40,7 +44,7 @@
     </div>
     <!--PAGINACION-->
 
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example" *ngIf="msg > 0">
         <ul class="pagination">
             <li class="page-item" *ngIf="page > 1"><a class="page-link" [routerLink]="['/mensajes/enviados', prevPage]">Anterior</a></li>
             <li class="page-item" *ngIf="pages != page"><a class="page-link" [routerLink]="['/mensajes/enviados', nextPage]">Siguiente</a></li>
