@@ -51,7 +51,8 @@ export class FollowingComponent implements OnInit {
     this.actualPage();
   }
 
-  actualPage(){
+/** Funcion para saber que pagina es la actual */
+actualPage(){
     this._route.params.subscribe(params => {
       let user_id = params['id'];
       this.userPageId = user_id;
@@ -76,8 +77,9 @@ export class FollowingComponent implements OnInit {
       //devolver listado de usuarios
       this.getFollows(user_id, page);
     });
-  }
+}
 
+/** Obtener los usuarios que sigo */
 getFollows(user_id, page){
   this._followService.getFollowing(this.token, user_id, page).subscribe(
     response => {
@@ -107,15 +109,17 @@ getFollows(user_id, page){
   );
 }
 
-
+/** Accion para cuando el cursor entra en el boton de seguir */
 mouseEnter(user_id){
   this.followUserOver = user_id;
 }
 
+/** Accion para cuando el cursor sale del boton de seguir */
 mouseLeave(user_id){
   this.followUserOver = 0;
 }
 
+/** Funcion para empezar a seguir a un usuario */
 followUser(followed){
   var follow = new Follow('', this.identity._id, followed);
   this._followService.addFollow(this.token, follow).subscribe(
@@ -139,7 +143,7 @@ followUser(followed){
     );
 }
 
-
+/** Funcion para dejar de seguir a un usuario */
 unfollowUser(followed){
   this._followService.deleteFollow(this.token, followed).subscribe(
     response => {

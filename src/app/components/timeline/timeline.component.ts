@@ -49,6 +49,7 @@ public pageComments;
 public totalComments;
 public itemsPerPageComments;
 public pagesComments;
+public idPublication;
 
   constructor(
     private _route: ActivatedRoute,
@@ -85,6 +86,7 @@ public pagesComments;
    //this.getPublications(this.page);
    }
 
+   /** Obtener el conteo de todos los likes de cada publicacion (no se usa) */
   getCountLikes(id){
     this._likeService.getCountLikes(this.token, id).subscribe(
       response => {
@@ -109,7 +111,7 @@ public pagesComments;
     );
   }
 
-  public idPublication;
+  /** Obtener todos los comentarios */
   getAllComments(idPub, page, adding = false){
     this.idPublication = idPub;
     this._commentService.getComments(this.token, idPub, page).subscribe(
@@ -138,8 +140,8 @@ public pagesComments;
     );
   }
 
+  /** Obtener todas las publicaciones que se iran mostrando en el timeline */
   getPublications(page, adding = false){
-    var temporal;
     this._publicationService.getPublications(this.token, page).subscribe(
       response => {
         if (response.publications){
@@ -183,7 +185,7 @@ public pagesComments;
     );
   }
 
-
+/** Ver todos los comentarios en lugar de solo los 2 mostrados en cada publicacion */
   viewMoreComments(){
     this.pageComments += 1;
     if(this.pageComments === this.pagesComments){
@@ -206,12 +208,17 @@ public pagesComments;
     this.getPublications(this.page, true);
   }
 
-  
+  /** Actualizar la pagina cuando se publica algo nuevo */
   refresh(event){
-    this.getPublications(1);
+    if(event.send){
+      this.getPublications(1);
+    }else{
+      console.log('no llega');
+    }
+    //this.getPublications(1);
   }
 
-
+/** Dar like a una publicacion */
   giveLike(idPub){
    // console.log('el id de la publicacion es: ' + idPub);
 
@@ -232,6 +239,7 @@ public pagesComments;
     );
   }
 
+  /** Quitar like a una publicacion */
   unlikePublication(idPub){
 
     this._likeService.deleteLike(this.token, idPub).subscribe(
@@ -247,7 +255,7 @@ public pagesComments;
     );
   }
 
-/**Obtener los likes */
+/** Obtener los likes */
   getLikes(){
     let temp;
     
@@ -271,7 +279,7 @@ public pagesComments;
     );
   }
 
-  /**Funcion añadir comentario que se llama desde el html */
+  /** Funcion añadir comentario que se llama desde el html */
   sendComment(publicationId){
     var idPub = publicationId;
     this.comment.publication = idPub;
@@ -285,7 +293,7 @@ public pagesComments;
     }
   }
 
-  /**Funcion añadir comentario que llama al servicio */
+  /** Funcion añadir comentario que llama al servicio */
   addComment(id, comment){
     this._commentService.addComment(this.token, comment).subscribe(
       response => {
@@ -302,7 +310,7 @@ public pagesComments;
     );
   }
 
-  /**Obtener los comentarios y quedarse con los dos ultimos para mostrarlos */
+  /* *Obtener los comentarios y quedarse con los dos ultimos para mostrarlos */
   getComments(idPub){
     // var idPub = '5fa6d064992c5b6de458ff02';
     this._commentService.getComments(this.token, idPub).subscribe(
@@ -324,8 +332,7 @@ public pagesComments;
     );
   }
 
-  
-/**Ver todos los comentarios */
+/* *Ver todos los comentarios */
   viewAllComments(idPub){
     // console.log('ver todos los comentarios publicacion ' + idPub);
     this.open = true;
@@ -337,7 +344,7 @@ public pagesComments;
     this.getAllComments(idPub, this.pageComments);
   }
 
-/**Cerrar modal comentarios */
+/** Cerrar modal comentarios */
   closeModal(){
     if (this.open){
       ($('#modalPersonalizadoComentarios') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'none');​​​​​​
@@ -348,7 +355,7 @@ public pagesComments;
     } 
   }
 
-  /**Hacer scroll infinito */
+  /** Hacer scroll automatico cuando se llega abajo de la pagina, siempre que haya publicaciones, se mostraran. */
   autoScroll(){
     $(window).scroll(function() {
       if ($(window).scrollTop() + $(window).height() >= $(document).height()) {

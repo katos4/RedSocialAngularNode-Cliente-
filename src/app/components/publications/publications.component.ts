@@ -73,7 +73,7 @@ export class PublicationsComponent implements OnInit {
    // console.log(this.identity);
   }
 
-
+/** Obtener las publicaciones de un usuario concreto */
   getPublications(user, page, adding = false){
     this._publicationService.getPublicationsUser(this.token, user, page).subscribe(
       response => {
@@ -126,7 +126,7 @@ export class PublicationsComponent implements OnInit {
    this.getPublications(this.user, this.page, true);
   }
 
-
+/** Abrir modal para ver la publicacion */
   openModal(id, file, userImg, userNick, text, userId, comments){
     this.open = true;
     ($('#modalPersonalizado') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'block');​​​​​​
@@ -149,6 +149,7 @@ export class PublicationsComponent implements OnInit {
 
   }
 
+  /** Cerrar modal de ver la publicacion */
   closeModal(){
     if(this.open){
       ($('#modalPersonalizado') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'none');​​​​​​
@@ -159,11 +160,13 @@ export class PublicationsComponent implements OnInit {
     } 
   }
 
+  /** Abrir modal para la confirmacion del borrado de una publicacion */
   openDeleteModal(){
     ($('#deleteModalConfirmation') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'block');​​​​​​
     this.open2 = true;
   }
 
+  /** Cerrar modal de confirmacion borrado */
   closeDeleteModal(){
     if(this.open2){
       ($('#deleteModalConfirmation') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​,'none');​​​​​​
@@ -174,6 +177,7 @@ export class PublicationsComponent implements OnInit {
     }
   }
 
+  /** Eliminar una publicacion */
   deletePublication(id){
     console.log("id de la publicacion " + id);
     this.deleteAllComments(id);
@@ -191,6 +195,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
+  /** Eliminar todos los comentarios de una publicacion concreta */
   deleteAllComments(id){
     this._commentService.deleteAllComments(this.token, id).subscribe(
       response => {
@@ -200,6 +205,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
+  /** Eliminar todos los likes de una publicacion concreta */
   deleteAllLikes(id){
     this._likeService.deleteAllLikes(this.token, id).subscribe(
       response => {
@@ -209,6 +215,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
+  /** Dar like a una publicacion */
   giveLike(idPub){
     // console.log('el id de la publicacion es: ' + idPub);
  
@@ -229,6 +236,7 @@ export class PublicationsComponent implements OnInit {
      );
   }
 
+  /** Quitar like a una publicacion */
   unlikePublication(idPub){
  
      this._likeService.deleteLike(this.token, idPub).subscribe(
@@ -244,6 +252,7 @@ export class PublicationsComponent implements OnInit {
      );
   }
 
+  /** Obtener todos los likes de una publicacion */
   getLikes(){
     let temp;
     
@@ -267,6 +276,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
+  /** Obtener los comentarios de una publicacion y separarlos para mostrar solo los 2 primeros */
   getComments(idPub){
     // var idPub = '5fa6d064992c5b6de458ff02';
     this._commentService.getComments(this.token, idPub).subscribe(
@@ -288,7 +298,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
-
+/** Obtener todos los comentarios */
   getAllComments(idPub, page = null, adding = false){
     this.idPublication = idPub;
     this._commentService.getComments(this.token, idPub, page).subscribe(
@@ -317,6 +327,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
+  /** Enviar comentario */
   sendComment(publicationId){
     var idPub = publicationId;
     this.comment.publication = idPub;
@@ -337,6 +348,7 @@ export class PublicationsComponent implements OnInit {
     );
   }
 
+  /** Abrir modal donde se muestran todos los comentarios */
   viewAllComments(idPub){
     // console.log('ver todos los comentarios publicacion ' + idPub);
     this.open = true;

@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   public followed;
   public following;
   public open;
+  public followUserOver;
 
 
   constructor(
@@ -50,6 +51,7 @@ export class ProfileComponent implements OnInit {
     $('.navbar').removeAttr('hidden');
   }
 
+  /** Funcion para cargar la pagina del usuario que corresponda segun el id */
   loadPage(){
     this._route.params.subscribe(params => {
       let id = params['id'];
@@ -58,6 +60,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /** Obtener los datos de un usuario concreto */
   getUser(id){
     this._userService.getUser(id).subscribe(
       response => {
@@ -89,6 +92,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  /** Obtener las estadisticas del usuario (seguidores, seguidos) */
   getCounters(id){
     this._userService.getCounters(id).subscribe(
       response => {
@@ -101,6 +105,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  /** Seguir a un usuario */
   followUser(followed){
     var follow = new Follow('', this.identity._id, followed);
 
@@ -114,6 +119,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+/** Dejar de seguir a un usuario */
   unfollowUser(followed){
     this._followService.deleteFollow(this.token, followed).subscribe(
       response => {
@@ -125,15 +131,17 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  public followUserOver;
+ /** Accion cuando el cursor entra en el boton de seguir */
   mouseEnter(user_id){
     this.followUserOver = user_id;
   }
 
+  /** Accion cuando el cursor sale del boton de seguir */
   mouseLeave(){
     this.followUserOver = 0;
   }
 
+  /** Abrir modal de los detalles de usuario */
   openModal(){
    // console.log('modal abierto');
     this.open = true;
@@ -143,6 +151,7 @@ export class ProfileComponent implements OnInit {
     ($('body') as any).css('overflow', 'hidden');
   }
 
+  /** Cerrar modal de los detalles del usuario */
   closeModal(){
     if (this.open){
       ($('#modalPersonalizadoMoreInfo') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'none');​​​​​​

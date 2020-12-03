@@ -115,7 +115,7 @@ gettoken(){
 }
 
 
-/**Obtengo las estadisticas desde el servicio y las almaceno en el local storage
+/**Obtengo las estadisticas desde el servicio y las almaceno en el session storage
  * esto se hace asi para no sobrecargar a la api con peticiones y hacerla solo 1 vez
  */
 getCounters(){

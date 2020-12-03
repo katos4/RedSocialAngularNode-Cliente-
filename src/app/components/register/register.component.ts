@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  /** Registrar el nuevo usuario si ha pasado todos los filtros de validacion */
   registerUser(user, form){
    this._userService.register(user).subscribe(
       response =>{
@@ -55,7 +56,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  /** validar campos de formulario de registro */
+  /** Comprobar que el password tiene mas de 8 caracteres */
   isValid(pass){
     if(pass.length < 8){
       $('#pass-error').removeClass('hide-pass');

@@ -81,7 +81,7 @@ export class SidebarComponent implements OnInit, DoCheck {
     
   }
 
-  //public filesToUpload: Array<File>;
+//public filesToUpload: Array<File>;
 
 
   /**Detectar si ha habido un cambio en el input file del formulario para subir publicaciones */

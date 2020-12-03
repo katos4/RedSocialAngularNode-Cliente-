@@ -44,11 +44,15 @@ export class UploadPublicationComponent implements OnInit {
    
   }
 
-  ngOnInit(){
-  
-  }
+/** Enviar propiedad sended al componente padre (timeline) */
+  @Output() publicationSent = new EventEmitter();
 
+
+  ngOnInit(){}
+  
+/** Comprobar que ni el textarea ni la foto estan vacios y luego llamar a la funcion para subir la publicacion */
   onSubmit(form, $event){
+   
     var textarea = $('#textarea-publication').val();
   
     if(textarea === ''){
@@ -67,11 +71,14 @@ export class UploadPublicationComponent implements OnInit {
 
     if(this.uploadTrue && this.uploadTrue2){
       console.log('los 2 son true');
-     this.uploadFilesAndPublication(form);
+      this.uploadFilesAndPublication(form);
+      
     }
-   
+
+
   }
 
+  /** Subir la publicacion nueva con su foto y texto */
   uploadFilesAndPublication(form){
     this._publicationService.addPublication(this.token, this.publication).subscribe(
       response => {
@@ -89,7 +96,8 @@ export class UploadPublicationComponent implements OnInit {
                                 alert.style.display = 'none';
                                 }, 2000);
                                form.reset();
-                               this.sended.emit({send: 'true'});
+                               $('#previewUploadImg').remove();
+                               this.publicationSent.emit({send: 'true'});
                                $('#closeModalButton').click();
                             });
   
@@ -107,8 +115,7 @@ export class UploadPublicationComponent implements OnInit {
     );
   }
 
-  
-
+/** Detectar si ha habido un cambio en el input para subir archivos */
   fileChangeEvent(fileInput: any){
     this.filesToUpload = <Array<File>> fileInput.target.files;
     if(this.filesToUpload.length > 0){
@@ -130,11 +137,5 @@ export class UploadPublicationComponent implements OnInit {
     div.append(preview);
   }
 
-//output (esto iria en el componente futuro dedicado solo al formulario de enviar publicaciones)
-@Output() sended = new EventEmitter();
-sendPublication(event){
-  console.log(event);
-  this.sended.emit({send: 'true'});
-}
 
 }

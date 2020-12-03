@@ -21,9 +21,10 @@ export class SearchComponent implements OnInit {
     .subscribe( value => this.searchEmitter.emit(value));
   }
 
-
+/** Crear formulario con el nombre search para pasarlo a otro componente */
 search = new FormControl('');
 
+/** Pasar el formulario como evento hacia otro componente */
 @Output('search') searchEmitter = new EventEmitter<string>();
 
 }

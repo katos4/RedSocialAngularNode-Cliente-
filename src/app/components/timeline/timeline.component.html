@@ -10,7 +10,7 @@
 
             <div class="row pb-3">
                 <div class="col-md-12">
-                    <app-upload-publication></app-upload-publication>
+                    <app-upload-publication (publicationSent)="refresh($event)"></app-upload-publication>
                 </div>
             </div> 
             

@@ -49,7 +49,7 @@ export class InfoCovidComponent implements OnInit {
   }
 
 
-
+/** Obtener la fecha actual y formatearla de manera que la api del covid la acepte */
 getDate(){
     let d = new Date();
     let month = '' + (d.getMonth() + 1);
@@ -67,6 +67,7 @@ getDate(){
     this.dateToShow = [day, month, year].join('/');
 }
 
+/** Obtener toda la informacion del pais */
 getinfo(country){
 
     this._infoCovidService.getInfo(this.date, country).subscribe(
@@ -84,6 +85,7 @@ getinfo(country){
     );
 }
 
+/** Filtrar la informacion del pais y los detalles de interes */
 getCountryDetails(){
   let array = [];
    // tslint:disable-next-line: forin
@@ -110,6 +112,7 @@ getCountryDetails(){
   }
 }
 
+/** Obtener una lista de todos los paises */
 getAllCountries(){
   let arrayCountry;
   this._infoCovidService.getCountries(this.date).subscribe(
@@ -134,6 +137,7 @@ getAllCountries(){
   );
 }
 
+/** Detectar si el select ha cambiado y obtener la informacion del pais nuevo seleccionado */
 onChange(country){
   console.log(country);
   if(country){
