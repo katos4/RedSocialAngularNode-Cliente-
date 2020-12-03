@@ -14,11 +14,11 @@ export class HomeComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
   ) { 
-    this.title = "Bienvenido a NGSocial";
+    this.title = "Bienvenido a Fleets";
   }
 
   ngOnInit(){
-    console.log("Home Component cargado");
+    // console.log("Home Component cargado");
     setTimeout(() => {
       this._router.navigate(['/timeline']);
     }, 2100);

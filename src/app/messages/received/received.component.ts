@@ -85,7 +85,7 @@ export class ReceivedComponent implements OnInit {
         }else{
           this.messages = response.messages;
           this.msg = this.messages.length;
-          console.log(this.msg);
+         // console.log(this.msg);
           this.total = response.total;
           this.pages = response.pages;
         }

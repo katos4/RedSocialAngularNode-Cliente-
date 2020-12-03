@@ -135,7 +135,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openModal(){
-    console.log('modal abierto');
+   // console.log('modal abierto');
     this.open = true;
     ($('#modalPersonalizadoMoreInfo') as any).css('display'​​​​​​​​​​​​​​​​​​​​​​​​​​​, 'block');​​​​​​
     ($('body') as any).css('position', 'static');

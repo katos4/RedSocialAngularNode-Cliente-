@@ -30,7 +30,7 @@ export class ViewMessageComponent implements OnInit {
    }
 
   ngOnInit(){
-    console.log('componente ver mensaje cargado');
+   // console.log('componente ver mensaje cargado');
     this.getMessage();
   }
 

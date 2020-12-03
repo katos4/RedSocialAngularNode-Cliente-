@@ -69,8 +69,8 @@ export class PublicationsComponent implements OnInit {
     $('.navbar').removeAttr('hidden');
 
     this.getLikes();
-    console.log(this.user);
-    console.log(this.identity);
+    // console.log(this.user);
+   // console.log(this.identity);
   }
 
 

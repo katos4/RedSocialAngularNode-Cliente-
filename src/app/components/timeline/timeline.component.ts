@@ -151,7 +151,7 @@ public pagesComments;
            if (!adding){
             this.publications = response.publications;
             this.existPublication = this.publications.length;
-            console.log(this.existPublication);
+           // console.log(this.existPublication);
             this.publications.forEach(publication => {
               this.getCountLikes(publication._id);
               this.getComments(publication._id);

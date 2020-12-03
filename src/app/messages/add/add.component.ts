@@ -114,7 +114,7 @@ private _filter(value: string): string[]{
                             });
         });
        // console.log(this.follows);
-        console.log(this.options);
+       // console.log(this.options);
       },
       error => {
         console.log(<any>error);

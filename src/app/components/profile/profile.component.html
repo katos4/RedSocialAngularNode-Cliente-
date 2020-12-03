@@ -17,10 +17,10 @@
         
         <div class="row align-items-center">
             <div class="nick">
-                <b>{{user.nick}}</b>
+                <b>{{user?.nick}}</b>
             </div>
 
-            <div class="edit-profile-button-box" *ngIf="user._id == identity._id">
+            <div class="edit-profile-button-box" *ngIf="user?._id == identity._id">
                 <button [routerLink]="['/mis-datos']" id="edit-profile-button">Editar perfil</button>
             </div>
 
@@ -80,7 +80,7 @@
         <div class="row">
             <div class="biography">
                 <b>Biografía</b>
-                <p>{{user.biography}}</p>
+                <p>{{user?.biography}}</p>
             </div>
         </div>
 
@@ -118,29 +118,29 @@
         <div class="row">
 
            <div class="col-md-7 user-info-details">
-                <div *ngIf="user.city != ''">
+                <div *ngIf="user?.city != ''">
                     <img class="info-user-icon" src="../../../assets/iconos/ciudad.svg">
-                    Vive en {{user.city}}
+                    Vive en {{user?.city}}
                 </div>
                  
-                <div *ngIf="user.birth != ''">
+                <div *ngIf="user?.birth != ''">
                     <img class="info-user-icon" src="../../../assets/iconos/pastel.svg">
-                    {{user.birth}}
+                    {{user?.birth}}
                 </div>
                   
-               <div *ngIf="user.study != ''">
+               <div *ngIf="user?.study != ''">
                 <img class="info-user-icon" src="../../../assets/iconos/birrete.svg">
-                Estudió en {{user.study}}
+                Estudió en {{user?.study}}
                </div>
                     
-              <div *ngIf="user.relationship != ''">
+              <div *ngIf="user?.relationship != ''">
                 <img class="info-user-icon" src="../../../assets/iconos/corazon.svg">
-                {{user.relationship}}
+                {{user?.relationship}}
               </div>
                 
-              <div *ngIf="user.gender != ''">
+              <div *ngIf="user?.gender != ''">
                 <img class="info-user-icon" src="../../../assets/iconos/genero.svg">
-                {{user.gender}}
+                {{user?.gender}}
               </div>
             </div>
         </div>
