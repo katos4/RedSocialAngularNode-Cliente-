@@ -61,16 +61,6 @@ export class LoginComponent implements OnInit {
           this.gettoken();
           //conseguir el socket del servidor
           const localUser = localStorage.getItem('identity');
-        /*  this.socket = io.connect(this.server);
-          //OBTENER EL ID DEL SOCKET CONECTADO EN EL SERVIDOR
-          this.socket.on('connect', () => {
-          //console.log(this.socket.id, this.socket.io.engine.id, this.socket.json.id);
-          localStorage.setItem('socket-id', this.socket.id);
-          this.identity = JSON.parse(localUser);
-          this.identity['socketId'] = this.socket.id;
-          localStorage.setItem('identity', JSON.stringify(this.identity)); 
-          });  */
-
           this._router.navigate(['/home']);
         }
       },
@@ -122,7 +112,7 @@ getCounters(){
   this._userService.getCounters().subscribe(
     response => {
       //console.log(response);
-      localStorage.setItem('stats', JSON.stringify(response));
+     // localStorage.setItem('stats', JSON.stringify(response));
       sessionStorage.setItem('stats', JSON.stringify(response));
       //this._router.navigate(['/']);
       this.status = 'success';

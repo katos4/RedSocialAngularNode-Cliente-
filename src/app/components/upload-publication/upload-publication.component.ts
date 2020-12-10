@@ -70,7 +70,7 @@ export class UploadPublicationComponent implements OnInit {
     }
 
     if(this.uploadTrue && this.uploadTrue2){
-      console.log('los 2 son true');
+      //console.log('los 2 son true');
       this.uploadFilesAndPublication(form);
       
     }
@@ -100,7 +100,6 @@ export class UploadPublicationComponent implements OnInit {
                                this.publicationSent.emit({send: 'true'});
                                $('#closeModalButton').click();
                             });
-  
         }else{
           this.status = 'error';
         }

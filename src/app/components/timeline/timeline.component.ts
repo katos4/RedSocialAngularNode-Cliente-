@@ -44,6 +44,7 @@ public comment: Comment;
 public comments: Comment[];
 public open;
 public existPublication = 0;
+public updateStats = 'false';
 
 public pageComments;
 public totalComments;
@@ -212,6 +213,7 @@ public idPublication;
   refresh(event){
     if(event.send){
       this.getPublications(1);
+      this.updateStats = 'true';
     }else{
       console.log('no llega');
     }
